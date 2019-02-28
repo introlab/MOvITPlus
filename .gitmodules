@@ -10,3 +10,6 @@
 	path = MOvIT-Detect
 	url = https://github.com/introlab/MOvIT-Detect.git
 	branch = develop
+[submodule "MOvIT-Hardware"]
+	path = MOvIT-Hardware
+	url = https://github.com/introlab/MOvIT-Hardware.git
