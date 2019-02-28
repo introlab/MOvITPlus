@@ -6,6 +6,3 @@
 	path = MOvIT-Detect
 	url = https://github.com/introlab/MOvIT-Detect.git
 	branch = develop
-[submodule "MOvIT-Detect-Frontend"]
-	path = MOvIT-Detect-Frontend
-	url = https://github.com/introlab/MOvIT-Detect-Frontend.git
