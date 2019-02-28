@@ -4,7 +4,7 @@
 	url = https://github.com/introlab/MOvIT-Detect-Backend.git
 [submodule "MOvIT-Detect"]
 	path = MOvIT-Detect
-	branch = developAlex
+	branch = develop
 	url = https://github.com/introlab/MOvIT-Detect.git
 [submodule "MOvIT-Detect-Frontend"]
 	path = MOvIT-Detect-Frontend
