@@ -1,12 +1,12 @@
 [submodule "MOvIT-Detect-Backend"]
 	path = MOvIT-Detect-Backend
-	branch = developAlex
 	url = https://github.com/introlab/MOvIT-Detect-Backend.git
+	branch = developAlex
 [submodule "MOvIT-Detect"]
 	path = MOvIT-Detect
-	branch = develop
 	url = https://github.com/introlab/MOvIT-Detect.git
+	branch = develop
 [submodule "MOvIT-Detect-Frontend"]
 	path = MOvIT-Detect-Frontend
-	branch = developAlex
 	url = https://github.com/introlab/MOvIT-Detect-Frontend.git
+	branch = developAlex
