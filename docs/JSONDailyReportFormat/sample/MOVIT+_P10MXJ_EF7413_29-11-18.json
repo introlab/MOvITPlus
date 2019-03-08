@@ -4,6 +4,7 @@
   "maxAngle": 90,
   "weight": 75,
   "chairId": "EF7413",
+  "date": "29-11-18",
   "dayStart": 1543467600000,
   "dayEnd": 1543553999999,
   "timezone": -5,
@@ -42,12 +43,12 @@
         18
       ]
     },
-    "slidingTravelGoal": 0.2345467,
-    "slidingRestGoal": 0.8125558892093518
+    "slidingTravelGoalPercent": 23.45,
+    "slidingRestGoalPercent": 81.25
   },
   "pressure": {
-    "releivePressureGoal": 0.5,
-    "releivePressurePersonalGoal": 0.7,
+    "relievePressureGoalPercent": 50.0,
+    "releivePressurePersonalGoalPercent": 70.0,
     "byTimestamp": {
       "1543412675000": {
         "center": {
