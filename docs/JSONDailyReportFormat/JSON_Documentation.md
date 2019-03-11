@@ -2,7 +2,7 @@
 A JSON file containing daily information is transmitted using SFTP according to the configuration of the system stored in its database. The transmission of the file occurs when there is an Internet connection available. The software will make sure to transmit all complete daily report that were not previously transmitted. 
 
 ## File Naming Convention
-Each transmitted file name contains the userId, the chairId, and the date in regular DD-MM-YY format, in that order. Provided the userId `P10MXJ`, the chairId `EF7413` and the date March 5, 2019, the file name will then be `MOVIT+_P10MXJ_EF7413_05-03-19.json`. The file name is designed to be easily searched, filtered or ordered in the filesystem.
+Each transmitted file name contains the userId, the chairId, and the date in regular DD-MM-YY format, in that order. Provided the userId `P10MXJ`, the chairId `EF7413` and the date `March 5, 2019`, the file name will then be `MOVIT+_P10MXJ_EF7413_05-03-19.json`. The file name is designed to be easily searched, filtered or ordered in the filesystem.
 
 ## JSON Formatting
 The following section details the different fields in the transmitted JSON object. You can find an example at the end of this document. Each key in the object follows the camel case naming convention. All timestamps are in UNIX time in millisecond since January 1st, 1970 at UTC.
