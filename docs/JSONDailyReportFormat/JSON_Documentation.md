@@ -31,9 +31,9 @@ This object contains all the tilt data for a specified day. It is separated in m
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :-------------|:-------------|:-----:|:-----:| :-----:|
-|distribution|Contains data related to the distribution of angle, used to create a pie chart. The data is contained in data_ms, and the explanation of each element of data is in the index||Object||
+|distribution|Contains data related to the distribution of angle, used to create a pie chart. The data is contained in duration_ms, and the explanation of each element of data is in the index||Object||
 |distribution.index|Explanation of each value of the data array sorted by index. The length of the array is 5 || String array ||
-|distribution.data_ms|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
+|distribution.duration_ms|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
 |tiltCount|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index ||||
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
 |tiltCount.count|Contains data related to the number of tilt done in a day. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
@@ -83,7 +83,7 @@ The pressureData object contains all the pressure information at a specific time
         "30° to 45°",
         "More than 45°"
       ],
-      "data_ms": [
+      "duration_ms": [
         0,
         0,
         0,
@@ -132,7 +132,7 @@ The pressureData object contains all the pressure information at a specific time
 
 # Sample JSON File
 
-* [MOVIT+_P10MXJ_EF7413_29-11-18.json](sample/MOVIT%2B_P10MXJ_EF7413_29-11-18.json)
+* [MOVIT+_P10MXJ_EF7413_29-11-18.json](sample/MOVIT%2B_P10MXJ_EF7413_11-03-19.json)
 
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
