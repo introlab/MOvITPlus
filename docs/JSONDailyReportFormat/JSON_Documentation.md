@@ -52,7 +52,7 @@ This object contains all the pressure data for a specified day. It is separated 
 |byTimestamp|Contains an object used as a dictionnary sorted by timestamps in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
 
 ### pressureData Object
-The pressureData object contains all the pressure information at a specific time. This data represents the overall center of gravity as well as the per quadrant center of gravity. Here is the description of each field:
+The pressureData object contains all the pressure information at a specific time. This data represents the overall center of pressure as well as the per quadrant center of pressure. Here is the description of each field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :-------------|:-------------|:-----:|:-----:|:-----:|
