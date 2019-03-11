@@ -5,8 +5,6 @@
   "weight": 75,
   "chairId": "EF7413",
   "date": "29-11-18",
-  "dayStart": 1543467600000,
-  "dayEnd": 1543553999999,
   "timezone": -5,
   "minAngle": -10,
   "rev": "A",
@@ -19,7 +17,7 @@
         "30° to 45°",
         "More than 45°"
       ],
-      "data": [
+      "data_ms": [
         2215000,
         27238999,
         7664000,
@@ -27,7 +25,7 @@
         328000
       ]
     },
-    "tiltMade": {
+    "tiltCount": {
       "index": [
         "Good angle and duration",
         "Good angle but insufficient duration",
@@ -35,7 +33,7 @@
         "Cancelled tilt",
         "Snoozed tilt"
       ],
-      "data": [
+      "count": [
         122,
         28,
         3,

@@ -19,8 +19,6 @@ The root of the object contains all the required data to recreate the graphics a
 |date|A user readable date in DD-MM-YY format||String||
 |weight|The weight of the patient|Kg|Integer|greater or equal to 0|
 |chairId|The unique identifier of the chair||String||
-|dayStart|The timestamp of the begining of the day at 00h00|ms|Long|greater or equal to 0|
-|dayEnd|The timestamp of the end of the day at 23h59|ms|Long|greater or equal to 0|
 |timezone|The timezone of the device|hours|Integer|-11 to 12|
 |rev|The revision of the JSON file format for verification purpose and future additions||String||
 |tilt|The tilt data for the day, described below||Object||
@@ -33,12 +31,12 @@ This object contains all the tilt data for a specified day. It is separated in m
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :-------------|:-------------|:-----:|:-----:| :-----:|
-|distribution|Contains data related to the distribution of angle, used to create a pie chart. The data is contained in data, and the explanation of each element of data is in the index||Object||
+|distribution|Contains data related to the distribution of angle, used to create a pie chart. The data is contained in data_ms, and the explanation of each element of data is in the index||Object||
 |distribution.index|Explanation of each value of the data array sorted by index. The length of the array is 5 || String array ||
-|distribution.data|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
-|tiltMade|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index ||||
-|tiltMade.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
-|tiltMade.data|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index | Number of tilt  | Integer array |greater or equal to 0|
+|distribution.data_ms|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
+|tiltCount|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index ||||
+|tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
+|tiltCount.count|Contains data related to the number of tilt done in a day. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
 |slidingTravelGoal|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
 |slidingRestGoal|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
 
@@ -49,17 +47,18 @@ This object contains all the pressure data for a specified day. It is separated 
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
-|releivePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Float | 0.0 to 100.0|
-|releivePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Float  | 0.0 to 100.0|
+|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Float | 0.0 to 100.0|
+|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Float  | 0.0 to 100.0|
 |byTimestamp|Contains an object used as a dictionnary sorted by timestamp in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
 
 ### pressureData Object
 The pressureData object contains all the pressure information at a specific time. This data represents the overall center of gravity as well as the per quadrant center of gravity. Here is the description of each field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
-| :------------- |:-------------| :-----:| :-----:| :-----:|
-|center|The center of pression of the patient in x and y coordinate|Inch|Float|-4.0 to 4.0|
-|quadrants|The center of pression of the patient per quadrant starting at the top left quadrant then clockwise in x and y coordinate|Inch|Float|-4.0 to 4.0|
+| :-------------|:-------------|:-----:|:-----:|:-----:|
+|center|The center of pressure of the patient in x and y coordinate|Inch|Float|-4.0 to 4.0|
+|quadrants|The center of pressure of the patient per quadrant starting at the top left quadrant at index 0, then clockwise in an x and y array of coordinate|Inch|Float|-4.0 to 4.0|
+|angle|The angle of the chair at this time|degree|Integer|-360° to 360°|
 
 ---
 
@@ -71,8 +70,6 @@ The pressureData object contains all the pressure information at a specific time
   "maxAngle": 0,
   "weight": 0,
   "chairId": "",
-  "dayStart": 0,
-  "dayEnd": 0,
   "date": "DD-MM-YY",
   "timezone": 0,
   "minAngle": 0,
@@ -86,7 +83,7 @@ The pressureData object contains all the pressure information at a specific time
         "30° to 45°",
         "More than 45°"
       ],
-      "data": [
+      "data_ms": [
         0,
         0,
         0,
@@ -94,7 +91,7 @@ The pressureData object contains all the pressure information at a specific time
         0
       ]
     },
-    "tiltMade": {
+    "tiltCount": {
       "index": [
         "Good angle and duration",
         "Good angle but insufficient duration",
@@ -102,7 +99,7 @@ The pressureData object contains all the pressure information at a specific time
         "Cancelled tilt",
         "Snoozed tilt"
       ],
-      "data": [
+      "count": [
         0,
         0,
         0,
@@ -115,31 +112,18 @@ The pressureData object contains all the pressure information at a specific time
   },
   "pressure": {
     "relievePressureGoalPercent": 0.0,
-    "releivePressurePersonalGoalPercent": 0.0,
+    "relievePressurePersonalGoalPercent": 0.0,
     "byTimestamp": {
       "1543412675000": {
         "center": {
           "x": 0,
           "y": 0
         },
-        "quadrants": [
-          {
-            "x": 0,
-            "y": 0
-          },
-          {
-            "x": 0,
-            "y": 0
-          },
-          {
-            "x": 0,
-            "y": 0
-          },
-          {
-            "x": 0,
-            "y": 0
-          }
-        ]
+        "quadrants": {
+          "x": [0,0,0,0],
+          "y": [0,0,0,0]
+        },
+        "angle": 0
       }
     }
   }
@@ -151,7 +135,7 @@ The pressureData object contains all the pressure information at a specific time
 * [MOVIT+_P10MXJ_EF7413_29-11-18.json](sample/MOVIT%2B_P10MXJ_EF7413_29-11-18.json)
 
 # Example Graphs
-Here are the differants graph and chart generated from the above sample file
+Here are the differents graphs and chart generated from the above sample file
 
 ## Center of pressure graph
 ![PressureCenter](pressure_graph/pressure_center.png)
