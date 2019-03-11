@@ -1,33 +1,33 @@
-# Formatted JSON data to transmit
-A JSON file containing daily information will be transmitte using SFTP according to the configuration of the system. The transmission of the file occurs when there is an Internet connection is available. The software will make sure to only send completed day, this means the most up to date data will be the one of yesterday. There may be one or more files transmitted if there was no network connection for a while. Each file will contain all the data for a single day.
+# JSON Data Format
+A JSON file containing daily information is transmitted using SFTP according to the configuration of the system stored in its database. The transmission of the file occurs when there is an Internet connection available. The software will make sure to transmit all complete daily report that were not previously transmitted. 
 
-## File naming convention
-Each transmitted file will contain the user Id, the chair Id, and the date in regular DD-MM-YY format, in that order. Provided the user Id `P10MXJ`, the chair Id `EF7413` and the date March 5, 2019, the file name will then be `MOVIT+_P10MXJ_EF7413_05-03-19.json`. It will then be easy to filter the data by a specific user.
+## File Naming Convention
+Each transmitted file name contains the userId, the chairId, and the date in regular DD-MM-YY format, in that order. Provided the userId `P10MXJ`, the chairId `EF7413` and the date March 5, 2019, the file name will then be `MOVIT+_P10MXJ_EF7413_05-03-19.json`. The file name is designed to be easily searched, filtered or ordered in the filesystem.
 
-## JSON formatting
-The following section details the different fields in the transmitted JSON object. You can find an example at the end of this document. Each key in the object follows the camel case naming convention. All timestamp are in UNIX time in millisecond since January 1st, 1970 at UTC.
+## JSON Formatting
+The following section details the different fields in the transmitted JSON object. You can find an example at the end of this document. Each key in the object follows the camel case naming convention. All timestamps are in UNIX time in millisecond since January 1st, 1970 at UTC.
 
-## Object root node
-The root of the object contains all the required data to recreate the graphics and store the data in a database. Here is the description of each top level field:
+## Object Root Node
+The root object contains all the required data to recreate the graphics and store the data in a database. Here is the description of each top level field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
 |createdAt|Timestamp of the creation of the file in the same timezone as the sensors|ms|long|0 to today's Date|
-|userId|The user Id provided by TelAsk||||
-|maxAngle|The maximum angle of tilt the wheel chair can acheive|degree|Integer|-360° to 360°|
-|minAngle|The minimum angle of tilt the wheel chair can acheive|degree|Integer|-360° to 360°|
+|userId|The user Id provided by TelAsk|String|||
+|maxAngle|The maximum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
+|minAngle|The minimum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
 |date|A user readable date in DD-MM-YY format||String||
 |weight|The weight of the patient|Kg|Integer|greater or equal to 0|
 |chairId|The unique identifier of the chair||String||
 |timezone|The timezone of the device|hours|Integer|-11 to 12|
 |rev|The revision of the JSON file format for verification purpose and future additions||String||
-|tilt|The tilt data for the day, described below||Object||
-|pressure|The pressure data for the day, described below||Object||
+|tilt|The tilt data for the day, described below||Tilt Object||
+|pressure|The pressure data for the day, described below||Pressure Object||
 
 ---
 
-## tilt node
-This object contains all the tilt data for a specified day. It is separated in multiple objects each containing data related to a single chart. Here is a description of each field:
+## Tilt Object
+This object contains all the tilt data for a specified day. It is separated in multiple fields, each containing data related to a single chart. Here is a description of each field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :-------------|:-------------|:-----:|:-----:| :-----:|
@@ -42,14 +42,14 @@ This object contains all the tilt data for a specified day. It is separated in m
 
 ---
 
-## pressure node
-This object contains all the pressure data for a specified day. It is separated in multiple objects each containing data related to a single chart. Here is the description of each field:
+## Pressure Object
+This object contains all the pressure data for a specified day. It is separated in multiple fields, each containing data related to a single chart. Here is the description of each field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
 |relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Float | 0.0 to 100.0|
 |relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Float  | 0.0 to 100.0|
-|byTimestamp|Contains an object used as a dictionnary sorted by timestamp in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
+|byTimestamp|Contains an object used as a dictionnary sorted by timestamps in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
 
 ### pressureData Object
 The pressureData object contains all the pressure information at a specific time. This data represents the overall center of gravity as well as the per quadrant center of gravity. Here is the description of each field:
@@ -137,20 +137,20 @@ The pressureData object contains all the pressure information at a specific time
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
 
-## Center of pressure graph
+## Center of Pressure Graph
 ![PressureCenter](pressure_graph/pressure_center.png)
 
-## Relieving pressure goal progress bar
+## Relieving Pressure Goal Progress Bar
 ![RelievePressureGoal](pressure_graph/relieving_pressure_personal_and_clinician_goal.png)
 
-## Distribution of angles pie chart
+## Distribution of Angles Pie Chart
 ![PressureCenter](tilt_graph/tilt_distribution.png)
 
-## Number of tilts achieved in a day bar graph
+## Number of Tilts Achieved in a Day Bar Graph
 ![PressureCenter](tilt_graph/tilts_made.png)
 
-## Reduce sliding at rest progress bar
+## Reduce Sliding at Rest Progress Bar
 ![PressureCenter](tilt_graph/sliding_rest_goal.png)
 
-## Reduce sliding during travel progress bar
+## Reduce Sliding During Travel Progress Bar
 ![PressureCenter](tilt_graph/sliding_travel_goal.png)
