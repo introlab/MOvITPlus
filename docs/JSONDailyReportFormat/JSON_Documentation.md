@@ -13,7 +13,7 @@ The root object contains all the required data to recreate the graphics and stor
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
 |createdAt|Timestamp of the creation of the file in the same timezone as the sensors|ms|long|0 to today's Date|
-|userId|The user Id provided by TelAsk|String|||
+|userId|The user Id provided by TelAsk||String||
 |maxAngle|The maximum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
 |minAngle|The minimum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
 |date|A user readable date in DD-MM-YY format||String||
