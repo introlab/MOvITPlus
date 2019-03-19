@@ -70,7 +70,7 @@ The pressureData object contains all the pressure information at a specific time
   "maxAngle": 0,
   "weight": 0,
   "chairId": "",
-  "date": "DD-MM-YY",
+  "date": "YYYYMMDD",
   "timezone": 0,
   "minAngle": 0,
   "rev": "A",
