@@ -12,55 +12,67 @@ Ce guide explique les étapes à suivre pour installer tous les modules nécessa
 
 Voici la liste des composants qui seront nécessaires à l'installation :
 
-### Module de l’unité centrale de contrôle
+### **Module de l’unité centrale de contrôle**
 
-|*Figure 1 : Unité centrale*|
+|*Figure 1 : Unité centrale de contrôle*|
 |:----------:|
-|![Unité centrale](images/UNITE_CENTRALE.JPG)|
+|![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.JPG)|
 
-La Figure 1 montre l'unité centrale du système (UC) est composée d'un système embarqué RaspberryPi Zero et comporte un port USB pour l'alimentation, huit (8) ports de connexion RJ-12 (en gris) pour les modules / capteurs à connecter et un port RJ-45 utilisé pour le module capteur de déplacement.
+La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est composée d'un système embarqué RaspberryPi Zero et comporte un port USB pour l'alimentation, huit (8) ports de connexion RJ-12 (en gris) pour les modules / capteurs à connecter et un port RJ-45 (en noir) utilisé pour le module capteur de déplacement.
 
-### Module des centrales inertielles (x2)
+### **Module de centrale inertielle (x2)**
 
-|*Figure 5 : Centrale Inertielle (IMU)*|
+|*Figure 2 : Centrale Inertielle (IMU)*|
 |:----------:|
-|![Centrales inertielles (IMU)](images/IMU.JPG)|
+|![IMU.JPG](images/IMU.JPG)|
 
-### Module de notification
+La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés IMU Fixe et IMU Mobile. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants MPU6050 qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesure l'angle de bascule. Nous mesurons l'angle de l'IMU fix par rapport à l'IMU mobile.
 
-|*Figure 6 : Module de notification*|
+### **Module de notification**
+
+|*Figure 3 : Module de notification*|
 |:----------:|
-|![Module de notification](images/NOTIFICATION.JPG)|
+|![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
 
-### Module du tapis de pression
+La Figure 3 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electro-luminescente (DELs, rouge et vert) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le temps d'effectuer une bascule.
 
-|*Figure 7 : Tapis de pression avec connecteur*|
+### **Module du tapis de pression**
+
+|*Figure 4 : Tapis de pression avec connecteur*|
 |:----------:|
-|![Tapis de pression](images/TAPIS_PRESSION.JPG)|
+|![TAPIS_PRESSION.JPG](images/TAPIS_PRESSION.JPG)|
 
-### Module capteur de déplacement
-
-|*Figure 8 : Module capteur de déplacement*|
+|*Figure 5 : Module de pression*|
 |:----------:|
-|![Module capteur de déplacement](images/DEPLACEMENT.JPG)|
+|![MODULE_PRESSION.JPG](images/MODULE_PRESSION.JPG)|
 
-### Câbles de branchement des modules (RJ-12)
+Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comportes 9 cellules de pression disposés en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus) servant de protection et permettant une installation facile. Les 2 systèmes sont connetés par un câble plat.
 
-|*Figure 9 : Câble RJ-12*|
+### **Module capteur de déplacement**
+
+|*Figure 6 : Module capteur de déplacement par flux optique*|
 |:----------:|
-|![Câble RJ-12](images/RJ12.JPG)|
+|![DEPLACEMENT.JPG](images/DEPLACEMENT.JPG)|
 
-La Figure X présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis.
+La Figure 6 montre le module capteur de déplacement par flux optique. *Nous ne prenons aucune image de l'environnement.  La caméra mesure les déplacements d'une image à l'autre et nous donne les déplacements cartésiens (x,y) en temps réel, comme une souris d'ordinateur*. La caméra doit être dirigée vers le sol ou les roues pour son bon fonctionnement.
 
-### Câble de branchement du module de déplacement (RJ-45)
+### **Câbles de branchement des modules (RJ-12)**
 
-|*Figure 10 : Câble RJ-45*|
+|*Figure 7 : Câble RJ-12*|
 |:----------:|
-|![Câble RJ-45](images/RJ45.JPG)|
+|![RJ12.JPG](images/RJ12.JPG)|
 
-Il est possible de différencier le câble puisqu'il comprend 8 contacts au lieu de 6 sur le RJ-12. La longueur maximale du câble doit être de 30 cm (1 pied).
+La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis. Les câbles peuvent être interchangés au besoin.
 
-### Batterie et câble USB
+### **Câble de branchement du module de déplacement par flux optique (RJ-45)**
+
+|*Figure 8 : Câble RJ-45*|
+|:----------:|
+|![RJ45.JPG](images/RJ45.JPG)|
+
+Il est possible de reconnaître le câble RJ-45, montré à la Figure 8, puisqu'il comprend 8 contacts au lieu de 6 pour le RJ-12. La longueur maximale du câble doit être de 30 cm (1 pied). Ce câble sert à relier le module de déplacement par flux optique.
+
+### **Batterie et câble USB***
 
 |*Figure 11 : Batterie USB*|
 |:----------:|
