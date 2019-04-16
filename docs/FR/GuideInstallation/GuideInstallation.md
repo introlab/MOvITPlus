@@ -2,7 +2,7 @@
 
 Révisions:
 
-* 16/04/2019, Dominic Létourneau, Alex Morin (Écriture du document à partir de l'ancien guide d'installation)
+* 16/04/2019, Dominic Létourneau, Alex Morin. Écriture du document à partir de l'ancien guide d'installation.
 
 ## INTRODUCTION
 
@@ -50,13 +50,15 @@ La Figure 1 montre l'unité centrale du système (UC) est composée d'un systèm
 |:----------:|
 |![Câble RJ-12](images/RJ12.JPG)|
 
+La Figure X présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis.
+
 ### Câble de branchement du module de déplacement (RJ-45)
 
 |*Figure 10 : Câble RJ-45*|
 |:----------:|
 |![Câble RJ-45](images/RJ45.JPG)|
 
-Il est possible de différencier le câble puisqu'il comprend 8 contacts au lieu de 6 sur le RJ-12.
+Il est possible de différencier le câble puisqu'il comprend 8 contacts au lieu de 6 sur le RJ-12. La longueur maximale du câble doit être de 30 cm (1 pied).
 
 ### Batterie et câble USB
 
@@ -68,20 +70,108 @@ Il est possible de différencier le câble puisqu'il comprend 8 contacts au lieu
 
 * Velcro
 * Ciseaux
-* Tie-Wraps (10)
+* Tie-Wraps (au besoin)
 
 ## PROCÉDURE D'INSTALLATION MATÉRIELLE
+
 |*Figure 12 : Schéma global*|
 |:----------:|
 |![SCHÉMA GLOBAL](images/SCHEMA_GLOBAL.JPG)|
 
+La Figure X présente le schéma de connexion global du système. Les prochaines sections décrivent étape par étape comment connecter tous les modules.
 
+### ÉTAPE 1 - INSTALLER L'UNITÉ CENTRALE DE CONTRÔLE
 
+|*Figure 11 : Installation de l'unité centrale*|
+|:----------:|
+|![Installation de l'unité centrale](images/INSTALLATION_UNITE_CENTRALE.JPG)|
 
+|*Figure 11 : Ouvrir la housse Latitude -  Orthofab*|
+|:----------:|
+|![Installation de l'unité centrale](images/HOUSSE.JPG)|
+
+* L'unité centrale doit être installée à l'arrière du fauteuil, le plus bas possible, car le câble RJ-45 du module de déplacement, qui sera installé dans les prochaines étapes, ne doit pas dépasser 30cm de long (1 pied).
+* Les connecteurs RJ-12 et RJ-45 doivent être facilement accessibles.
+* Le connecteur USB doit être facilement accessible pour brancher la batterie.
+* Un bon endroit pour l'installation est dans la housse « Latitude – Orthofab » qui protègera l'unité centrale et la batterie des intempéries.
+  * Dans l’éventualité où l’espace est insuffisant au bas du fauteuil ou que la housse est absente, un petit sac peut être accroché au bas du fauteuil et être utilisé comme alternative pour le rangement de l’unité centrale de contrôle et de la batterie.  
+  * Ouvrez la housse « Latitude – Orthofab » tel qu’illustré à la figure x. Rouler ensuite la housse vers le bas pour découvrir le dos de la chaise.
+  * Laissez la housse ouverte (ou le sac) pendant toute l'installation.
+
+### ÉTAPE 2 - INSTALLER LE MODULE CENTRALE INERTIELLE FIXE
+
+|*Figure 11 : Installation du module centrale inertielle fixe*|
+|:----------:|
+|![Installation de l'IMU fixe](images/INSTALLATION_IMU_FIXE.JPG)|
+
+1. Installez le module IMU Fixe sur la partie base du fauteuil avec du velcro :
+   * Le module doit être orienté vers le haut
+2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+
+### ÉTAPE 3 - INSTALLER LE MODULE CENTRALE INERTIELLE MOBILE
+
+|*Figure 11 : Installation du module centrale inertielle mobile*|
+|:----------:|
+|![Installation de l'IMU mobile](images/INSTALLATION_IMU_MOBILE.JPG)|
+
+1. Installez le module IMU Mobile sur la partie bascule du fauteuil avec du velcro :
+   * Le module doit être orienté vers le haut
+2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+
+### ÉTAPE 4 - INSTALLER LE MODULE DE DÉPLACEMENT (FLUX OPTIQUE)
+
+|*Figure 11 : Installation du module de déplacement*|
+|:----------:|
+|![Installation du module de déplacement](images/INSTALLATION_MODULE_DEPLACEMENT.JPG)|
+
+1. Installez le module de dépacement avec du velcro :
+   * Le module doit être fixé à plus de 8 cm du sol.
+   * La caméra doit regarder vers le sol.
+2. Connectez le câble RJ-45 (le plus court possible) à l'unité centrale. Utilisez le seul port RJ-45 disponible sur le côté.
+
+### ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATION
+
+|*Figure 11 : Installation du module de notification*|
+|:----------:|
+|![Installation du module de notification](images/INSTALLATION_MODULE_NOTIFICATION.JPG)|
+
+1. Installez le module de dépacement avec du velcro :
+   * Le module de notification et son branchement ne doivent pas être accrochant.
+2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+   * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches.
+
+### ÉTAPE 6 - INSTALLER LE MODULE DE TAPIS DE PRESSION
+
+|*Figure 11 : Installation du module de tapis de pression*|
+|:----------:|
+|![Installation du module de tapis de pression](images/INSTALLATION_MODULE_PRESSION.JPG)|
+
+|*Figure 11 : Connexion du tapis de pression avec le module de pression*|
+|:----------:|
+|![Installation du module de tapis de pression](images/CONNEXION_PRESSION.JPG)|
+
+1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir figure x).
+    1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
+    2. Le boitier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil.
+2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+
+### ÉTAPE 7 - INSTALLER LA BATTERIE
+
+|*Figure 11 : Installation de la batterie*|
+|:----------:|
+|![Installation de la batterie](images/INSTALLATION_BATTERIE.JPG)|
+
+1. Placez la batterie à proximité de l'unité centrale à l'intérieur de la housse (ou du sac).
+2. Connectez le port USB de sortie de la batterie au port USB de l'unité centrale.
+
+### ÉTAPE 8 - FINITION
+
+1. Fixez les câbles qui "trainent" avec des attaches (tie-wraps).
+2. Fermer la housse « Latitude – Orthofab ».
 
 ## CONFIGURATION LOGICIELLE DU SYSTÈME
 
-Veuillez suivre les prochaines étapes afin de bien configurer le système.
+Veuillez suivre les prochaines étapes afin de bien configurer le système. **Assurez-vous d'avoir branché la batterie à l'unité centrale avant de poursuivre la configuration**
 
 ### ÉTAPE 1 - BRANCHER LA BATTERIE AVEC LE CÂBLE USB À L'UNITÉ CENTRALE
 
@@ -114,17 +204,30 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |![WEB_PAGE_PRINCIPALE](images/PAGE_CONFIGURATION.PNG)|
 
-3. Cliquez sur l'engrenage de configuration dans l'interface en haut à droite. Vous obtiendrez une page telle que montré à la Figure 16. Sur cette page, il fau configurer dans l'ordre (Un tooltip va apparaître quand vous laissez votre souris sur les icônes):
+3. Cliquez sur l'engrenage de configuration dans l'interface en haut à droite. Vous obtiendrez une page telle que montré à la Figure 16. Sur cette page, il fau configurer dans l'ordre (les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent):
     1. Le nom de l'usager.
     2. L'identifiant TelAsk de l'usager. Ceci sera donné par votre coordonnatrice de projet.
-    3. Plus
-    4. Moins
-    5. Bascule.
+    3. L'angle maximal de bascule.
+    4. L'angle minimal de bascule.
+    5. Le poids en kg de l'usager.
     6. Adresse de connexion SFTP pour transférer les fichiers à TelAsk. Par défaut à  "www.cati.telask.ca".
     7. Nom d'usager SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
     8. Mot de passe SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
 
 4. Cliquez sur "Sauvegarder" pour enregistrer votre configuration.
+
+|*Figure 16 : Configuration du WiFi pour Internet*|
+|:----------:|
+|![WEB_PAGE_PRINCIPALE](images/INTERNET_CONFIGURATION.PNG)|
+
+5. Configurez le réseau WiFi pour Internet. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk.
+
+|*Figure 18 : Validation du fonctionnement des capteurs*|
+|:----------:|
+|![WEB_PAGE_PRINCIPALE](images/VALIDATION_CAPTEURS.PNG)|
+
+6. Validation de communication des capteurs.
+
 
 Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plate-forme.
 
