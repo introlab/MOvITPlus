@@ -129,26 +129,28 @@ La Figure X présente le schéma de connexion global du système. Les prochaines
    * La caméra doit regarder vers le sol.
 2. Connectez le câble RJ-45 (le plus court possible) à l'unité centrale. Utilisez le seul port RJ-45 disponible sur le côté.
 
-### ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATION
+### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATION**
 
 |*Figure 11 : Installation du module de notification*|
 |:----------:|
 |![Installation du module de notification](images/INSTALLATION_MODULE_NOTIFICATION.JPG)|
 
-1. Installez le module de dépacement avec du velcro :
+1. Installez le module de notification avec du velcro :
    * Le module de notification et son branchement ne doivent pas être accrochant.
-2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
-   * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches.
+   * Le bouton doit se trouver vers le haut.
+   * Le câble doit se diriger vers l'arrière du fauteuil.
+2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 disponibles.
+   * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches (tie-wraps).
 
 ### ÉTAPE 6 - INSTALLER LE MODULE DE TAPIS DE PRESSION
 
-|*Figure 11 : Installation du module de tapis de pression*|
+|*Figure 11 : Installation du tapis de pression*|
 |:----------:|
-|![Installation du module de tapis de pression](images/INSTALLATION_MODULE_PRESSION.JPG)|
+|![Installation du tapis  de pression](images/INSTALLATION_TAPIS_PRESSION.JPG)|
 
 |*Figure 11 : Connexion du tapis de pression avec le module de pression*|
 |:----------:|
-|![Installation du module de tapis de pression](images/CONNEXION_PRESSION.JPG)|
+|![Installation du module de tapis de pression](images/CONNEXION_MODULE_PRESSION.JPG)|
 
 1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir figure x).
     1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
