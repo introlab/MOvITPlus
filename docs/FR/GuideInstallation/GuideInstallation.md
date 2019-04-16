@@ -6,11 +6,11 @@ Révisions:
 
 ## INTRODUCTION
 
-Ce guide explique les étapes à suivre pour installer tous les modules nécessaires au bon fonctionnement du système MOvIT+ ainsi que sa configuration sur n’importe quel fauteuil roulant (motorisé ou non).  Ce guide prévoit que tous les modules nécessaires sont préalablement assemblés et prêts à être utilisés.
+Ce guide explique les étapes à suivre pour installer tous les modules nécessaires au bon fonctionnement du système MOvIT+ ainsi que sa configuration sur n’importe quel fauteuil roulant (motorisé ou non).  Ce guide prévoit que tous les modules capteurs nécessaires, décrits dans la prochaine section, sont préalablement assemblés et prêts à être utilisés.
 
 ## MODULES REQUIS
 
-Voici la liste des composants qui seront nécessaires à l'installation :
+Voici la liste des modules qui seront nécessaires à l'installation :
 
 ### **Module de l’unité centrale de contrôle**
 
@@ -242,7 +242,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |![VALIDATION_CAPTEURS.PNG](images/VALIDATION_CAPTEURS.PNG)|
 
-6. Validation de communication des capteurs. La page de configuration montre à la Figure 24 quels capteurs sont connectés. Vous devriez voir des points verts après chaque module. Si vous voyez des points rouges, vérifiez que vos câbles RJ-12 sont bien connectés.
+6. Validez la communication avec les modules capteurs. La page de configuration montre à la Figure 24 quels capteurs sont connectés. Vous devriez voir des points verts après chaque module. Si vous voyez des points rouges, vérifiez que vos câbles RJ-12 sont bien connectés.
 
 
 Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plate-forme.
