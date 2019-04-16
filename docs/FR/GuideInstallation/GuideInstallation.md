@@ -220,13 +220,13 @@ Une fois connecté au réseau WiFi :
 
 |*Figure 16 : Configuration du WiFi pour Internet*|
 |:----------:|
-|![WEB_PAGE_PRINCIPALE](images/INTERNET_CONFIGURATION.PNG)|
+|![INTERNET_CONFIGURATION.PNG](images/INTERNET_CONFIGURATION.PNG)|
 
 5. Configurez le réseau WiFi pour Internet. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk.
 
 |*Figure 18 : Validation du fonctionnement des capteurs*|
 |:----------:|
-|![WEB_PAGE_PRINCIPALE](images/VALIDATION_CAPTEURS.PNG)|
+|![VALIDATION_CAPTEURS.PNG](images/VALIDATION_CAPTEURS.PNG)|
 
 6. Validation de communication des capteurs.
 
