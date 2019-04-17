@@ -209,7 +209,7 @@ Quand le système est démarré correctement, un point d'accès WiFi apparaît. 
 
 Une fois connecté au réseau WiFi :
 
-1. Connectez-vous à l'adresse [http://192.168.50.1](http://192.168.50.1) à l'aide de votre navigateur Internet.
+1. Connectez-vous à l'adresse [http://192.168.1.10:3000](http://192.168.1.10:3000) à l'aide de votre navigateur Internet.
 
 ||
 |:----------:|
