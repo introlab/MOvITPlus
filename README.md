@@ -1,15 +1,14 @@
 # MOvITPlus
-
-This repository contains all the required code and documents to create your own MOvITPlus system.
+Ce Repository contient tous les éléments nécessaires pour faire votre propre système MovIt+
 
 ## MOvIT-Detect
-Contains everything to access sensors via I2C and SPI using a raspberry pi zero w and and custom hardware. This code is in C++. All communication with the backend is done over MQTT. It is meant to run on a raspberry pi based on BroadCom bcm2835 CPU.
+Contiens tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend est faites via MQTT. Ce code fonctionne sur Raspberry Pi Zero W, ou tout autre processeur ARM basé sur le processeur BroadCom bcm2835.
 
 ## MOvIT-Detect-Backend
-This is the backend of the system, it uses Node-Red which is simple to modify and adapt to your needs. It takes MQTT as input from MOvIT-Detect and stores data in a MongoDB 2 instance locally. All data is then accesible via GET and POST http request used by MOvIT-Detect-Frontend. It is meant to run on a raspberry pi.
+C'est le backend du système, il a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB 2 localement. Les donnes sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, également utilisé par le frontend pour afficher l'information.
 
 ## MOvIT-Detect-Frontend
-This is the frontend of the system. This is the part the user and clinician interacts with. It is written using React and Redux. It displays data stored by MOvIT-Detect-Backend for further analysis.
+C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et interprétées. 
 
 ## MOvIT-Hardware
-Contains all the files to recreate the complete hardware. The altium PCB files, enclosure CAD and STL as well as a bill of material for each sensor needed for the complete system.
+Contiens tous les fichiers de fabrication pour concevoir, ce qui permet de recréer le système en entier.
