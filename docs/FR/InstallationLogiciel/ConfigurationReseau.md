@@ -111,17 +111,27 @@ iface AP1 inet dhcp
 L'adresse IP de l'AP est définie ici soit `192.168.10.1`. Il est possible de changer cette adresse si nécessaire, tant que la configuration de dnsmasq est respectée, il ne devrait pas y avoir de problème. Il est important que l'interface `ap0` soit activée avant `wlan0`, autrement cela ne fonctionnera pas. 
 
 # Démarrage de l'AP et partage de connexion
-Il faut lancer l'AP manuellement au démarrage du Raspberry Pi, ce qui n'est pas pratique c'est pourquoi une tâche cron va être utilisée. Nous allons également activer le partage d'internet entre les deux interfaces soit `wlan0` et `ap0`. Il faudra d'abord créer un fichier `/home/pi/start-ap-managed-wifi.sh` et lui ajouter ces lignes:
+Il faut lancer l'AP manuellement au démarrage du Raspberry Pi, ce qui n'est pas pratique. C'est pourquoi un script qui s'éxécute à la toute fin de la sécance de démarrage du Raspberry Pi semble idéal. Nous allons également activer le partage d'internet entre les deux interfaces soit `wlan0` et `ap0` avec ce même script. Il faudra d'abord créer un fichier `start-ap-managed-wifi` à l'emplacement à `/home/pi`. Celui-ci doit contenir ces lignes:
 ```bash
 #!/bin/bash
-sleep 30
 sudo ifdown --force wlan0 && sudo ifdown --force ap0 && sudo ifup ap0 && sudo ifup wlan0
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 192.168.10.0/24 ! -d 192.168.10.0/24 -j MASQUERADE
 sudo systemctl restart dnsmasq
 ```
-Il faut rendre ce fichier exécutable a l'aide de `sudo chmod +x /home/pi/start-ap-managed-wifi.sh`, puis l'exécuté a l'aide d'une tâche cron. Il faut exécuté la commande `sudo crontab -e` et ajouter cette ligne a la fin du fichier:
+Il faut rendre ce fichier exécutable a l'aide de `sudo chmod 755 /home/pi/start-ap-managed-wifi.sh`, puis créer une tâche de démarrage. IL faut ainsi créer un fichier de cette façon `sudo nano /etc/systemd/system/start-wifi.service` et y ajouter: 
 ```bash
-@reboot /home/pi/start-ap-managed-wifi.sh
+[Unit]
+Description=Starting AP and managed wifi with internet sharing
+After=dnsmasq.service
+
+[Service]
+Type=forking
+ExecStart= /home/pi/start-ap-managed-wifi.sh
+
+[Install]
+WantedBy=multi-user.target
 ```
+Il faut ensuite exécuter `sudo systemctl daemon-reload` puis `sudo systemctl enable start-wifi.service`
+
 Une fois tout ceci effectué, il faut redémarrer le Raspberry Pi. Au prochain démarrage l'AP devrait être visible et accessible.
