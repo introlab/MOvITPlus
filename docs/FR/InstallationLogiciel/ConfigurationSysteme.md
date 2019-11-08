@@ -43,7 +43,11 @@ ___
 L'entièreté des configurations ci-dessous sont basées sur une image de [Rasbian Buster](https://www.raspberrypi.org/downloads/raspbian/ "Site de téléchargement pour l'image Rasbian"). La dernière version testée est la révision de septembre 2019 déployé le 26 septembre. Il est important d'utiliser la version dite "Lite", qui n'a pas d'interface utilisateur, afin de réduire considérablement la charge de travaille sur le RaspberryPi Zero W.
 
 ### 1.2. Image préconfiguré
-Une image du système préconfiguré, incluant un script de démarrage sur mesure, est disponible sur le GitHub du projet directment. Utiliser cette image permet notamment d'éviter d'avoir à faire toutes les étapes de configuration qui suivent. Il peut cependant être utile de faire celle-ci pour mettre à jour l'image de base de Rasbian ou simplement pour permettre une meilleure compréhension du système.
+Une image du système préconfiguré, incluant un script de démarrage sur mesure, est disponible sur le GitHub du projet directment. Utiliser cette image permet notamment d'éviter d'avoir à faire toutes les étapes de configuration qui suivent. 
+
+Certaines configurations, notamment le changement du _hostname_, du nom du point d'accès et de l'addresse MAC dans l'interface pour le point d'accès, sont réalisées avec un script qui s'exécute au premier démarrage puis se supprime. Celui-ci laisse des traces dans le fichier `/home/pi/bootSetup.log`. Le script est disponible dans ce répertoire GitHub au besoin.
+
+Il peut cependant être utile de faire toute cette configuration manuellement pour mettre à jour l'image de base de Rasbian ou simplement pour permettre une meilleure compréhension du système.
 
 ### 1.3 Flashage d'une image
 [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") est le logiciel utilisé pour _flasher_ l'image désiré sur une carte micro-SD facilement.
@@ -317,7 +321,11 @@ After=network-online.target mosquitto.service
 StartLimitIntervalSec=0
 
 [Service]
+# Set process niceness (priority) to maximum
+#	(without being a near real-time process)
+Nice=-20
 Type=simple
+# Ensures the process always restarts when it crashes
 Restart=always
 RestartSec=1
 User=root
@@ -325,6 +333,7 @@ ExecStart=/home/pi/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 
