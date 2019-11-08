@@ -7,6 +7,7 @@
 - [1. Image système](#1-image-syst%c3%a8me)
     - [1.1. Image de base](#11-image-de-base)
     - [1.2. Image préconfiguré](#12-image-pr%c3%a9configur%c3%a9)
+        - [Script d'initialisation](#script-dinitialisation)
     - [1.3 Flashage d'une image](#13-flashage-dune-image)
     - [1.4 Utilisation en mode _headless_](#14-utilisation-en-mode-headless)
 - [2. Configuration réseau](#2-configuration-r%c3%a9seau)
@@ -33,6 +34,7 @@
     - [3.2. Utilisation des services](#32-utilisation-des-services)
     - [3.3. Optimisation du temps de démarrage](#33-optimisation-du-temps-de-d%c3%a9marrage)
 - [4. Installation de MOvIT +](#4-installation-de-movit)
+        - [À MODIFIER POUR AJOUTER LA MÉTHODE D'INSTALLATION PAR LE RÉPERTOIRE PARENT](#%c3%80-modifier-pour-ajouter-la-m%c3%89thode-dinstallation-par-le-r%c3%89pertoire-parent)
 - [5. Mises à jour du système](#5-mises-%c3%a0-jour-du-syst%c3%a8me)
 ___
 <br>
@@ -44,10 +46,13 @@ L'entièreté des configurations ci-dessous sont basées sur une image de [Rasbi
 
 ### 1.2. Image préconfiguré
 Une image du système préconfiguré, incluant un script de démarrage sur mesure, est disponible sur le GitHub du projet directment. Utiliser cette image permet notamment d'éviter d'avoir à faire toutes les étapes de configuration qui suivent. 
-
-Certaines configurations, notamment le changement du _hostname_, du nom du point d'accès et de l'addresse MAC dans l'interface pour le point d'accès, sont réalisées avec un script qui s'exécute au premier démarrage puis se supprime. Celui-ci laisse des traces dans le fichier `/home/pi/bootSetup.log`. Le script est disponible dans ce répertoire GitHub au besoin.
-
 Il peut cependant être utile de faire toute cette configuration manuellement pour mettre à jour l'image de base de Rasbian ou simplement pour permettre une meilleure compréhension du système.
+
+##### Script d'initialisation
+Certaines configurations, notamment le changement du _hostname_, du nom du point d'accès et de l'addresse MAC dans l'interface pour le point d'accès, sont réalisées avec un script qui s'exécute au premier démarrage puis se supprime. Celui-ci laisse des traces dans le fichier `/home/pi/MOvITPlus/firstBootSetup.log`. Le script est disponible dans ce répertoire GitHub au besoin.
+Si un problème survient ou que l'initialisation doit être réactivée à nouveau, le script peut être déclanché avec la commande `sudo /home/pi/MOvITPlus/./firstBootSetup.sh`. L'ajout de l'option `--restore` à la fin de cette commande permet de réactiver l'exécution du script lors du prochain boot au besoin.
+
+
 
 ### 1.3 Flashage d'une image
 [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") est le logiciel utilisé pour _flasher_ l'image désiré sur une carte micro-SD facilement.
@@ -284,7 +289,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/usr/local/bin/node-red-pi -u /home/pi/MOvIT-Detect-Backend --max-old-space-size=256
+ExecStart=/usr/local/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
 
 [Install]
 WantedBy=multi-user.target
@@ -306,7 +311,7 @@ User=root
 #  To change its behavior please refer to the corresponding script in package.json
 #  Package.json is located in the "WorkingDirectory".
 ExecStart=/usr/bin/yarn start
-WorkingDirectory=/home/pi/MOvIT-Detect-Frontend/
+WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
 
 [Install]
 WantedBy=multi-user.target
@@ -384,6 +389,8 @@ ___
 # 4. Installation de MOvIT +
 Les instructions d'installation des composantes de Movit + sont disponibles dans les `README.md` des répertoires GitHub correspondants.
 L'installation devrait ainsi se faire dans l'ordre suivant :
+
+##### À MODIFIER POUR AJOUTER LA MÉTHODE D'INSTALLATION PAR LE RÉPERTOIRE PARENT
 - **MOvIT-Detect :** Capteurs, code d’acquisition en C++ et communication avec les bus I2C
 
 - **MOvIT-Detect-Frontend :** Code en JavaScript permettant l’affichage d’une page web et l’interaction avec les couches inférieures
