@@ -1,5 +1,35 @@
-# MOvITPlus
-Ce Repository contient tous les éléments nécessaires pour faire votre propre système MovIt+
+
+
+# MOvIT +
+Ce répertoire contient tous les éléments nécessaires pour faire fonctionner un système MOvIt+
+
+#### Installation de MOvIt+ et de ces sous-répertoires 
+L'installation de MOvIt requiert un `git clone` habituel et 
+
+|Installer initialement| Mettre à jour répertoire parent|Mettre à jour les sous-répertoires|
+|-|-|-|
+|`git clone [...] --recurse-submodules`|`git pull`|`git submodule update --remote`|
+
+https://git-scm.com/book/en/v2/Git-Tools-Submodules
+```bash
+git submodule update --init --recursive
+```
+**Mettre à jour le répertoire parent**
+   - liens vers les bonnes versions des sous-répertoires
+   - scripts de démarrage et de mise à jour
+
+```bash
+git pull
+```
+```bash
+# Mettre à jour tous les sous-répertoires à leur version la plus récente sur leur origin/master respectifs
+git submodule update --remote
+
+# Mettre à jour le master du répertoire parent avec ces dernières versions des masters des sous-répertoires.
+git add [les dossiers des répertoires]
+git commit -m "message du commit"
+git push
+```
 
 ## MOvIT-Detect
 Contiens tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend est faites via MQTT. Ce code fonctionne sur Raspberry Pi Zero W, ou tout autre processeur ARM basé sur le processeur BroadCom bcm2835.
