@@ -32,8 +32,9 @@ Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flash
 #### Script de mise à jour
 **`updateProject.sh`**
 Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi et l'initialisation d'une nouvelle instance du projet. Voici les options à entrer en argument :
-   - `--config` : Mise à jour de la configuration du système (ex: services de démarrage)
+   - `--sysconfig` : Mise à jour de la configuration du système (ex: services de démarrage)
    - `--init` : Initialisation du projet (ex: nouvelle base de donnée)
+   - `--rtctime` : 
    - (aucun argument) : mise à jour des répertoires du projet avec Git
 
 

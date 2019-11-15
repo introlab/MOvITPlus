@@ -18,7 +18,7 @@ else
 
 #ACTUAL SCRIPT
 # Redirect all outputs to a log file
-exec 1>/home/pi/MOvITPlus/firstBootSetup.log 2>&1
+exec 1>>/home/pi/MOvITPlus/firstBootSetup.log 2>&1
 
 #Log date
 echo "Running initial setup script for a new Movit plus system"
@@ -53,6 +53,7 @@ sed -i '\/bin\/bash \/home\/pi\/MOvITPlus\/firstBootSetup.sh/d' /etc/rc.local
 echo "Removed script execution line from /etc/rc.local"
 
 #######################################################
+reboot now
 fi
 exit 0
 
