@@ -20,23 +20,32 @@ network={
     id_str="AP1"
 }
 ```
-### 1.4. Scripts
+### 1.4. Initialisation automatisé
+L'initialisation automatisé d'une nouvelle machine nécessite une connection à internet pour fonctionner. Si les scripts ne fonctionnent pas (voir les `.logs` dans `/home/pi`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi))
+
 #### Script de configuration
 **`firstBootSetup.sh`**
 Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
-**\*** Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine avec le lancement du script de mise à jour avec l'argument `--init`.
-> Ce script enregistre le résultat de sa dernière exécution dans `firstBootSetup.log`
-
-> **\*** Ces étapes du script ne fonctionnent pas si l'accès internet n'est pas correctement configuré dans `wpa_supplicant.conf`. Il peut alors être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi))
+Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--rtc-time`, `--sys-config` et `--init`.
+> Ce script enregistre la sortie de ses exécutions dans `/home/pi/firstBootSetup.log`
 
 #### Script de mise à jour
 **`updateProject.sh`**
-Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi et l'initialisation d'une nouvelle instance du projet. Voici les options à entrer en argument :
-   - `--sysconfig` : Mise à jour de la configuration du système (ex: services de démarrage)
-   - `--init` : Initialisation du projet (ex: nouvelle base de donnée)
-   - `--rtctime` : 
-   - (aucun argument) : mise à jour des répertoires du projet avec Git
+Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi, l'initialisation d'une nouvelle instance du projet et la configuration du RTC _(Real Time Clock)_. Voici les options qui peuvent être entrées en argument :
+   - `--sys-config` : Mise à jour de la configuration du système (ex: services de démarrage)
+   - `--init-project` : Initialisation du projet (ex: nouvelle base de donnée)
+   - `--rtc-time` : Écrit le temps du système sur le RTC _(Real Time Clock)_
+   - `--git-update` : mise à jour des répertoires du projet avec Git
 
+Additionnelement, l'ajout de l'argument `--console-log` redirige la sortie de l'éxecution à la console.
+
+> ATTENTION : `--git-update` ne doit pas être appelé directement mais à l'aide de
+> ```bash
+> curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
+> ```
+> Cette commande permet d'éviter les conflits lorsque Git fait son travail.
+
+> Ce script enregistre la sortie de ses exécutions dans `/home/pi/updateProject.log.log`
 
 
 
