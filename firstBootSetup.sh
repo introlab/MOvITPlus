@@ -14,27 +14,35 @@ set -e
 #Constants
 HomePath="/home/pi"
 MovitPath="$HomePath/MOvITPlus"
-
-#RESTORE OR REMOVE SCRIPT FOR EXECUTION ON NEXT BOOT
-#via the argument --restore and --remove
-if [ $1 == "--restore" ]; then
+#Functions
+restore () {
     if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local; then
-        echo "Script execution line is already in /etc/rc.local"
+            echo "Script execution line is already in /etc/rc.local"
     else
-    #Add execution line from /etc/rc.local
+        #Add execution line from /etc/rc.local
         sed -i "$ i /bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local
         echo "Added script execution line to /etc/rc.local"
         echo "Script will run on next boot..."
     fi
-elif [ $1 == "--remove" ]; then
+}
+
+remove () {
     if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local; then
-    #Delete execution line from /etc/rc.local
+        #Delete execution line from /etc/rc.local
         sed -i '\/bin\/bash \/home\/pi\/firstBootSetup.sh/d' /etc/rc.local
         echo "Removed script execution line from /etc/rc.local"
 
     else
         echo "No script execution line to remove in /etc/rc.local"
     fi
+}
+
+#RESTORE OR REMOVE SCRIPT FOR EXECUTION ON NEXT BOOT
+#via the argument --restore and --remove
+if [[ $1 == "--restore" ]]; then
+    restore
+elif [[ $1 == "--remove" ]]; then
+    remove
 else
 
     #ACTUAL SCRIPT
@@ -42,8 +50,10 @@ else
     exec 1>>$HomePath/firstBootSetup.log 2>&1
 
     #Log date
+    echo "########################################################"
     echo "Running initial setup script for a new Movit plus system"
     echo "Current date : $(date)"
+    echo "########################################################"
 
     #######################################################
     #Verify connectivity (will not run if device fails to ping through DNS server)
@@ -55,32 +65,30 @@ else
         echo "Detected MAC address : \"$MACAddr\" "
         #Modify string to keep only last 3 bytes and delete all ":"
         MACname="$(echo ${MACAddr:9:8} | tr -d :)"
+        MACname=${MACname^^}
 
 
         #AP interface
         sed -i -e "s/b8:27:eb:..:..:../$MACAddr/g" /etc/udev/rules.d/70-persistent-net.rules
 
         #Hostname part 1
-        sed -i -e "s/raspberrypi/Movit$MACname/g;s/Movit....../Movit$MACname/g;" /etc/hostname
+        sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostname
         #Old method #sed -i -e "s/raspberrypi/Movit$MACname/g" /etc/hostname
 
         #Hostname part 2
-        sed -i -e "s/raspberrypi/Movit$MACname/g;s/Movit....../Movit$MACname/g;" /etc/hosts
+        sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hosts
 
         #AP name
-        sed -i -e "s/raspberrypi/Movit$MACname/g;s/Movit....../Movit$MACname/g;" /etc/hostapd/hostapd.conf
+        sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostapd/hostapd.conf
 
         #######################################################
         echo "Setup completed, no errors"
-        echo "At this point, after a reboot, networks should be fully functionnal."
-
-        #Delete execution line from /etc/rc.local
-        sed -i '\/bin\/bash \/home\/pi\/firstBootSetup.sh/d' /etc/rc.local
-        echo "Removed script execution line from /etc/rc.local"
+        echo "--- At this point, after a reboot, networks should be fully operationnal."
+        remove
 
         #
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
-        #Only if "--mac" argument is passed
+        #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
             #Installing git repositories
             echo "Installing necessary GitHub directories"
@@ -88,9 +96,9 @@ else
             git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
 
             #Executing update script
-            $MovitPath./updateProject.sh --rtc-time
-            $MovitPath./updateProject.sh --sys-config
-            $MovitPath./updateProject.sh --init-project
+            $MovitPath/./updateProject.sh --rtc-time
+            $MovitPath/./updateProject.sh --sys-config
+            $MovitPath/./updateProject.sh --init-project
         else
             echo "Skipping git installation because of '--nogit' argument"
         fi
@@ -103,6 +111,6 @@ else
     fi
 fi
 
-echo "Exiting..."
+echo "Exiting...______________________________________________"
 exit 0
 

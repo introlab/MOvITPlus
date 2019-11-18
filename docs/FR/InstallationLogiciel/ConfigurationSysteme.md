@@ -101,7 +101,7 @@ Secure Shell (SSH) peux être activé à l'aide du menu _raspi-config_ ou en uti
 > **Utilisation headless :** Il peut également être activé en plaçant un fichier vide et sans extension, nommé `ssh`, dans la partition de boot de l'image fraichement flashée.
 
 ### 2.3. Changment du Hostname et du mot de passe
-Il est préférable que le Hostname et le nom de l'_access point_ soient du format `movitxxyyzz` où xxyyzz représente les derniers octets de l'addresse MAC de l'appareil configuré. Ce format, également utilisé pour le nom du point d'accès plus bas, permet d'éviter des conflits de Hostname sur même réseau ou de la confusion entre les points d'accès.
+Il est préférable que le Hostname et le nom de l'_access point_ soient du format `movit-xxyyzz` où xxyyzz représente les derniers octets de l'addresse MAC de l'appareil configuré. Ce format, également utilisé pour le nom du point d'accès plus bas, permet d'éviter des conflits de Hostname sur même réseau ou de la confusion entre les points d'accès.
 
 ##### Obtention de l'addresse MAC :
 Pour procéder, il faut donc connaitre l'adresse MAC de l'interface `wlan0`. La commande suivante devrait retourner l'addresse directement :
@@ -129,7 +129,7 @@ ifconfig wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'
 >L'adresse MAC de ce Raspberry Pi se trouve sous Inteface wlan0 > addr, dans notre situation l'adresse MAC de l’Interface wlan0 serait b8:27:eb:xx:yy:zz.
 
 ##### Hostname :
-Ensuite, il faut changer `raspberrypi`, le Hostname par défaut, pour `movitxxyyzz` dans
+Ensuite, il faut changer `raspberrypi`, le Hostname par défaut, pour `movit-xxyyzz` dans
 les fichiers `/etc/hostname` et `/etc/hosts`. Ces changements peuvent aussi être réalisés en utilisant le menu _raspi-config_.
 
 ##### Mot de passe :
@@ -180,7 +180,7 @@ ctrl_interface=/var/run/hostapd
 ctrl_interface_group=0
 interface=ap0
 driver=nl80211
-ssid=Movitxxyyzz
+ssid=Movit-xxyyzz
 hw_mode=g
 channel=11
 wmm_enabled=0
@@ -193,7 +193,7 @@ wpa_pairwise=TKIP CCMP
 rsn_pairwise=CCMP
 ```
 
-Il faut remplacer le ssid (nom du réseau) actuellement `Movitxxyyzz` et remplacer _xxyyzz_ par les derniers octets de l'[addresse MAC](#obtention-de-laddresse-mac) comme précédement. Il est recommendé que le mot de passe du point d'accès, représenté ici arpès `wpa_passphrase=`, soit `movitplus` par soucis d'uniformité entre les appareils. Si changé, ce mot de passe doit avoir un minimum de 8 caractères pour respecter la norme WPA.
+Il faut remplacer le ssid (nom du réseau) actuellement `Movit-xxyyzz` et remplacer _xxyyzz_ par les derniers octets de l'[addresse MAC](#obtention-de-laddresse-mac) comme précédement. Il est recommendé que le mot de passe du point d'accès, représenté ici arpès `wpa_passphrase=`, soit `movitplus` par soucis d'uniformité entre les appareils. Si changé, ce mot de passe doit avoir un minimum de 8 caractères pour respecter la norme WPA.
 
 Ensuite, le fichier `/etc/default/hostapd` doit être modifié de façon à changer la clé `DAEMON_CONF`. Cette ligne fait comprendre à HostAPd où il doit lire son fichier de configuration au démarrage. Il faut la remplacer par :
 ```bash
