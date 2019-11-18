@@ -1,7 +1,10 @@
 #!/bin/bash
 #######################################################
 ####   MOVIT PLUS Project : First boot script      ####
-####    - Hostname, AP interface config, AP name   ####
+####    - Set RTC time                             ####
+####    - Update system configuration              ####
+####    - Initialise github project on the device  ####
+####    - Update github project on the device      ####
 ####    Author : Charles Maheu                     ####
 #######################################################
 
@@ -77,6 +80,10 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
     #use of --production must be tested...
 
+    echo "Compiling acquisition software"
+    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && sudo make check && sudo make install
+    cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
+
     systemctl enable movit_acquisition.service
     systemctl enable movit_frontend.service
     systemctl enable movit_backend.service
@@ -95,7 +102,7 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     #----------------------------------------
     #Update function
     updateGithub () {
-        echo "Update available :"
+        echo "Update available, proceeding..."
 
         echo "Stopping outdated services..."
         systemctl stop movit_acquisition.service
@@ -119,7 +126,7 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     [ $(git rev-parse HEAD) = $(git ls-remote $(git rev-parse --abbrev-ref @{u} | sed 's/\// /g') | cut -f1) ] && echo "Already up to date, nothing to do" || updateGithub
     #----------------------------------------
 
-    echo "Done updating the Git repos"
+    echo "Done updating all GitHub repositories"
 
 
 else
@@ -134,9 +141,8 @@ echo "   $InitArg"
 echo "   $GitArg"
 echo " "
 echo "Additionnaly, use '$ConsArg' to redirect logs to the console"
-echo "Exiting..."
-
-
 fi
+
+echo "Exiting..."
 exit 0
 

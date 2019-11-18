@@ -90,7 +90,7 @@ network={
 }
 ```
 
-Il faut évidemment remplacer `SSID` et `MOT_DE_PASSE` par des identifiants réseau valides. La clé `id_str` permet de définir une priorité réseau, si jamais il faut ajouter d'autres réseaux, il faudrait incrémenter `AP1`.
+Il faut évidemment remplacer `SSID` et `MOT_DE_PASSE` par des identifiants réseau valides. La clé `id_str` permet de définir une priorité réseau. Pour ajouter d'autres réseaux (_wifi roaming_), il faut incrémenter `AP1` (`AP2`, `AP3`...).
 
 > Il est aussi possible d'utiliser l'utilitaire `raspi-config` pour réaliser l'équivalent de ces étapes à l'aide d'un interface utilisateur.
 
@@ -373,12 +373,28 @@ systemctl list-unit-files | grep disabled
 > [Exemple de réponse](https://pastebin.com/iXuyHpXC) d'un des systèmes fonctionnels lors de l'exécution de ces commandes pour référence...
 
 ### 3.3. Optimisation du temps de démarrage
-Certains services et certaines fonctionnalités peuvent être désactivées pour accélérer le démarrage du RaspberryPi :
+Certains services et certaines fonctionnalités peuvent être désactivées pour accélérer le démarrage du RaspberryPi. Dans le fichier `/boot/config.txt`, il faut ajouter ces lignes à la fin :
 ```bash
-echo "dtoverlay=pi3-disable-bt" | sudo tee -a /boot/config.txt #Désactive le bluetooth
-sudo systemctl disable hciuart #Service systemd qui initialise le Bluetooth
-sudo systemctl disable dnsmasq #Celui-ci est démarré à l'aide du script plus haut
+#disable bluetooth
+dtoverlay=pi3-disable-bt
+
+#---------Tested, seems fine
+# Disable the rainbow splash screen
+disable_splash=1
+
+# Overclock the SD Card from 50 to 100MHz
+# This can only be done with at least a UHS Class 1 card
+dtoverlay=sdtweak,overclock_50=100
+
+# Set the bootloader delay to 0 seconds. The default is 1s if not specified.
+boot_delay=0
 ```
+Il faut également exécuter ces commandes :
+```bash
+sudo systemctl disable hciuart #Service systemd qui initialise le Bluetooth
+sudo systemctl disable dhcpcd.service #Service de dhcpcd inutile
+```
+
 Voir l'exemple de réponse plus haut aux commandes `systemctl list-unit-files` pour plus de détails.
 D'autres optimisations pourraient être faites, notamment en utilisant une version de Linux comportant uniquement les fonctionnalités nécessaires.
 ___

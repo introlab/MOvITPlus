@@ -21,12 +21,22 @@ network={
 }
 ```
 ### 1.4. Initialisation automatisé
-L'initialisation automatisé d'une nouvelle machine nécessite une connection à internet pour fonctionner. Si les scripts ne fonctionnent pas (voir les `.logs` dans `/home/pi`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi))
+Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré.
+
+Cependant, l'initialisation automatisé d'une nouvelle machine nécessite une connection à internet pour fonctionner. Si les scripts ne fonctionnent pas (voir les `.logs` dans `/home/pi` pour voir le résultat de leurs exécutions), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi))
 
 #### Script de configuration
 **`firstBootSetup.sh`**
 Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
 Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--rtc-time`, `--sys-config` et `--init`.
+
+
+Ce script doit demeurer sous `/home/pi` et la façon pour l'exécuter est donc `/home/pi/./firstBootSetup.sh`
+
+Ce script peut également être utilisé pour mettre à jour tous les fichiers en lien avec l'addresse MAC physique d'un appareil. Par exemple, si la carte SD est installée dans un autre RaspberryPi, les références à l'addresse MAC doivent être changée pour correspondre à cette nouvelle addresse MAC. Pour ce faire, il faut appeler le script avec l'argument `--nogit` pour éviter une nouvelle tentative d'installation des répertoires avec _Git_.
+
+Aussi, le script peut être lancé avec l'argument `--restore` afin de restaurer l'appel au démarrage de ce script au prochain démarrage. La commande `--remove` fait l'inverse.
+
 > Ce script enregistre la sortie de ses exécutions dans `/home/pi/firstBootSetup.log`
 
 #### Script de mise à jour
@@ -39,23 +49,16 @@ Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au pro
 
 Additionnelement, l'ajout de l'argument `--console-log` redirige la sortie de l'éxecution à la console.
 
-> ATTENTION : `--git-update` ne doit pas être appelé directement mais à l'aide de
+> ATTENTION : Il est recommandé d'appeler `--git-update` à l'aide de cette commande :
 > ```bash
 > curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
 > ```
-> Cette commande permet d'éviter les conflits lorsque Git fait son travail.
+> Celle-ci permet d'éviter les conflits lorsque Git fait son travail.
 
 > Ce script enregistre la sortie de ses exécutions dans `/home/pi/updateProject.log.log`
 
 
-
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
+___
 <br>
 <br>
 
