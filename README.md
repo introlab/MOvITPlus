@@ -1,34 +1,50 @@
 
 
 # MOvIT Plus
-Ce répertoire contient tous les éléments nécessaires pour faire fonctionner un système MOvIt+. L'utilisation d'une **image préconfiguré** et des **scripts** de mise à jour est recommendée [**[installation simplifiée](#installation-simplifi%c3%a9e "Section de ce document")**], mais il possible de suivre les instructions et la documentation pour préparer un système à partir de rien [**[installation complète](#installation-compl%c3%a8te "Section de ce document")**].
+Ce répertoire contient tous les éléments nécessaires pour faire fonctionner un système MOvIt+. L'utilisation d'une **image préconfiguré** et des **scripts** de mise à jour est recommendée [**[installation rapide](#1-installation-rapide "Section de ce document")**], mais il possible de suivre les instructions et la documentation pour préparer un système à partir de rien [**[installation complète](#installation-compl%c3%a8te "Section de ce document")**].
 
-## 1. Installation simplifiée
+## 1. Installation rapide
 ### 1.2. Image préconfigurée
-Autrement, l'image préconfiguré doit être flashé à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD.
+L'image préconfigurée doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD.
 **DISPONIBILITÉ DE L'IMAGE**
+Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification.
+
 ### 1.3. Configuration sans fil
-Un fichier nommé `wpa_supplicant.conf` remplit, selon la structure ci-bas, avec les informations pour se connecter au réseau wifi choisi peut être placé dans la partition boot d'une carte SD nouvellement flashé. Le système l'utilisera afin de permettre une connection au wifi spécifié dès le premier démarrage. 
+**Un fichier nommé `wpa_supplicant.conf`**, remplit selon la structure ci-bas avec les informations pour se connecter au réseau wifi choisi, peut être **placé dans la partition `boot`** d'une carte SD nouvellement flashé. Le système l'utilisera afin de permettre une connection au wifi spécifié dès le premier démarrage.
+**`wpa_supplicant.conf`** :
 ```bash
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 
 network={
-    ssid="SSID"
-    psk="MOT_DE_PASSE"
+    ssid="NOM_DU_RESEAU" #Remplacer NOM_DU_RESEAU par le nom du réseau désiré
+    psk="MOT_DE_PASSE" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
     id_str="AP1"
 }
 ```
-### 1.4. Initialisation automatisé
-Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré.
+Aussi, l'**ajout d'un fichier nommé `ssh`** (sans extension) dans la partition `boot` permettra de lancer un service pour débogger sur un autre ordinateur en cas de problème.
 
-Cependant, l'initialisation automatisé d'une nouvelle machine nécessite une connection à internet pour fonctionner. Si les scripts ne fonctionnent pas (voir les `.logs` dans `/home/pi` pour voir le résultat de leurs exécutions), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi))
+### 1.4. Initialisation automatisé
+Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre plusieurs minutes, l'**appareil ne doit pas être débranché!**.
+
+> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner. Si les scripts ne fonctionnent pas (voir `/home/pi/firstBootScript.log`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si il y a eu une erreur dans le fichier wpa_supplicant.conf par exemple.
+
+### 1.5. Vérification
+À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'ouvrir le site `movit.plus`. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulu. Voir la documentation de la partie frontend pour plus de détails.
+
+___
+<br>
+<br>
+
+
+
+## 2. Explications
 
 #### Script de configuration
 **`firstBootSetup.sh`**
 Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
-Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--rtc-time`, `--sys-config` et `--init`.
+Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine l'écriture du temps du système sur le RTC _(Real Time Clock)_ puis avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--sys-config` et `--init`.
 
 
 Ce script doit demeurer sous `/home/pi` et la façon pour l'exécuter est donc `/home/pi/./firstBootSetup.sh`
@@ -44,7 +60,6 @@ Aussi, le script peut être lancé avec l'argument `--restore` afin de restaurer
 Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi, l'initialisation d'une nouvelle instance du projet et la configuration du RTC _(Real Time Clock)_. Voici les options qui peuvent être entrées en argument :
    - `--sys-config` : Mise à jour de la configuration du système (ex: services de démarrage)
    - `--init-project` : Initialisation du projet (ex: nouvelle base de donnée)
-   - `--rtc-time` : Écrit le temps du système sur le RTC _(Real Time Clock)_
    - `--git-update` : mise à jour des répertoires du projet avec Git
 
 Additionnelement, l'ajout de l'argument `--console-log` redirige la sortie de l'éxecution à la console.

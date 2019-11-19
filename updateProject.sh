@@ -1,7 +1,6 @@
 #!/bin/bash
 #######################################################
-####   MOVIT PLUS Project : First boot script      ####
-####    - Set RTC time                             ####
+####   MOVIT PLUS Project : update script          ####
 ####    - Update system configuration              ####
 ####    - Initialise github project on the device  ####
 ####    - Update github project on the device      ####
@@ -14,12 +13,9 @@ set -e
 #Constants---------------------
 HomePath="/home/pi"
 MovitPath="$HomePath/MOvITPlus"
-
-RTCArg="--rtc-time"
 ConfigArg="--sys-config"
 InitArg="--init-project"
 GitArg="--git-update"
-
 ConsArg="--console-log"
 #------------------------------
 
@@ -28,44 +24,28 @@ if [[ $1 != $ConsArg && $2 != $ConsArg ]]; then
     exec 1>>$HomePath/updateProject.log 2>&1
 fi
 
-#Log date
-echo "----------------------------------------------------------"
+echo "#######################################################"
+echo "Running update script for a Movit plus system"
 echo "Current date : $(date)"
+echo "#######################################################"
 
-#
-#SETS CORRECT TIME TO THE RTC
-#via the argument $RTCArg
-if [[ $1 == $RTCArg || $2 == $RTCArg ]]; then
-    echo "Setting the correct time to the RTC clock through the '$RTCArg'' argument"
-
-    #----------------------------------------
-    #Assuming the date and time is correctly set (timezones)
-    echo "Using '$(date)' and updating hardware clock.."
-    sudo hwclock -w --verbose
-    #----------------------------------------
-
-    echo "Done setting RTC time"
-
-
-#
 #UPDATE SYSTEM CONFIGURATION
 #via the argument $ConfigArg
 elif [[ $1 == $ConfigArg || $2 == $ConfigArg ]]; then
-    echo "UPDATING SYSTEM CONFIGURATION through the '$ConfigArg' argument "
+    echo "### UPDATING SYSTEM CONFIGURATION through the '$ConfigArg' argument "
 
     #----------------------------------------
     # INSERT ANY ADDITIONNAL SYSTEM CONFIG SCRIPT HERE 
-    echo "No configuration update available"
+    echo "No configuration update available..."
     #----------------------------------------
 
     echo "Done updating system configuration"
 
 
-#
 #INITIALISE PROJECT
 #via the argument $InitArg
 elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
-    echo "INITIALISING PROJECT though the '$InitArg' argument "
+    echo "### INITIALISING PROJECT though the '$InitArg' argument "
 
     #----------------------------------------
     echo "Using Movit folder location : $MovitPath"
@@ -80,7 +60,7 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
     #use of --production must be tested...
 
-    echo "Compiling acquisition software"
+    echo "Compiling acquisition software..."
     cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && sudo make check && sudo make install
     cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
 
@@ -92,12 +72,11 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     echo "Done initialising"
 
 
-#
 #REPOSITORY UPDATE THROUGH GITHUB
 #Note : To run this command and successfully update the Git repo with $GitArg, the script must be run as such :
 # curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
 elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
-    echo "Updating all Git repositories through the '$GitArg' argument"
+    echo "### Updating all Git repositories through the '$GitArg' argument"
 
     #----------------------------------------
     #Update function
@@ -114,28 +93,27 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         git pull
         git submodule update --init --recursive
 
-        echo "Starting updated services"
+        echo "Starting updated services..."
         systemctl start movit_acquisition.service
         systemctl start movit_frontend.service
         systemctl start movit_backend.service
     }
 
-    #Figuring out if an update is available and calling update function if so
     echo "Using Movit folder location : $MovitPath"
     cd $MovitPath
+    #Figuring out if an update is available and calling update function if so
     [ $(git rev-parse HEAD) = $(git ls-remote $(git rev-parse --abbrev-ref @{u} | sed 's/\// /g') | cut -f1) ] && echo "Already up to date, nothing to do" || updateGithub
     #----------------------------------------
 
-    echo "Done updating all GitHub repositories"
+    echo "### Done updating all GitHub repositories"
+    echo "Databases and other settings may need to be resetted manually"
 
 
 else
 
-#WARNING NO ARGUMENTS
 echo " "
 echo "Warning : No arguments passed or invalid arguments!"
 echo "Use one of the following :"
-echo "   $RTCArg"
 echo "   $ConfigArg"
 echo "   $InitArg"
 echo "   $GitArg"

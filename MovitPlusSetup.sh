@@ -7,12 +7,20 @@
 ####   completed with preconfigured images.        ####
 #######################################################
 #                       /!\                           #
-#   COPYING ONLY NECESSARY PARTS IS HIGLY SUGGESTED   #
+#   THIS SCRIPT SHOULD BE RUN WITH A CURL COMMAND     #
 #                       /!\                           #
 #######################################################
+#TODO : Comments and explainations (reference to docs?)
 
 #Exits if any command fails
 set -e
+
+#######################################################
+#NETWORK SETUP
+#######################################################
+#TODO
+
+
 
 #######################################################
 #MOVIT DETECT
@@ -127,5 +135,6 @@ WantedBy=multi-user.target
 EOF
 
 
+#TODO : install firstBootSetup(curl with cat EOF?) + lauch with --restore + reboot
 
 exit 0
