@@ -40,8 +40,11 @@ ___
 
 
 ## 2. Explications
-
 #### Script de configuration
+**`.sh`**
+...
+
+#### Script d'initialisation de système
 **`firstBootSetup.sh`**
 Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
 Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine l'écriture du temps du système sur le RTC _(Real Time Clock)_ puis avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--sys-config` et `--init`.

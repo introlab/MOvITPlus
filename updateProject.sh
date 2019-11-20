@@ -24,14 +24,17 @@ if [[ $1 != $ConsArg && $2 != $ConsArg ]]; then
     exec 1>>$HomePath/updateProject.log 2>&1
 fi
 
+echo ""
+echo ""
 echo "#######################################################"
 echo "Running update script for a Movit plus system"
+echo "Lauched with the following arguments : $1 $2 $3"
 echo "Current date : $(date)"
 echo "#######################################################"
 
 #UPDATE SYSTEM CONFIGURATION
 #via the argument $ConfigArg
-elif [[ $1 == $ConfigArg || $2 == $ConfigArg ]]; then
+if [[ $1 == $ConfigArg || $2 == $ConfigArg ]]; then
     echo "### UPDATING SYSTEM CONFIGURATION through the '$ConfigArg' argument "
 
     #----------------------------------------
@@ -50,26 +53,38 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     #----------------------------------------
     echo "Using Movit folder location : $MovitPath"
 
-    echo "Installing backend modules..."
-    cd $MovitPath/MOvIT-Detect-Backend && npm install
+    echo "### Installing backend modules..."
+    #source $HomePath/.nvm/nvm.sh #Quick fix that could be used if node is updated.
+    # It will reload PATH variable but it is slow... Hardcoding current path instead.
+    #                                                                  V
+    cd $MovitPath/MOvIT-Detect-Backend && /home/pi/.nvm/versions/node/v10.16.3/bin/npm install
 
-    echo "Initialising database..."
+    echo "### Initialising database..."
     node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
-    echo "Installing frontend modules..."
-    cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
-    #use of --production must be tested...
+    echo "### Installing frontend modules..."
+    cd $MovitPath/MOvIT-Detect-Frontend && /usr/bin/yarn install --production --network-timeout 1000000
+    #use of --production must be tested or optimized (remove unnecessary modules...)
 
-    echo "Compiling acquisition software..."
-    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && sudo make check && sudo make install
+    echo "### Compiling bcm2835 library for the acquisition software..."
+    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && make check && make install
+
+    echo "### Compiling acquisition software..."
     cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
 
+    echo "### Enabling startup services..."
     systemctl enable movit_acquisition.service
     systemctl enable movit_frontend.service
     systemctl enable movit_backend.service
+
+    echo "### Starting all services..."
+    systemctl start movit_acquisition.service
+    systemctl start movit_frontend.service
+    systemctl start movit_backend.service
+
     #----------------------------------------
 
-    echo "Done initialising"
+    echo "### Done initialising!"
 
 
 #REPOSITORY UPDATE THROUGH GITHUB
@@ -83,17 +98,15 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     updateGithub () {
         echo "Update available, proceeding..."
 
-        echo "Stopping outdated services..."
+        echo "### Stopping outdated services..."
         systemctl stop movit_acquisition.service
         systemctl stop movit_frontend.service
         systemctl stop movit_backend.service
 
-        echo "Updating repositories..."
-        cd $MovitPath/
-        git pull
-        git submodule update --init --recursive
+        echo "### Updating repositories..."
+        cd $MovitPath/ && git pull && git submodule update --init --recursive
 
-        echo "Starting updated services..."
+        echo "### Starting updated services..."
         systemctl start movit_acquisition.service
         systemctl start movit_frontend.service
         systemctl start movit_backend.service

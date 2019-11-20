@@ -18,8 +18,31 @@ set -e
 #######################################################
 #NETWORK SETUP
 #######################################################
-#TODO
+if ping -q -c 1 -W 1 google.com >/dev/null; then
+        echo "The network is up, proceeding..."
+else
+    read -p "Wifi configuration seems to be empty"
+    read -p "Enter SSID: " SSID
+    read -p "Enter password:" PSK
+cat << EOF > wpa_supplicant.conf
+country=CA
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
 
+network={
+    ssid="Capsule" #Remplacer NOM_DU_RESEAU par le nom du réseau désiré
+    psk="wolfpack" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
+    id_str="AP1"
+}
+
+EOF
+
+    echo "wpa_supplicant.conf generated, launch this script on next boot to continue"
+    echo "Rebooting in 5 seconds"
+    sleep 5s
+    reboot
+    exit 0
+fi
 
 
 #######################################################
@@ -38,7 +61,7 @@ cd /etc/apt/sources.list.d/
 sudo wget http://repo.mosquitto.org/debian/mosquitto-buster.list
 sudo apt-get update
 sudo apt-get install -y libkrb5-dev libzmq3-dev mosquitto-clients=1.6.4-0mosquitto1~buster1 libmosquitto1=1.6.4-0mosquitto1~buster1 mosquitto=1.6.4-0mosquitto1~buster1 libmosquitto-dev=1.6.4-0mosquitto1~buster1 libmosquittopp-dev=1.6.4-0mosquitto1~buster1 libmosquittopp1=1.6.4-0mosquitto1~buster1 --allow-downgrades
-sudo apt-get install -y git
+sudo apt-get install -y git automake
 
 #TODO : timezone setup
 #https://serverfault.com/questions/94991/setting-the-timezone-with-an-automated-script
@@ -111,6 +134,9 @@ User=root
 #  Package.json is located in the "WorkingDirectory".
 ExecStart=/usr/bin/yarn start
 WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
+
+[Install]
+WantedBy=multi-user.target
 EOF
 
 cat<<EOF >/etc/systemd/system/movit_acquisition.service
@@ -134,7 +160,32 @@ ExecStart=/home/pi/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 WantedBy=multi-user.target
 EOF
 
+cd /home/pi && sudo wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x firstBootSetup.sh
 
-#TODO : install firstBootSetup(curl with cat EOF?) + lauch with --restore + reboot
+#######################################################
+# RESET ALL CONFIG FOR IMAGE CREATION
+#######################################################
+cat<<EOF >/etc/wpa_supplicant/wpa_supplicant.conf
+country=CA
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="NOM_DU_RESEAU" #Remplacer NOM_DU_RESEAU par le nom du réseau désiré
+    psk="MOT_DE_PASSE" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
+    id_str="AP1"
+}
+EOF
+echo "Updating '/etc/hostname' with Movit-NOCONF..."
+sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hostname
+
+echo "Updating '/etc/hosts' with Movit-NOCONF..."
+sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hosts
+
+echo "Updating '/etc/hostapd/hostapd.conf' with Movit-NOCONF..."
+sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hostapd/hostapd.conf
+
+/home/pi/./firstBootSetup.sh --restore
+
 
 exit 0

@@ -34,7 +34,6 @@ remove () {
         sed -i '/sleep 10s/d' /etc/rc.local
         sed -i '/\/bin\/bash \/home\/pi\/firstBootSetup.sh/d' /etc/rc.local
         echo "Removed script execution line from /etc/rc.local"
-
     else
         echo "No script execution line to remove in /etc/rc.local"
     fi
@@ -51,12 +50,16 @@ else
 
     #######################################################
     #ACTUAL SCRIPT
-    # Redirect all outputs to a log file
-    exec 1>>$HomePath/firstBootSetup.log 2>&1
+    if [[ $1 != --console-log && $2 != --console-log ]]; then
+        # Redirect all outputs to a log file
+        exec 1>>$HomePath/firstBootSetup.log 2>&1
+    fi
 
-    #Log date
+    echo ""
+    echo ""
     echo "########################################################"
     echo "Running initial setup script for a new Movit plus system"
+    echo "Lauched with the following arguments : $1 $2"
     echo "Current date : $(date)"
     echo "########################################################"
     
@@ -88,9 +91,7 @@ EOF
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostapd/hostapd.conf
 
         echo "Networks should be fully operationnal..."
-        remove #Call to "remove()" function
-
-
+        
         echo "Using '$(date)' and updating hardware clock.."
         #Assuming the date and time is correctly set (timezones)
         sudo hwclock -w --verbose
@@ -100,9 +101,14 @@ EOF
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
         #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
-            echo "### Installing necessary GitHub directories ###"
-            cd $HomePath/
-            git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+            echo "### Installing necessary GitHub directories"
+            cd $HomePath/ && git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+            
+            echo "### Restoring proper group and ownership of git repo folders"
+            chown -R pi $MovitPath
+            chgrp -R pi $MovitPath
+            echo "### Making updateProject.sh executable in case it wasn't"
+            chmod +x $MovitPath/updateProject.sh
 
             echo "### Executing 'updateProject.sh' with '--sys-config'"
             $MovitPath/./updateProject.sh --sys-config
@@ -123,6 +129,8 @@ EOF
     fi
 fi
 
-echo "Exiting...______________________________________________"
+remove
+
+echo "Exiting..."
 exit 0
 
