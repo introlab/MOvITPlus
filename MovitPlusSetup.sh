@@ -22,19 +22,18 @@ if ping -q -c 1 -W 1 google.com >/dev/null; then
         echo "The network is up, proceeding..."
 else
 
-    echo "Wifi configuration seems to be empty"
+    echo "Wifi may not be properly configured"
     read -p "Enter SSID: " SSID
     read -p "Enter password:" PSK
-    echo "SSID : $SSID"
-    echo "psk : $PSK"
+    echo "SSID : $SSID, PSK : $PSK"
 cat << EOF > wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 
 network={
-    ssid="Capsule" #Remplacer NOM_DU_RESEAU par le nom du réseau désiré
-    psk="wolfpack" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
+    ssid="$SSID" #Remplacer NOM_DU_RESEAU par le nom du réseau désiré
+    psk="$PSK" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
     id_str="AP1"
 }
 
@@ -99,70 +98,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update -y #au besoin
 sudo apt-get install yarn -y
 
-
-
-#######################################################
-# SERVICES
-#######################################################
-cat <<EOF >/etc/systemd/system/movit_backend.service
-[Unit]
-Description=-------- MOVIT+ BACKEND with node-red
-StartLimitIntervalSec=0
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=1
-User=pi
-ExecStart=/usr/local/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat<<EOF >/etc/systemd/system/movit_frontend.service
-[Unit]
-Description=-------- MOVIT+ FRONTEND Express server
-After=movit_backend.service
-StartLimitIntervalSec=0
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=1
-User=root
-#The next line is the "yarn" command that runs on boot
-#  To change its behavior please refer to the corresponding script in package.json
-#  Package.json is located in the "WorkingDirectory".
-ExecStart=/usr/bin/yarn start
-WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat<<EOF >/etc/systemd/system/movit_acquisition.service
-[Unit]
-Description=-------- MOVIT+ acquisition software
-After=network-online.target mosquitto.service
-StartLimitIntervalSec=0
-
-[Service]
-# Set process niceness (priority) to maximum
-#	(without being a near real-time process)
-Nice=-20
-Type=simple
-# Ensures the process always restarts when it crashes
-Restart=always
-RestartSec=1
-User=root
-ExecStart=/home/pi/MOvIT-Detect/Movit-Pi/Executables/movit-pi
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cd /home/pi && sudo wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x firstBootSetup.sh
+cd /home/pi && wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x /home/pi/firstBootSetup.sh
 
 #######################################################
 # RESET ALL CONFIG FOR IMAGE CREATION
@@ -189,5 +125,6 @@ sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hos
 
 /home/pi/./firstBootSetup.sh --restore
 
+rm -r /home/pi/MOvITPlus
 
 exit 0

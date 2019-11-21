@@ -10,13 +10,18 @@
 # Exits if any command fails
 set -e
 
-#Constants---------------------
+#Variables---------------------
 HomePath="/home/pi"
 MovitPath="$HomePath/MOvITPlus"
 ConfigArg="--sys-config"
 InitArg="--init-project"
 GitArg="--git-update"
 ConsArg="--console-log"
+#------------------------------
+#ENV Variables
+export PATH=/usr/bin/:$PATH
+#source /home/pi/.nvm/nvm.sh #Would reload PATH variable for npm and node but is slow...
+export PATH=/home/pi/.nvm/versions/node/v10.16.3/bin/:$PATH #Hardcoding current path instead.
 #------------------------------
 
 if [[ $1 != $ConsArg && $2 != $ConsArg ]]; then
@@ -39,7 +44,66 @@ if [[ $1 == $ConfigArg || $2 == $ConfigArg ]]; then
 
     #----------------------------------------
     # INSERT ANY ADDITIONNAL SYSTEM CONFIG SCRIPT HERE 
-    echo "No configuration update available..."
+    echo "Creating movit_backend.service..."
+cat <<EOF >/etc/systemd/system/movit_backend.service
+[Unit]
+Description=-------- MOVIT+ BACKEND with node-red
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/local/bin/node-red-pi -u $MovitPath/MOvIT-Detect-Backend --max-old-space-size=256
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    echo "Creating movit_frontend.service..."
+cat<<EOF >/etc/systemd/system/movit_frontend.service
+[Unit]
+Description=-------- MOVIT+ FRONTEND Express server
+After=movit_backend.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+#The next line is the "yarn" command that runs on boot
+#  To change its behavior please refer to the corresponding script in package.json
+#  Package.json is located in the "WorkingDirectory".
+ExecStart=/usr/bin/yarn start
+WorkingDirectory=$MovitPath/MOvIT-Detect-Frontend/
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    echo "Creating movit_acquisition.service..."
+cat<<EOF >/etc/systemd/system/movit_acquisition.service
+[Unit]
+Description=-------- MOVIT+ acquisition software
+After=network-online.target mosquitto.service
+StartLimitIntervalSec=0
+
+[Service]
+# Set process niceness (priority) to maximum
+#	(without being a near real-time process)
+Nice=-20
+Type=simple
+# Ensures the process always restarts when it crashes
+Restart=always
+RestartSec=1
+User=root
+ExecStart=$MovitPath/MOvIT-Detect/Movit-Pi/Executables/movit-pi
+
+[Install]
+WantedBy=multi-user.target
+EOF
     #----------------------------------------
 
     echo "Done updating system configuration"
@@ -53,23 +117,20 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     #----------------------------------------
     echo "Using Movit folder location : $MovitPath"
 
-    echo "### Installing backend modules..."
-    #source $HomePath/.nvm/nvm.sh #Quick fix that could be used if node is updated.
-    # It will reload PATH variable but it is slow... Hardcoding current path instead.
-    #                                                                  V
-    cd $MovitPath/MOvIT-Detect-Backend && /home/pi/.nvm/versions/node/v10.16.3/bin/npm install
+    echo -e "###\n### Installing backend modules...\n###"
+    cd $MovitPath/MOvIT-Detect-Backend && npm install
 
     echo "### Initialising database..."
     node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
-    echo "### Installing frontend modules..."
-    cd $MovitPath/MOvIT-Detect-Frontend && /usr/bin/yarn install --production --network-timeout 1000000
+    echo -e "###\n### Installing frontend modules...\n###"
+    cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
     #use of --production must be tested or optimized (remove unnecessary modules...)
 
-    echo "### Compiling bcm2835 library for the acquisition software..."
+    echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && make check && make install
 
-    echo "### Compiling acquisition software..."
+    echo -e "###\n### Compiling acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
 
     echo "### Enabling startup services..."
@@ -77,14 +138,10 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     systemctl enable movit_frontend.service
     systemctl enable movit_backend.service
 
-    echo "### Starting all services..."
-    systemctl start movit_acquisition.service
-    systemctl start movit_frontend.service
-    systemctl start movit_backend.service
-
     #----------------------------------------
 
     echo "### Done initialising!"
+    echo "System should be rebooted for services to start properly"
 
 
 #REPOSITORY UPDATE THROUGH GITHUB

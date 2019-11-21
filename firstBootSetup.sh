@@ -60,8 +60,8 @@ else
     echo ""
     echo "########################################################"
     echo "Running initial setup script for a new Movit plus system"
-    if [[ $1 == "--fromRClocal" ]]; then echo "Lauched from rc.local"
-    else [[ $1 == "" ]] || echo "Lauched with the following arguments : $1 $2";fi
+    if [[ $1 == "--fromRClocal" ]]; then echo "Lauched from rc.local"; failmesg="reboot the system" 
+    else echo "Lauched with the following arguments : $1 $2"; failmesg="run the script again"; fi
     echo "Current date : $(date)"
     echo "########################################################"
 
@@ -92,7 +92,7 @@ EOF
         echo "Updating '/etc/hostapd/hostapd.conf' with Movit-$MACname..."
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostapd/hostapd.conf
 
-        echo "Networks should be fully operationnal"
+        echo "Networks should be fully operationnal on next reboot"
 
         echo "Using '$(date)' and updating hardware clock..."
         #Assuming the date and time is correctly set (timezones)
@@ -126,13 +126,15 @@ EOF
         else
             echo "### Skipping git installation because of '--nogit' argument"
         fi
-
+        remove
+        echo "Rebooting to finish network setup..."
+        reboot
         #######################################################
     else
         echo "The network is down, cannot run first boot setup"
-        echo "Please fix internet connection and try again"
+        echo "Please fix internet connection and $failmesg."
     fi
-    remove
+    
 fi
 
 
