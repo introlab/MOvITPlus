@@ -21,9 +21,12 @@ set -e
 if ping -q -c 1 -W 1 google.com >/dev/null; then
         echo "The network is up, proceeding..."
 else
-    read -p "Wifi configuration seems to be empty"
+
+    echo "Wifi configuration seems to be empty"
     read -p "Enter SSID: " SSID
     read -p "Enter password:" PSK
+    echo "SSID : $SSID"
+    echo "psk : $PSK"
 cat << EOF > wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -36,7 +39,6 @@ network={
 }
 
 EOF
-
     echo "wpa_supplicant.conf generated, launch this script on next boot to continue"
     echo "Rebooting in 5 seconds"
     sleep 5s

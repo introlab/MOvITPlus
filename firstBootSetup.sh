@@ -16,23 +16,24 @@ set -e
 HomePath="/home/pi"
 MovitPath="$HomePath/MOvITPlus"
 #Functions
+
 restore () {
-    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local; then
+    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
             echo "Script execution line is already in /etc/rc.local"
     else
         #Add execution line from /etc/rc.local
         sed -i "$ i sleep 10s" /etc/rc.local #To ensure network availability
-        sed -i "$ i /bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local
+        sed -i "$ i /bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local
         echo "Added script execution line to /etc/rc.local"
         echo "Script will run on next boot..."
     fi
 }
 
 remove () {
-    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh" /etc/rc.local; then
+    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
         #Delete execution line from /etc/rc.local
         sed -i '/sleep 10s/d' /etc/rc.local
-        sed -i '/\/bin\/bash \/home\/pi\/firstBootSetup.sh/d' /etc/rc.local
+        sed -i '/\/bin\/bash \/home\/pi\/firstBootSetup.sh --fromRClocal/d' /etc/rc.local
         echo "Removed script execution line from /etc/rc.local"
     else
         echo "No script execution line to remove in /etc/rc.local"
@@ -59,10 +60,11 @@ else
     echo ""
     echo "########################################################"
     echo "Running initial setup script for a new Movit plus system"
-    echo "Lauched with the following arguments : $1 $2"
+    if [[ $1 == "--fromRClocal" ]]; then echo "Lauched from rc.local"
+    else [[ $1 == "" ]] || echo "Lauched with the following arguments : $1 $2";fi
     echo "Current date : $(date)"
     echo "########################################################"
-    
+
     #Verify connectivity (will not run if device fails to ping through DNS server)
     if ping -q -c 1 -W 1 google.com >/dev/null; then
         echo "The network is up, proceeding..."
@@ -90,36 +92,39 @@ EOF
         echo "Updating '/etc/hostapd/hostapd.conf' with Movit-$MACname..."
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostapd/hostapd.conf
 
-        echo "Networks should be fully operationnal..."
-        
-        echo "Using '$(date)' and updating hardware clock.."
+        echo "Networks should be fully operationnal"
+
+        echo "Using '$(date)' and updating hardware clock..."
         #Assuming the date and time is correctly set (timezones)
         sudo hwclock -w --verbose
         echo "Done setting RTC time"
-        
-        
+
+
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
         #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
-            echo "### Installing necessary GitHub directories"
+            echo ""
+            echo "### Installing necessary GitHub directories..."
             cd $HomePath/ && git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
-            
-            echo "### Restoring proper group and ownership of git repo folders"
-            chown -R pi $MovitPath
-            chgrp -R pi $MovitPath
-            echo "### Making updateProject.sh executable in case it wasn't"
+
+            echo ""
+            echo "### Restoring proper group and ownership of the Git repository folders..."
+            chown -R pi:pi $MovitPath
+            echo "### Making updateProject.sh executable in case it wasn't..."
             chmod +x $MovitPath/updateProject.sh
 
-            echo "### Executing 'updateProject.sh' with '--sys-config'"
+            echo ""
+            echo "### Executing 'updateProject.sh' with '--sys-config'..."
             $MovitPath/./updateProject.sh --sys-config
             echo "Script successful, see updateProject.log..."
 
-            echo "### Executing 'updateProject.sh' with '--init-project'"
+            echo ""
+            echo "### Executing 'updateProject.sh' with '--init-project'..."
             $MovitPath/./updateProject.sh --init-project
-            echo "Script successful, see updateProject.log..."
+            echo "Script successful, see updateProject.log"
 
         else
-            echo "Skipping git installation because of '--nogit' argument"
+            echo "### Skipping git installation because of '--nogit' argument"
         fi
 
         #######################################################
@@ -127,9 +132,9 @@ EOF
         echo "The network is down, cannot run first boot setup"
         echo "Please fix internet connection and try again"
     fi
+    remove
 fi
 
-remove
 
 echo "Exiting..."
 exit 0
