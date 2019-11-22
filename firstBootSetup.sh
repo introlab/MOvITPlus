@@ -11,18 +11,20 @@
 #######################################################
 
 #Exits if any command fails
-set -e
+onexit(){ echo "Something went wrong, exiting..."; exit 1; }
+trap onexit ERR
+
 #Constants
 HomePath="/home/pi"
 MovitPath="$HomePath/MOvITPlus"
-#Functions
 
+#Functions
 restore () {
     if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
             echo "Script execution line is already in /etc/rc.local"
     else
         #Add execution line from /etc/rc.local
-        sed -i "$ i sleep 10s" /etc/rc.local #To ensure network availability
+        sed -i "$ i sleep 15s" /etc/rc.local #To ensure network availability
         sed -i "$ i /bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local
         echo "Added script execution line to /etc/rc.local"
         echo "Script will run on next boot..."
@@ -32,7 +34,7 @@ restore () {
 remove () {
     if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
         #Delete execution line from /etc/rc.local
-        sed -i '/sleep 10s/d' /etc/rc.local
+        sed -i '/sleep 15s/d' /etc/rc.local
         sed -i '/\/bin\/bash \/home\/pi\/firstBootSetup.sh --fromRClocal/d' /etc/rc.local
         echo "Removed script execution line from /etc/rc.local"
     else
@@ -56,9 +58,7 @@ else
         exec 1>>$HomePath/firstBootSetup.log 2>&1
     fi
 
-    echo ""
-    echo ""
-    echo "########################################################"
+    echo -e "\n\n########################################################"
     echo "Running initial setup script for a new Movit plus system"
     if [[ $1 == "--fromRClocal" ]]; then echo "Lauched from rc.local"; failmesg="reboot the system" 
     else echo "Lauched with the following arguments : $1 $2"; failmesg="run the script again"; fi
@@ -103,25 +103,23 @@ EOF
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
         #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
-            echo ""
-            echo "### Installing necessary GitHub directories..."
-            cd $HomePath/ && git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+            #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git works anyways
+            [ -d "$MovitPath/" ] || { echo -e "###\n### Installing necessary GitHub directories...\n###";
+            cd $HomePath/ && git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules; }
 
-            echo ""
-            echo "### Restoring proper group and ownership of the Git repository folders..."
+            echo -e "###\n### Restoring proper group and ownership of the Git repository folders..."
             chown -R pi:pi $MovitPath
-            echo "### Making updateProject.sh executable in case it wasn't..."
+            echo "### Making updateProject.sh executable in case it wasn't...\n###"
             chmod +x $MovitPath/updateProject.sh
 
-            echo ""
-            echo "### Executing 'updateProject.sh' with '--sys-config'..."
+            echo -e "###\n### Executing 'updateProject.sh' with '--sys-config'...\n###"
             $MovitPath/./updateProject.sh --sys-config
             echo "Script successful, see updateProject.log..."
 
-            echo ""
-            echo "### Executing 'updateProject.sh' with '--init-project'..."
-            $MovitPath/./updateProject.sh --init-project
-            echo "Script successful, see updateProject.log"
+            #This is part of the script is long to execute, it should be run manually instead and not with rc.local
+            #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
+            #$MovitPath/./updateProject.sh --init-project
+            #echo "Script successful, see updateProject.log"
 
         else
             echo "### Skipping git installation because of '--nogit' argument"
@@ -137,7 +135,5 @@ EOF
     
 fi
 
-
 echo "Exiting..."
 exit 0
-

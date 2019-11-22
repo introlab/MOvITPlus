@@ -13,7 +13,7 @@
 #TODO : Comments and explainations (reference to docs?)
 
 #Exits if any command fails
-set -e
+#set -e
 
 #######################################################
 #NETWORK SETUP
@@ -26,7 +26,7 @@ else
     read -p "Enter SSID: " SSID
     read -p "Enter password:" PSK
     echo "SSID : $SSID, PSK : $PSK"
-cat << EOF > wpa_supplicant.conf
+cat << EOF > /etc/wpa_supplicant/wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -38,7 +38,7 @@ network={
 }
 
 EOF
-    echo "wpa_supplicant.conf generated, launch this script on next boot to continue"
+    echo "wpa_supplicant.conf generated, launch this script again on next boot to continue"
     echo "Rebooting in 5 seconds"
     sleep 5s
     reboot
@@ -64,8 +64,10 @@ sudo apt-get update
 sudo apt-get install -y libkrb5-dev libzmq3-dev mosquitto-clients=1.6.4-0mosquitto1~buster1 libmosquitto1=1.6.4-0mosquitto1~buster1 mosquitto=1.6.4-0mosquitto1~buster1 libmosquitto-dev=1.6.4-0mosquitto1~buster1 libmosquittopp-dev=1.6.4-0mosquitto1~buster1 libmosquittopp1=1.6.4-0mosquitto1~buster1 --allow-downgrades
 sudo apt-get install -y git automake
 
-#TODO : timezone setup
+#Timezone setup, manually would be :
+#dpkg-reconfigure tzdata #-> requires user input
 #https://serverfault.com/questions/94991/setting-the-timezone-with-an-automated-script
+cp /usr/share/zoneinfo/America/Montreal /etc/localtime #What the above command actually does in the end
 
 
 #######################################################
@@ -76,14 +78,15 @@ source ~/.profile #Permet au système de trouver le nouvel installation
 nvm install 10.16.3 #Dernière version fonctionnelle testée
 nvm alias default 10.16.3 #Mettre cette version par défaut
 
-sudo apt-get install -y libkrb5-dev libzmq3-dev mosquitto-clients=1.6.4-0mosquitto1~buster1
 #TODO : mosquitto password + config file
 #sudo mosquitto_passwd -c /etc/mosquitto/passwd admin
 #http://www.steves-internet-guide.com/mqtt-username-password-example/
 sudo systemctl stop mosquitto
-sudo sed -i '$ a #Password options' /etc/mosquitto/mosquitto.conf
-sudo sed -i '$ a password_file /etc/mosquitto/passwd' /etc/mosquitto/mosquitto.conf
-sudo sed -i '$ a allow_anonymous false' /etc/mosquitto/mosquitto.conf
+cat<<EOF >>/etc/mosquitto/mosquitto.conf
+#Password options 
+password_file /etc/mosquitto/passwd
+allow_anonymous false
+EOF
 sudo systemctl start mosquitto
 
 sudo apt-get install -y mongodb mongodb-server
@@ -114,6 +117,9 @@ network={
     id_str="AP1"
 }
 EOF
+echo "Deleting '/etc/udev/rules.d/70-persistent-net.rules'..."
+rm /etc/udev/rules.d/70-persistent-net.rules
+
 echo "Updating '/etc/hostname' with Movit-NOCONF..."
 sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hostname
 
@@ -126,5 +132,11 @@ sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hos
 /home/pi/./firstBootSetup.sh --restore
 
 rm -r /home/pi/MOvITPlus
+rm /home/pi/MovitPlusSetup.sh
+rm /etc/systemd/system/movit_frontend.service
+rm /etc/systemd/system/movit_acquisition.service
+rm /etc/systemd/system/movit_backend.service
+systemctl disable wpa_supplicant.service
+
 
 exit 0

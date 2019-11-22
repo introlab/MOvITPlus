@@ -19,9 +19,9 @@ GitArg="--git-update"
 ConsArg="--console-log"
 #------------------------------
 #ENV Variables
-export PATH=/usr/bin/:$PATH
+export PATH=/usr/bin/:$PATH #For yarn
 #source /home/pi/.nvm/nvm.sh #Would reload PATH variable for npm and node but is slow...
-export PATH=/home/pi/.nvm/versions/node/v10.16.3/bin/:$PATH #Hardcoding current path instead.
+export PATH=/home/pi/.nvm/versions/node/v10.16.3/bin/:$PATH #Hardcoding current path for npm
 #------------------------------
 
 if [[ $1 != $ConsArg && $2 != $ConsArg ]]; then
@@ -118,14 +118,14 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     echo "Using Movit folder location : $MovitPath"
 
     echo -e "###\n### Installing backend modules...\n###"
-    cd $MovitPath/MOvIT-Detect-Backend && npm install
+    cd $MovitPath/MOvIT-Detect-Backend && sudo -u pi /home/pi/.nvm/versions/node/v10.16.3/bin/npm install
 
-    echo "### Initialising database..."
+    echo -e "###\n### Initialising database...\n###"
     node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
     echo -e "###\n### Installing frontend modules...\n###"
     cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
-    #use of --production must be tested or optimized (remove unnecessary modules...)
+    #use of --production should be optimized (remove unnecessary modules...)
 
     echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && make check && make install
@@ -133,7 +133,7 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     echo -e "###\n### Compiling acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
 
-    echo "### Enabling startup services..."
+    echo -e "###\n### Enabling startup services...\n###"
     systemctl enable movit_acquisition.service
     systemctl enable movit_frontend.service
     systemctl enable movit_backend.service

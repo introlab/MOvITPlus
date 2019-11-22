@@ -6,7 +6,7 @@ Ce répertoire contient tous les éléments nécessaires pour faire fonctionner 
 ## 1. Installation rapide
 ### 1.2. Image préconfigurée
 L'image préconfigurée doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD.
-**DISPONIBILITÉ DE L'IMAGE**
+**AJOUTER DÉTAILS DISPONIBILITÉ DE L'IMAGE**
 Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification.
 
 ### 1.3. Configuration sans fil
@@ -28,7 +28,9 @@ Aussi, l'**ajout d'un fichier nommé `ssh`** (sans extension) dans la partition 
 ### 1.4. Initialisation automatisé
 Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre plusieurs minutes, l'**appareil ne doit pas être débranché!**.
 
-> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner. Si les scripts ne fonctionnent pas (voir `/home/pi/firstBootScript.log`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si il y a eu une erreur dans le fichier wpa_supplicant.conf par exemple.
+> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner. Si les scripts ne fonctionnent pas (voir `/home/pi/firstBootScript.log` et `/home/pi/updateProject.log.log`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si il y a eu une erreur dans le fichier wpa_supplicant.conf par exemple.
+
+> sudo /home/pi/MOvITPlus/./updateProject.sh --init-project --console-log
 
 ### 1.5. Vérification
 À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'ouvrir le site `movit.plus`. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulu. Voir la documentation de la partie frontend pour plus de détails.
@@ -58,7 +60,7 @@ Aussi, le script peut être lancé avec l'argument `--restore` afin de restaurer
 
 > Ce script enregistre la sortie de ses exécutions dans `/home/pi/firstBootSetup.log`
 
-#### Script de mise à jour
+###****# Script de mise à jour
 **`updateProject.sh`**
 Le scipt de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi, l'initialisation d'une nouvelle instance du projet et la configuration du RTC _(Real Time Clock)_. Voici les options qui peuvent être entrées en argument :
    - `--sys-config` : Mise à jour de la configuration du système (ex: services de démarrage)
