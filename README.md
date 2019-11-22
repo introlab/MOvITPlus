@@ -26,11 +26,16 @@ network={
 Aussi, l'**ajout d'un fichier nommé `ssh`** (sans extension) dans la partition `boot` permettra de lancer un service pour débogger sur un autre ordinateur en cas de problème.
 
 ### 1.4. Initialisation automatisé
-Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre plusieurs minutes, l'**appareil ne doit pas être débranché!**.
+Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre quelques minutes, l'**appareil ne doit pas être débranché!**.
 
 > L'initialisation automatisé **nécessite une connection à internet** pour fonctionner. Si les scripts ne fonctionnent pas (voir `/home/pi/firstBootScript.log` et `/home/pi/updateProject.log.log`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si il y a eu une erreur dans le fichier wpa_supplicant.conf par exemple.
 
-> sudo /home/pi/MOvITPlus/./updateProject.sh --init-project --console-log
+### 1.5 Initialisation du projet
+Pour initialiser le projet, il faut exécuter la commande suivante :
+```bash
+sudo /home/pi/MOvITPlus/./updateProject.sh --init-project --console-log
+```
+Le script s'occupe alors d'installer le backend, d'initialiser la base de données, d'installer le frontend puis finalement de compiler les librairies et le code d'acquisition. Il termine en activant tous les services et en les démarrant.
 
 ### 1.5. Vérification
 À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'ouvrir le site `movit.plus`. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulu. Voir la documentation de la partie frontend pour plus de détails.
@@ -42,6 +47,7 @@ ___
 
 
 ## 2. Explications
+> Documentation incomplète et non à jour.
 #### Script de configuration
 **`.sh`**
 ...

@@ -67,14 +67,14 @@ else
 
     #Verify connectivity (will not run if device fails to ping through DNS server)
     if ping -q -c 1 -W 1 google.com >/dev/null; then
-        echo "The network is up, proceeding..."
+        echo "### The network is up, proceeding..."
 
         MACAddr="$(ifconfig wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')" #Get MAC address
         MACname="$(echo ${MACAddr:9:8} | tr -d :)" #Modify string to keep only last 3 bytes and delete all ":"
         MACname=${MACname^^}
-        echo "Detected MAC address : '$MACAddr' "
+        echo "### Detected MAC address : '$MACAddr' "
 
-        echo "Creating '/etc/udev/rules.d/70-persistent-net.rules'..."
+        echo "### Creating '/etc/udev/rules.d/70-persistent-net.rules'..."
         #Old replacement method :
         #sed -i -e "s/b8:27:eb:..:..:../$MACAddr/g" /etc/udev/rules.d/70-persistent-net.rules
         cat <<EOF > /etc/udev/rules.d/70-persistent-net.rules
@@ -83,21 +83,21 @@ SUBSYSTEM=="ieee80211", ACTION=="add|change", ATTR{macaddress}=="$MACAddr", KERN
   RUN+="/bin/ip link set ap0 address $MACAddr"
 
 EOF
-        echo "Updating '/etc/hostname' with Movit-$MACname..."
+        echo "### Updating '/etc/hostname' with Movit-$MACname..."
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostname
 
-        echo "Updating '/etc/hosts' with Movit-$MACname..."
+        echo "### Updating '/etc/hosts' with Movit-$MACname..."
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hosts
 
-        echo "Updating '/etc/hostapd/hostapd.conf' with Movit-$MACname..."
+        echo "### Updating '/etc/hostapd/hostapd.conf' with Movit-$MACname..."
         sed -i -e "s/raspberrypi/Movit-$MACname/g;s/Movit-....../Movit-$MACname/g;" /etc/hostapd/hostapd.conf
 
-        echo "Networks should be fully operationnal on next reboot"
+        echo "### Networks should be fully operationnal on next reboot"
 
-        echo "Using '$(date)' and updating hardware clock..."
+        echo -e "### Using '$(date)' and updating hardware clock...\n###"
         #Assuming the date and time is correctly set (timezones)
         sudo hwclock -w --verbose
-        echo "Done setting RTC time"
+        echo "### Done setting RTC time"
 
 
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
@@ -109,12 +109,12 @@ EOF
 
             echo -e "###\n### Restoring proper group and ownership of the Git repository folders..."
             chown -R pi:pi $MovitPath
-            echo "### Making updateProject.sh executable in case it wasn't...\n###"
+            echo "### Making updateProject.sh executable in case it wasn't..."
             chmod +x $MovitPath/updateProject.sh
 
             echo -e "###\n### Executing 'updateProject.sh' with '--sys-config'...\n###"
             $MovitPath/./updateProject.sh --sys-config
-            echo "Script successful, see updateProject.log..."
+            echo "### Script successful, see updateProject.log..."
 
             #This is part of the script is long to execute, it should be run manually instead and not with rc.local
             #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
@@ -125,15 +125,15 @@ EOF
             echo "### Skipping git installation because of '--nogit' argument"
         fi
         remove
-        echo "Rebooting to finish network setup..."
+        echo "### Rebooting to finish network setup..."
         reboot
         #######################################################
     else
-        echo "The network is down, cannot run first boot setup"
-        echo "Please fix internet connection and $failmesg."
+        echo "### The network is down, cannot run first boot setup"
+        echo "### Please fix internet connection and $failmesg."
     fi
     
 fi
 
-echo "Exiting..."
+echo "### Exiting..."
 exit 0
