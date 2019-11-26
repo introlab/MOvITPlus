@@ -5,6 +5,7 @@
 ####   Script should be executed on a linux computer with the SD card inserted as the /dev/sde device
 ####   Manually change the script to respect this path for the SD card (check path with sudo fdisk -l)
 ####   Execute as su
+####   VERIFY THE MENTIONNED DRIVE PATH IS CORRECT BEFORE USING
 ####  Source : https://medium.com/platformer-blog/creating-a-custom-raspbian-os-image-for-production-3fcb43ff3630
 #######################################################
 if ! [ $(id -u) = 0 ]; then
@@ -20,21 +21,22 @@ if ! [ $(id -u) = 0 ]; then
 # If the downloaded and unzipped folder is in download ($HOME/Downloads/balena-cli) then :
 export PATH=$PATH:$HOME/Downloads/balena-cli #Allows script environment to understand where Balena Etcher CLI is
 
-echo "The fully configured source SD card should be plugged in to continue"
-read -p "When ready, input version number : " NUM
-dd status=progress if=/dev/sde of=$HOME/MovitImages/Movit-unshrunk$NUM.img
-echo -e "\nSource SD card can now be removed. Shrinking image..."
-pishrink.sh -z $HOME/MovitImages/Movit-unshrunk$NUM.img $HOME/MovitImages/Movit_V$NUM.img && rm $HOME/MovitImages/Movit-unshrunk$NUM.img
+#echo "The fully configured source SD card should be plugged in to continue"
+#read -p "When ready, input version number : " NUM
+#dd status=progress if=/dev/sde of=$HOME/MovitImages/Movit-unshrunk$NUM.img
+#echo -e "\nSource SD card can now be removed. Shrinking image..."
+#pishrink.sh -z $HOME/MovitImages/Movit-unshrunk$NUM.img $HOME/MovitImages/Movit_V$NUM.img && rm $HOME/MovitImages/Movit-unshrunk$NUM.img
 
-echo ""
-read -p "Press enter when target SD card is inserted"
-echo "Flashing new image on inserted SD card..."
-balena local flash $HOME/MovitImages/Movit_V$NUM.img.gz -y
+#echo ""
+#read -p "Press enter when target SD card is inserted"
+#echo "Flashing new image on inserted SD card..."
+#balena local flash $HOME/MovitImages/Movit_V$NUM.img.gz -y --drive /dev/sde
 
 echo -e "\nConfiguring wpa_supplicant for the first boot with the flashed SD card"
-read -p "Enter SSID: " SSID
-read -p "Enter password:" PSK
-cat << EOF > /media/$USERNAME/boot/wpa_supplicant.conf
+read -p "Enter SSID:     " SSID
+read -p "Enter password: " PSK
+cd /media/charles/boot/
+cat << EOF > wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -45,4 +47,5 @@ network={
     id_str="AP1"
 }
 EOF
+cat wpa_supplicant.conf
 exit 0

@@ -19,7 +19,7 @@ GitArg="--git-update"
 ConsArg="--console-log"
 #------------------------------
 #ENV Variables
-export PATH=/usr/bin/:$PATH #For yarn
+#export PATH=/usr/bin/:$PATH #For yarn
 #source /home/pi/.nvm/nvm.sh #Would reload PATH variable for npm and node but is slow...
 export PATH=/home/pi/.nvm/versions/node/v10.16.3/bin/:$PATH #Hardcoding current path for npm
 #------------------------------
@@ -55,7 +55,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/usr/local/bin/node-red-pi -u $MovitPath/MOvIT-Detect-Backend --max-old-space-size=256
+ExecStart=/home/pi/.nvm/versions/node/v10.16.3/bin/node-red-pi -u $MovitPath/MOvIT-Detect-Backend --max-old-space-size=256
 
 [Install]
 WantedBy=multi-user.target
@@ -121,17 +121,17 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     cd $MovitPath/MOvIT-Detect-Backend && sudo -u pi /home/pi/.nvm/versions/node/v10.16.3/bin/npm install
 
     echo -e "###\n### Initialising database...\n###"
-    node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
+    sudo -u pi node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
     echo -e "###\n### Installing frontend modules...\n###"
-    cd $MovitPath/MOvIT-Detect-Frontend && yarn install --production --network-timeout 1000000
+    cd $MovitPath/MOvIT-Detect-Frontend && sudo -u pi /usr/bin/yarn install --production --network-timeout 1000000
     #use of --production should be optimized (remove unnecessary modules...)
 
     echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
-    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && ./configure && make && make check && make install
+    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && sudo -u pi ./configure && sudo -u pi make && make check && make install
 
     echo -e "###\n### Compiling acquisition software...\n###"
-    cd $MovitPath/MOvIT-Detect/Movit-Pi && make -f MakefilePI all
+    cd $MovitPath/MOvIT-Detect/Movit-Pi && sudo -u pi make -f MakefilePI all
 
     echo -e "###\n### Enabling startup services...\n###"
     systemctl enable movit_acquisition.service
@@ -161,7 +161,7 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         systemctl stop movit_backend.service
 
         echo "### Updating repositories..."
-        cd $MovitPath/ && git pull && git submodule update --init --recursive
+        cd $MovitPath/ && sudo -u pi git pull && git submodule update --init --recursive
 
         echo "### Starting updated services..."
         systemctl start movit_acquisition.service

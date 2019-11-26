@@ -105,18 +105,13 @@ EOF
         if [[ $1 != --nogit && $2 != --nogit ]]; then
             #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git works anyways
             [ -d "$MovitPath/" ] || { echo -e "###\n### Installing necessary GitHub directories...\n###";
-            cd $HomePath/ && git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules; }
-
-            echo -e "###\n### Restoring proper group and ownership of the Git repository folders..."
-            chown -R pi:pi $MovitPath
-            echo "### Making updateProject.sh executable in case it wasn't..."
-            chmod +x $MovitPath/updateProject.sh
+            cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules; }
 
             echo -e "###\n### Executing 'updateProject.sh' with '--sys-config'...\n###"
             $MovitPath/./updateProject.sh --sys-config
             echo "### Script successful, see updateProject.log..."
 
-            #This is part of the script is long to execute, it should be run manually instead and not with rc.local
+            #This next part of the script is long to execute, it should be run manually instead and not with rc.local
             #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
             #$MovitPath/./updateProject.sh --init-project
             #echo "Script successful, see updateProject.log"

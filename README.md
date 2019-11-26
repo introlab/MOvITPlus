@@ -23,7 +23,6 @@ network={
     id_str="AP1"
 }
 ```
-Aussi, l'**ajout d'un fichier nommé `ssh`** (sans extension) dans la partition `boot` permettra de lancer un service pour débogger sur un autre ordinateur en cas de problème.
 
 ### 1.4. Initialisation automatisé
 Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre quelques minutes, l'**appareil ne doit pas être débranché!**.
@@ -100,8 +99,7 @@ git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
 ```
 
 #### Mise à jour du répertoire parent
-   - Met à jour les liens vers les bonnes versions des sous-répertoires
-   - Charge les versions des sous-répertoires liées
+   - Charge les versions des sous-répertoires liées (tag de versions des sous-répertoires)
    - Met à jour les scripts et les autres fichiers contenu par le répertoire parent
 ```bash
 git pull
@@ -109,11 +107,11 @@ git submodule update --init --recursive
 ```
 
 #### Mise à jour des sous-répertoires
-Cette commande permet de mettre à jour les sous-répertoires à leur version la plus récente sur leur `origin/master` respectifs
+Cette commande permet de mettre à jour les sous-répertoires à leur version la plus récente sur leur `origin/master` respectifs. Elle change donc le tag de versions des sous-répertoires.
 ```bash
 git submodule update --remote
 ```
-Il est ensuite possible de mettre à jour le répertoire parent avec ces dernières versions des sous-répertoires en faisant `git add [les dossiers à mettre à jour]` puis les commandes habituelles `git commit` et `git push`. Le prochain clone avec les sous-modules ira ainsi chercher les versions les plus à jour du répertoire.
+Il est ensuite possible de mettre à jour le répertoire parent avec ces dernières versions des sous-répertoires. Pour voir ce qui a été modifié, `git status` retourne la liste des fichiers et des tags de répertoires qui ont été modifiés. En faisant `git add [les dossiers à mettre à jour]` puis les commandes habituelles `git commit` et `git push`, il est possible de rendre ces changements officiels. Le prochain clone avec les sous-modules ira ainsi chercher les versions les plus à jour du répertoire.
 
 > [Documentation sur les sous-modules GitHub](https://git-scm.com/book/en/v2/Git-Tools-Submodules "GitHub Submodules")
 
