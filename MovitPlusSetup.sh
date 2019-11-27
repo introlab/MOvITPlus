@@ -8,14 +8,18 @@
 #######################################################
 #                       /!\                           #
 #   THIS SCRIPT HAS NOT BEEN FULLY TESTED             #
+#   Use it as a guide and copy paste useful commands  #
 #                       /!\                           #
 #######################################################
 
-#Exits if any command fails
-#set -e
-onexit(){ echo "!!!!!!!!!!!!!!!!Something went wrong steps may have been skipped!!!!!"; }
+#echo if any command fails
+onexit(){ echo "----- Something went wrong! Steps may have been skipped! ------"; }
 trap onexit ERR
 
+
+
+
+##############################################################
 echo "#######################################################"
 echo "#NETWORK SETUP"
 echo "#######################################################"
@@ -120,6 +124,10 @@ echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo deb
 sudo apt-get -y install iptables-persistent
 
 
+
+
+
+##############################################################
 echo "#######################################################"
 echo "#MOVIT DETECT"
 echo "#######################################################"
@@ -141,11 +149,16 @@ sudo apt-get install -y git automake
 
 #Timezone setup, manually would be :
 #dpkg-reconfigure tzdata #-> requires user input
+#Automated :
 #https://serverfault.com/questions/94991/setting-the-timezone-with-an-automated-script
 echo "Setting timezone to America/Montreal"
-cp /usr/share/zoneinfo/America/Montreal /etc/localtime #What the above command actually does in the end
+cp /usr/share/zoneinfo/America/Montreal /etc/localtime #What "dpkg-reconfigure" actually does anyways
 
 
+
+
+
+##############################################################
 echo "#######################################################"
 echo "#MOVIT BACKEND"
 echo "#######################################################"
@@ -155,12 +168,12 @@ source ~/.profile #Permet au système de trouver le nouvel installation
 nvm install 10.16.3 #Dernière version fonctionnelle testée
 nvm alias default 10.16.3 #Mettre cette version par défaut
 
-#TODO : mosquitto password + config file
+#Manual Mosquitto password + config file: 
 #sudo mosquitto_passwd -c /etc/mosquitto/passwd admin
 #http://www.steves-internet-guide.com/mqtt-username-password-example/
 
 echo "Configuring password for mosquitto mqtt"
-sudo systemctl stop mosquitto
+systemctl stop mosquitto
 cat<<EOF >>/etc/mosquitto/passwd
 admin:movitplus
 EOF
@@ -171,13 +184,16 @@ cat<<EOF >/etc/mosquitto/mosquitto.conf
 password_file /etc/mosquitto/passwd
 allow_anonymous false
 EOF
-sudo systemctl start mosquitto
+systemctl start mosquitto
 
 echo "Installing mongod and node-red"
-sudo apt-get install -y mongodb mongodb-server
+apt-get install -y mongodb mongodb-server
 npm install -g node-red
 
 
+
+
+##############################################################
 echo "#######################################################"
 echo "#MOVIT BACKEND"
 echo "#######################################################"
@@ -188,10 +204,15 @@ sudo apt-get install yarn -y
 
 cd /home/pi && wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x /home/pi/firstBootSetup.sh
 
+
+
+
+##############################################################
 echo "#######################################################"
 echo "# RESETTING ALL CONFIG FOR IMAGE CREATION"
+echo "# Especially useful if setup script was triggered"
 echo "#######################################################"
-echo "removing wpa setup"
+echo "Removing wpa setup"
 cat<<EOF >/etc/wpa_supplicant/wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -216,15 +237,30 @@ echo "Updating '/etc/hostapd/hostapd.conf' with Movit-NOCONF..."
 sed -i -e "s/raspberrypi/Movit-NOCONF/g;s/Movit-....../Movit-NOCONF/g;" /etc/hostapd/hostapd.conf
 
 /home/pi/./firstBootSetup.sh --restore
-#echo "remove MOvITPlus"
-#rm -r /home/pi/MOvITPlus
-#echo "removing services"
-#rm /etc/systemd/system/movit_frontend.service
-#rm /etc/systemd/system/movit_acquisition.service
-#rm /etc/systemd/system/movit_backend.service
+echo "Removing MOvITPlus"
+rm -r /home/pi/MOvITPlus
+echo "Removing movit_ services except movit_setup"
+rm /etc/systemd/system/movit_frontend.service
+rm /etc/systemd/system/movit_acquisition.service
+rm /etc/systemd/system/movit_backend.service
 
-#echo "removing self"
-#rm /home/pi/MovitPlusSetup.sh
+echo "Removing self"
+rm /home/pi/MovitPlusSetup.sh
 
+echo "Creating movit_setup.service..."
+sudo cat <<EOF >/etc/systemd/system/movit_setup.service
+[Unit]
+Description=-------> MOVIT+ first boot setup script
+After=network-online.target dnsmasq.service
+Wants=network-online.target
+
+[Service]
+Type=forking
+User=root
+ExecStart=/home/pi/firstBootSetup.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
 exit 0

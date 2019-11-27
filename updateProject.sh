@@ -87,7 +87,7 @@ EOF
 cat<<EOF >/etc/systemd/system/movit_acquisition.service
 [Unit]
 Description=-------- MOVIT+ acquisition software
-After=network-online.target mosquitto.service
+After=network-online.target mosquitto.service 
 StartLimitIntervalSec=0
 
 [Service]
@@ -124,7 +124,7 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     sudo -u pi node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
     echo -e "###\n### Installing frontend modules...\n###"
-    cd $MovitPath/MOvIT-Detect-Frontend && sudo -u pi /usr/bin/yarn install --production --network-timeout 1000000
+    cd $MovitPath/MOvIT-Detect-Frontend && sudo -u pi /usr/bin/yarn install --registry https://registry.npmjs.org --production --network-timeout 1000000
     #use of --production should be optimized (remove unnecessary modules...)
 
     echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"

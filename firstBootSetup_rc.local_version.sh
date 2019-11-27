@@ -20,13 +20,26 @@ MovitPath="$HomePath/MOvITPlus"
 
 #Functions
 restore () {
-    systemctl enable movit_setup.service
-    echo "Script will run on next boot..."
+    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
+            echo "Script execution line is already in /etc/rc.local"
+    else
+        #Add execution line from /etc/rc.local
+        sed -i "$ i sleep 15s" /etc/rc.local #To ensure network availability
+        sed -i "$ i /bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local
+        echo "Added script execution line to /etc/rc.local"
+        echo "Script will run on next boot..."
+    fi
 }
 
 remove () {
-    systemctl disable movit_setup.service
-    echo "Script will no longer run on next boot..."
+    if grep -Fxq "/bin/bash $HomePath/firstBootSetup.sh --fromRClocal" /etc/rc.local; then
+        #Delete execution line from /etc/rc.local
+        sed -i '/sleep 15s/d' /etc/rc.local
+        sed -i '/\/bin\/bash \/home\/pi\/firstBootSetup.sh --fromRClocal/d' /etc/rc.local
+        echo "Removed script execution line from /etc/rc.local"
+    else
+        echo "No script execution line to remove in /etc/rc.local"
+    fi
 }
 
 #RESTORE OR REMOVE SCRIPT FOR EXECUTION ON NEXT BOOT
@@ -47,7 +60,7 @@ else
 
     echo -e "\n\n########################################################"
     echo "Running initial setup script for a new Movit plus system"
-    if [[ $1 == "--fromService" ]]; then echo "Lauched from systemd service"; failmesg="reboot the system" 
+    if [[ $1 == "--fromRClocal" ]]; then echo "Lauched from rc.local"; failmesg="reboot the system" 
     else echo "Lauched with the following arguments : $1 $2"; failmesg="run the script again"; fi
     echo "Current date : $(date)"
     echo "########################################################"
@@ -64,7 +77,7 @@ else
         echo "### Creating '/etc/udev/rules.d/70-persistent-net.rules'..."
         #Old replacement method :
         #sed -i -e "s/b8:27:eb:..:..:../$MACAddr/g" /etc/udev/rules.d/70-persistent-net.rules
-cat <<EOF > /etc/udev/rules.d/70-persistent-net.rules
+        cat <<EOF > /etc/udev/rules.d/70-persistent-net.rules
 SUBSYSTEM=="ieee80211", ACTION=="add|change", ATTR{macaddress}=="$MACAddr", KERNEL=="phy0", \
   RUN+="/sbin/iw phy phy0 interface add ap0 type __ap", \
   RUN+="/bin/ip link set ap0 address $MACAddr"
@@ -93,9 +106,6 @@ EOF
             #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git works anyways
             [ -d "$MovitPath/" ] || { echo -e "###\n### Installing necessary GitHub directories...\n###";
             cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules; }
-
-            echo "### Making updateProject.sh executable in case it wasn't..."
-            chmod +x $MovitPath/updateProject.sh
 
             echo -e "###\n### Executing 'updateProject.sh' with '--sys-config'...\n###"
             $MovitPath/./updateProject.sh --sys-config
