@@ -20,7 +20,7 @@ if ! [ $(id -u) = 0 ]; then
 # https://github.com/balena-io/balena-cli/blob/master/INSTALL.md#executable-installer
 # If the downloaded and unzipped folder is in download ($HOME/Downloads/balena-cli) then :
 export PATH=$PATH:$HOME/Downloads/balena-cli #Allows script environment to understand where Balena Etcher CLI is
-
+if false; then
 echo "The fully configured source SD card should be plugged in to continue"
 read -p "When ready, input version number : " NUM
 dd status=progress if=/dev/sde of=$HOME/MovitImages/Movit-unshrunk$NUM.img
@@ -31,13 +31,13 @@ echo ""
 read -p "Press enter when target SD card is inserted"
 echo "Flashing new image on inserted SD card..."
 balena local flash $HOME/MovitImages/Movit_V$NUM.img.gz -y --drive /dev/sde
-
+fi
 echo -e "\nConfiguring wpa_supplicant for the first boot with the flashed SD card"
 read -p "     Enter SSID: " SSID
 read -p " Enter password: " PSK
 
 read -p "Remove and reinsert the card and press enter"
-cd /media/charles/boot/ && cat << EOF > wpa_supplicant.conf
+cat << EOF > /media/charles/boot/wpa_supplicant.conf
 country=CA
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -47,5 +47,10 @@ network={
     psk="$PSK" #Remplacer MOT_DE_PASSE par le mot de passe de celui-ci
     id_str="AP1"
 }
-EOF && cat wpa_supplicant.conf
+EOF
+
+echo -e "\n#####################################\nWritten file :\n#####################################"
+cat /media/charles/boot/wpa_supplicant.conf
+echo -e "#####################################\nExiting..."
+
 exit 0

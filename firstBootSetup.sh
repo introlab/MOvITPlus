@@ -91,8 +91,9 @@ EOF
         #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
             #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git works anyways
-            [ -d "$MovitPath/" ] || { echo -e "###\n### Installing necessary GitHub directories...\n###";
-            cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules; }
+            
+            echo -e "###\n### Installing necessary GitHub directories...\n###"
+            cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
 
             echo "### Making updateProject.sh executable in case it wasn't..."
             chmod +x $MovitPath/updateProject.sh
