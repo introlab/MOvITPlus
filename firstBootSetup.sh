@@ -101,17 +101,17 @@ EOF
             $MovitPath/./updateProject.sh --sys-config
             echo "### Script successful, see updateProject.log..."
 
-            #This next part of the script is long to execute, it should be run manually instead and not with rc.local
-            #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
-            #$MovitPath/./updateProject.sh --init-project
-            #echo "Script successful, see updateProject.log"
+            #This next part of the script is long to execute
+            echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
+            $MovitPath/./updateProject.sh --init-project
+            echo "Script successful, see updateProject.log"
 
         else
             echo "### Skipping git installation because of '--nogit' argument"
         fi
         remove
         echo "### Rebooting to finish network setup..."
-        reboot
+        echo "### If the system doesn't reboot, please do so manually."
         #######################################################
     else
         echo "### The network is down, cannot run first boot setup"
@@ -120,5 +120,5 @@ EOF
     
 fi
 
-echo "### Exiting..."
+echo -e "### Exiting...\n########################################################"
 exit 0

@@ -44,7 +44,7 @@ if [[ $1 == $ConfigArg || $2 == $ConfigArg ]]; then
 
     #----------------------------------------
     # INSERT ANY ADDITIONNAL SYSTEM CONFIG SCRIPT HERE 
-    echo "Creating movit_backend.service..."
+    echo "### Creating movit_backend.service..."
 cat <<EOF >/etc/systemd/system/movit_backend.service
 [Unit]
 Description=-------- MOVIT+ BACKEND with node-red
@@ -55,13 +55,16 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/home/pi/.nvm/versions/node/v10.16.3/bin/node-red-pi -u $MovitPath/MOvIT-Detect-Backend --max-old-space-size=256
+# The nvm.sh command ensures node-red has access to the npm folder
+ExecStart=/bin/bash -c '\
+. ~/.nvm/nvm.sh; \
+/home/pi/.nvm/versions/node/v10.16.3/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256'
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-    echo "Creating movit_frontend.service..."
+    echo "### Creating movit_frontend.service..."
 cat<<EOF >/etc/systemd/system/movit_frontend.service
 [Unit]
 Description=-------- MOVIT+ FRONTEND Express server
@@ -83,7 +86,7 @@ WorkingDirectory=$MovitPath/MOvIT-Detect-Frontend/
 WantedBy=multi-user.target
 EOF
 
-    echo "Creating movit_acquisition.service..."
+    echo "### Creating movit_acquisition.service..."
 cat<<EOF >/etc/systemd/system/movit_acquisition.service
 [Unit]
 Description=-------- MOVIT+ acquisition software
@@ -106,7 +109,7 @@ WantedBy=multi-user.target
 EOF
     #----------------------------------------
 
-    echo "Done updating system configuration"
+    echo "### Done updating system configuration"
 
 
 #INITIALISE PROJECT
@@ -124,11 +127,11 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
     sudo -u pi node $MovitPath/MOvIT-Detect-Backend/initDatabase.js
     
     echo -e "###\n### Installing frontend modules...\n###"
-    cd $MovitPath/MOvIT-Detect-Frontend && sudo -u pi /usr/bin/yarn install --registry https://registry.npmjs.org --production --network-timeout 1000000
-    #use of --production should be optimized (remove unnecessary modules...)
+    cd $MovitPath/MOvIT-Detect-Frontend && sudo -u pi /usr/bin/yarn install --registry https://registry.npmjs.org --production --ignore-optional --network-timeout 1000000
 
-    echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
-    cd $MovitPath/MOvIT-Detect/bcm2835-1.58 && sudo -u pi ./configure && sudo -u pi make && make check && make install
+    #echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
+    # bcm2835 library already installed in preconfigured image
+    #cd $MovitPath/MOvIT-Detect/bcm2835-1.60 && sudo -u pi ./configure && sudo -u pi make && make check && make install
 
     echo -e "###\n### Compiling acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/Movit-Pi && sudo -u pi make -f MakefilePI all
@@ -161,12 +164,15 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         systemctl stop movit_backend.service
 
         echo "### Updating repositories..."
-        cd $MovitPath/ && sudo -u pi git pull && git submodule update --init --recursive
+        cd $MovitPath/ && sudo -u pi git pull && sudo -u pi git submodule update --init --recursive
 
         echo "### Starting updated services..."
         systemctl start movit_acquisition.service
         systemctl start movit_frontend.service
         systemctl start movit_backend.service
+        
+        echo "### Done updating all GitHub repositories"
+        echo "Databases and other settings may need to be resetted manually"
     }
 
     echo "Using Movit folder location : $MovitPath"
@@ -175,8 +181,7 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     [ $(git rev-parse HEAD) = $(git ls-remote $(git rev-parse --abbrev-ref @{u} | sed 's/\// /g') | cut -f1) ] && echo "Already up to date, nothing to do" || updateGithub
     #----------------------------------------
 
-    echo "### Done updating all GitHub repositories"
-    echo "Databases and other settings may need to be resetted manually"
+    
 
 
 else

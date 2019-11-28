@@ -154,8 +154,11 @@ sudo apt-get install -y git automake
 echo "Setting timezone to America/Montreal"
 cp /usr/share/zoneinfo/America/Montreal /etc/localtime #What "dpkg-reconfigure" actually does anyways
 
-
-
+cd /home/pi
+git clone https://github.com/introlab/MOvIT-Detect.git
+echo -e "###\n### Compiling bcm2835 library for the acquisition software...\n###"
+cd MOvIT-Detect/bcm2835-1.60 && sudo -u pi ./configure && sudo -u pi make && make check && make install
+cd /home/pi && rm -r MOvIT-Detect/
 
 
 ##############################################################
@@ -195,7 +198,7 @@ npm install -g node-red
 
 ##############################################################
 echo "#######################################################"
-echo "#MOVIT BACKEND"
+echo "#MOVIT FRONTEND"
 echo "#######################################################"
 echo "Installing yarn"
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -257,10 +260,13 @@ Wants=network-online.target
 [Service]
 Type=forking
 User=root
-ExecStart=/home/pi/firstBootSetup.sh
+ExecStart=/home/pi/firstBootSetup.sh --fromService
+TimeoutStartSec=25min 00s
+ExecStartPost=reboot
 
 [Install]
 WantedBy=multi-user.target
 EOF
+
 
 exit 0

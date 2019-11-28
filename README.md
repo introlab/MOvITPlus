@@ -4,10 +4,10 @@
 Ce répertoire contient tous les éléments nécessaires pour faire fonctionner un système MOvIt+. L'utilisation d'une **image préconfiguré** et des **scripts** de mise à jour est recommendée [**[installation rapide](#1-installation-rapide "Section de ce document")**], mais il possible de suivre les instructions et la documentation pour préparer un système à partir de rien [**[installation complète](#installation-compl%c3%a8te "Section de ce document")**].
 
 ## 1. Installation rapide
-### 1.2. Image préconfigurée
+### 1.2. Flashage
 L'image préconfigurée doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD.
 **AJOUTER DÉTAILS DISPONIBILITÉ DE L'IMAGE**
-Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification.
+Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification telle que décrite ci-dessous.
 
 ### 1.3. Configuration sans fil
 **Un fichier nommé `wpa_supplicant.conf`**, remplit selon la structure ci-bas avec les informations pour se connecter au réseau wifi choisi, peut être **placé dans la partition `boot`** d'une carte SD nouvellement flashé. Le système l'utilisera afin de permettre une connection au wifi spécifié dès le premier démarrage.
