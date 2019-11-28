@@ -7,10 +7,10 @@ Ce répertoire contient tous les éléments nécessaires pour faire fonctionner 
 ### 1.2. Flashage
 L'image préconfigurée doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD.
 **AJOUTER DÉTAILS DISPONIBILITÉ DE L'IMAGE**
-Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification telle que décrite ci-dessous.
+Avec ce logiciel, il suffit de brancher la carte SD avec un adapteur approprié puis, une fois le logiciel lancé, il faut sélectionner l'image téléchargée. Il faut ensuite vérifier que la carte SD détectée par le logiciel est la bonne puis appuyer sur le bouton pour lancer le flashage. Une fois terminé, il peut être nécessaire de sortir et de réinserrer la carte afin de faire une dernière modification telle que décrite ci-dessous.
 
 ### 1.3. Configuration sans fil
-**Un fichier nommé `wpa_supplicant.conf`**, remplit selon la structure ci-bas avec les informations pour se connecter au réseau wifi choisi, peut être **placé dans la partition `boot`** d'une carte SD nouvellement flashé. Le système l'utilisera afin de permettre une connection au wifi spécifié dès le premier démarrage.
+**Il est recommandé de placer un fichier nommé `wpa_supplicant.conf` dans la partition `boot`** d'une carte SD nouvellement flashé. Celui-ci doit être remplit selon la structure ci-bas avec les informations pour se connecter au réseau wifi choisi. Le système l'utilisera afin de permettre une connection au wifi spécifié dès les premiers démarrages.
 **`wpa_supplicant.conf`** :
 ```bash
 country=CA
@@ -25,19 +25,14 @@ network={
 ```
 
 ### 1.4. Initialisation automatisé
-Des scripts permettent d'initialiser un nouvel appareil rapidement dès le premier démarrage avec l'image préconfiguré. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre quelques minutes, l'**appareil ne doit pas être débranché!**.
+Des scripts s'activant automatiquement permettent d'initialiser un nouvel appareil. Aucune action n'est requise outre que d'**insérer la carte SD** et de **brancher l'appareil**. L'exécution de ces scripts peut prendre quelques minutes.
 
-> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner. Si les scripts ne fonctionnent pas (voir `/home/pi/firstBootScript.log` et `/home/pi/updateProject.log.log`), il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si il y a eu une erreur dans le fichier wpa_supplicant.conf par exemple.
+> Attention : **l'appareil ne doit pas être débranché** pendant son initialisation!
 
-### 1.5 Initialisation du projet
-Pour initialiser le projet, il faut exécuter la commande suivante :
-```bash
-sudo /home/pi/MOvITPlus/./updateProject.sh --init-project --console-log
-```
-Le script s'occupe alors d'installer le backend, d'initialiser la base de données, d'installer le frontend puis finalement de compiler les librairies et le code d'acquisition. Il termine en activant tous les services et en les démarrant.
+> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner([spécification de cette connection internet]()). Si les scripts ne fonctionnent pas ([déboggage]()) , il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)). L'[étape 1.3](#13-configuration-sans-fil) peut également être répété si une erreur s'est glissée dans le fichier `wpa_supplicant.conf`.
 
 ### 1.5. Vérification
-À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'ouvrir le site `movit.plus`. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulu. Voir la documentation de la partie frontend pour plus de détails.
+À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'accèder à l'addresse `movit.plus` dans un navigateur. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulu. Voir la documentation de la partie frontend pour plus de détails.
 
 ___
 <br>
@@ -48,12 +43,14 @@ ___
 ## 2. Explications
 > Documentation incomplète et non à jour.
 #### Script de configuration
-**`.sh`**
-...
+**`MovitPlusSetup.sh`**
+Ce script vise à simplifier le paramètrage d'une image _Rasbian Buster Lite_ dans le but de générer une image préconfiguration. Cependant, le script n'a pas été testé complètement et représente d'avantage une piste sur la façon d'y arriver qu'un moyen certain. La dernière partie du script permet d'annuler en partie les effets de l'essaie du script `firstBootSetup.sh`.
+> Il est recommendé d'exécuter ce script prudemment et de vérifier chaque étape.
+
 
 #### Script d'initialisation de système
 **`firstBootSetup.sh`**
-Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
+Lors de son premier démarrage, le Raspberry Pi avec la carte nouvellement flashé avec l'image préconfigurée effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
 Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine l'écriture du temps du système sur le RTC _(Real Time Clock)_ puis avec de multiples lancements du script de mise à jour (`updateProject.sh`) avec l'argument `--sys-config` et `--init`.
 
 
@@ -82,13 +79,64 @@ Additionnelement, l'ajout de l'argument `--console-log` redirige la sortie de l'
 
 > Ce script enregistre la sortie de ses exécutions dans `/home/pi/updateProject.log.log`
 
-
+### 1.5 Initialisation du projet
+Pour initialiser le projet, il faut exécuter la commande suivante :
+```bash
+sudo /home/pi/MOvITPlus/./updateProject.sh --init-project --console-log
+```
+Le script s'occupe alors d'installer le backend, d'initialiser la base de données, d'installer le frontend puis finalement de compiler les librairies et le code d'acquisition. Il termine en activant tous les services et en les démarrant.
 ___
+
+
+
+
+voir `firstBootScript.log` et `updateProject.log.log` dans le répertoire ` /home/pi/`)
+___
+
 <br>
 <br>
 
-## Installation complète
-Pour ce faire, [la documentation sur la configuration d'un nouveau système](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md "Configuration du système") est essentielle.
+
+
+
+## Installation manuelle
+### Documentation et installation manuelle
+Un nouveau système peut être installé manuellement en suivant la documentation sur la [configuration d'un nouveau système](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md "Configuration du système"), puis la documentation de chacune des parties du projet ([MOvIT-Detect](), [MOvIT-Detect-Backend](), [MOvIT-Detect-Frontend]()).
+
+### Génération d'image
+Il également possible d'utiliser le script `MovitPlusSetup.sh`. Ce dernier effectue essentiellement toutes les étapes nécessaires générer l'image préconfiguré en partant d'un image de Rasbian Lite. Cela permettra donc d'utiliser les scripts mentionnés plus haut pour terminer l'installation du projet par la suite.
+
+> **Attention :** ce script n'a pas été testé complètement et certaines erreurs plus ou moins importantes pourraient survenir. L'utiliser à vos risque. 
+
+
+## MOvIT-Detect
+Contiens tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend est faites via MQTT. Ce code fonctionne sur Raspberry Pi Zero W, ou tout autre processeur ARM basé sur le processeur BroadCom bcm2835.
+
+## MOvIT-Detect-Backend
+C'est le backend du système, il a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB 2 localement. Les donnes sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, également utilisé par le frontend pour afficher l'information.
+
+## MOvIT-Detect-Frontend
+C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et interprétées. 
+
+## MOvIT-Hardware
+Contiens tous les fichiers de fabrication pour concevoir, ce qui permet de recréer le système en entier.
+
+
+
+
+
+____
+
+
+
+
+
+____
+____
+____
+____
+
+
 ### Installation de MOvIt Plus
 L'installation de MOvIt requiert un `git clone` habituel mais comporte quelques subtilitées avec les sous-modules.
 
@@ -115,14 +163,22 @@ Il est ensuite possible de mettre à jour le répertoire parent avec ces derniè
 
 > [Documentation sur les sous-modules GitHub](https://git-scm.com/book/en/v2/Git-Tools-Submodules "GitHub Submodules")
 
-## MOvIT-Detect
-Contiens tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend est faites via MQTT. Ce code fonctionne sur Raspberry Pi Zero W, ou tout autre processeur ARM basé sur le processeur BroadCom bcm2835.
 
-## MOvIT-Detect-Backend
-C'est le backend du système, il a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB 2 localement. Les donnes sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, également utilisé par le frontend pour afficher l'information.
+### Astuces
+- Pour exécuter uniquement certaines partie d'un script, il est plus rapide de faire un `if false; then` en début, et `fi` en fin du segment qui doit être ignoré que de commenter toutes les lignes.
+- Pour observer et suivre en temps réel le déroulement du des scripts qui écrit dans un fichier _.log_, la commande `tail -fn 50 #nom_du_fichier.log` affichera les 50 dernières lignes ainsi que les lignes qui se rajouteront à mesure.
+- L'utilisation de l'argument --console-log pour le script `updateProject.sh` montrera le progrès de NPM et Yarn lors de l'exécution de ces étapes.
+    > Attention, les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
+- Pour trouver le nom du Raspberry Pi pour, par exemple, se connecter en SSH, il suffit de regarder le nom du point d'accès créé par le Pi. Si celui-ci n'a pas encore réussi à terminer sa configuration ou qu'un erreur est survenu pendant celle-ci, alors le hostname du Pi sera `Movit-NOCONF`.
 
-## MOvIT-Detect-Frontend
-C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et interprétées. 
 
-## MOvIT-Hardware
-Contiens tous les fichiers de fabrication pour concevoir, ce qui permet de recréer le système en entier.
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>

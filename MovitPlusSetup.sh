@@ -244,19 +244,26 @@ EOF
     sudo cat <<EOF >/etc/systemd/system/movit_setup.service
 [Unit]
 Description=-------> MOVIT+ first boot setup script
-After=network-online.target dnsmasq.service
+After=network-online.target dnsmasq.service rc-local.service
 Wants=network-online.target
 
 [Service]
+# Increase process niceness (priority) for faster execution
+Nice=-10
 Type=forking
 User=root
 ExecStart=/home/pi/firstBootSetup.sh --fromService
-TimeoutStartSec=25min 00s
+TimeoutStartSec=40min 00s
 ExecStartPost=reboot
 
 [Install]
 WantedBy=multi-user.target
 EOF
+
+systemctl enable systemd-networkd-wait-online.service
+systemctl disable triggerhappy.service
+systemctl disable triggerhappy.socket
+
 
     else
     echo "Skipping step..."

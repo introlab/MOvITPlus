@@ -20,7 +20,7 @@ if ! [ $(id -u) = 0 ]; then
 # https://github.com/balena-io/balena-cli/blob/master/INSTALL.md#executable-installer
 # If the downloaded and unzipped folder is in download ($HOME/Downloads/balena-cli) then :
 export PATH=$PATH:$HOME/Downloads/balena-cli #Allows script environment to understand where Balena Etcher CLI is
-if false; then
+
 echo "The fully configured source SD card should be plugged in to continue"
 read -p "When ready, input version number : " NUM
 dd status=progress if=/dev/sde of=$HOME/MovitImages/Movit-unshrunk$NUM.img
@@ -31,7 +31,7 @@ echo ""
 read -p "Press enter when target SD card is inserted"
 echo "Flashing new image on inserted SD card..."
 balena local flash $HOME/MovitImages/Movit_V$NUM.img.gz -y --drive /dev/sde
-fi
+
 echo -e "\nConfiguring wpa_supplicant for the first boot with the flashed SD card"
 read -p "     Enter SSID: " SSID
 read -p " Enter password: " PSK

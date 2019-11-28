@@ -103,9 +103,10 @@ EOF
             echo "### Script successful, see updateProject.log..."
 
             #This next part of the script is long to execute
-            echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
-            $MovitPath/./updateProject.sh --init-project
-            echo "Script successful, see updateProject.log"
+            #TO BE FULLY IMPLEMETED AND TESTED IN FUTURE VERSIONS
+            #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
+            #$MovitPath/./updateProject.sh --init-project
+            #echo "Script successful, see updateProject.log"
 
         else
             echo "### Skipping git installation because of '--nogit' argument"
@@ -117,6 +118,7 @@ EOF
     else
         echo "### The network is down, cannot run first boot setup"
         echo "### Please fix internet connection and $failmesg."
+        exit 1
     fi
     
 fi
