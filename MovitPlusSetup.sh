@@ -314,6 +314,10 @@ EOF
     systemctl daemon-reload
     /home/pi/./firstBootSetup.sh --restore
     
+    echo "Removing log files"
+    rm /home/pi/firstBootSetup.log
+    rm /home/pi/updateProject.log
+
     echo "Removing self"
     rm /home/pi/MovitPlusSetup.sh
 

@@ -83,14 +83,14 @@ EOF
 
         echo -e "### Using '$(date)' and updating hardware clock...\n###"
         #Assuming the date and time is correctly set (timezones)
-        sudo hwclock -w --verbose
+        hwclock -w --verbose
         echo "### Done setting RTC time"
 
 
         #INSTALLS GIT REPOSITORY AND INITIALISES IT WITH `updateProject.sh`
         #Only if "--nogit" argument is not passed
         if [[ $1 != --nogit && $2 != --nogit ]]; then
-            #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git works anyways
+            #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git work anyways
             
             echo -e "###\n### Installing necessary GitHub directories...\n###"
             cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
