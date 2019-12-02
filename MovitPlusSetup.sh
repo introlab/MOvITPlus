@@ -126,6 +126,10 @@ EOF
     echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
     sudo apt-get -y install iptables-persistent
 
+    systemctl enable systemd-networkd-wait-online.service
+    systemctl disable triggerhappy.service
+    systemctl disable triggerhappy.socket
+
     else
     echo "Skipping step..."
     fi
@@ -226,8 +230,6 @@ EOF
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt-get install yarn -y
 
-    cd /home/pi && wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x /home/pi/firstBootSetup.sh
-
     else
     echo "Skipping step..."
     fi
@@ -260,11 +262,8 @@ ExecStartPost=reboot
 WantedBy=multi-user.target
 EOF
 
-systemctl enable systemd-networkd-wait-online.service
-systemctl disable triggerhappy.service
-systemctl disable triggerhappy.socket
-
-
+    cd /home/pi && wget https://raw.githubusercontent.com/introlab/MOvITPlus/master/firstBootSetup.sh && chmod +x /home/pi/firstBootSetup.sh
+    
     else
     echo "Skipping step..."
     fi

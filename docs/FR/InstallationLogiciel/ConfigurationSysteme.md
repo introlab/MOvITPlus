@@ -28,14 +28,19 @@
         - [Configuration des IPtables](#configuration-des-iptables)
         - [IPtables au démarrage](#iptables-au-d%c3%a9marrage)
     - [2.9. Démarrage du point d'accès](#29-d%c3%a9marrage-du-point-dacc%c3%a8s)
-    - [2.10. Conclusion](#210-conclusion)
+    - [2.10. Finalisation](#210-finalisation)
+    - [2.11. Conclusion](#211-conclusion)
 - [3. Configuration du démarrage](#3-configuration-du-d%c3%a9marrage)
     - [3.1. Services avec systemd](#31-services-avec-systemd)
     - [3.2. Utilisation des services](#32-utilisation-des-services)
     - [3.3. Optimisation du temps de démarrage](#33-optimisation-du-temps-de-d%c3%a9marrage)
 - [4. Installation de MOvIT +](#4-installation-de-movit)
-        - [À MODIFIER POUR AJOUTER LA MÉTHODE D'INSTALLATION PAR LE RÉPERTOIRE PARENT](#%c3%80-modifier-pour-ajouter-la-m%c3%89thode-dinstallation-par-le-r%c3%89pertoire-parent)
+    - [Installation de GitHub](#installation-de-github)
+    - [Installation initiale de MOvIt Plus](#installation-initiale-de-movit-plus)
+    - [Installation complémentaire](#installation-compl%c3%a9mentaire)
 - [5. Mises à jour du système](#5-mises-%c3%a0-jour-du-syst%c3%a8me)
+    - [Mise à jour du projet par script](#mise-%c3%a0-jour-du-projet-par-script)
+    - [Mise à jour du projet manuellement](#mise-%c3%a0-jour-du-projet-manuellement)
 ___
 <br>
 <br>
@@ -68,8 +73,7 @@ ___
 Il est possible d'utiliser la carte réseau du Raspberry Pi Zero W à la fois comme client et point d'accès. Ce point d'accès peut ainsi fournir à la fois une connection internet et une connection à l'interface web du projet. Les instructions sont tirées principalement d'[ici](https://community.ptc.com/t5/IoT-Tech-Tips/Using-the-Raspberry-Pi-as-a-WIFI-hotspot/td-p/535058).
 
 Fonctionnement en bref :
-- **ifup :** Met en fonction les connections sans fil configurées. Deux instances de ifup sont créées; _ifup@wlan0_, pour la connection au wi-fi, et _ifup@ap0_, pour la gestion du point d'accès. Ces instances font appels à **wpa_supplicant** / **_dhclient_** et **hostapd** respectivement.
-  >Il est utilisé en conjonction avec **_ifdown_**, qui ferme ces connections au besoin.
+- **ifupdown :** Met en fonction les connections sans fil configurées. Deux instances de ifup sont créées; _ifup@wlan0_, pour la connection au wi-fi, et _ifup@ap0_, pour la gestion du point d'accès. Ces instances font appels à **wpa_supplicant** / **_dhclient_** et **hostapd** respectivement.
   - **wpa_supplicant / dhclient :** Gère la connection à d'autres points d'accès wi-fi
   - **hostapd :** Permet la création d'un point d'accès à même le RaspberryPi
 - **dnsmasq :** Fournit les services DHCP, soit l'assignation d'addresse IP aux appareils connectés à un réseau (AP), et DNS, soit l'utilisation de l'addresse [movit.plus](http://movit.plus) à la place de [192.168.10.1](http://192.168.10.1).
@@ -157,6 +161,10 @@ Ensuite, pour installer ces logiciels, il faut effectuer la commande suivante:
 ```bash
 sudo apt-get install dnsmasq hostapd -y
 ```
+Il faut également désactiver wpa_supplicant.service
+```bash
+systemctl disable wpa_supplicant.service
+```
 ##### Configuration de DNSmasq :
 Suite a cette commande, il faut mettre en place quelques fichiers de configuration. Le premier fichier à modifier est `/etc/dnsmasq.conf` dans lequel il faut ajouter quelques lignes à la fin, voici ces lignes:
 ```bash
@@ -233,7 +241,7 @@ L'adresse IP de l'AP est ainsi définie ici, soit `192.168.10.1`. Il est possibl
 
 
 ### 2.7. Configuration du nom de domaine
-DNSmasq lit le fichier `/etc/hosts` afin d'associer certaines addresses à des noms de domaines. Cette fonction est utilisée pour rediriger le traffic vers le la bonne addresse si une tentative est faite pour se connecter aux noms de domaines spécifiés. À ce fichier, il faut ajouter ces lignes à la fin :
+DNSmasq lit le fichier `/etc/hosts` afin d'associer certaines addresses à des noms de domaines. Cette fonction est utilisée pour rediriger le traffic vers le la bonne addresse si une tentative est faite pour se connecter aux noms de domaines spécifiés. À ce fichier, il faut **ajouter ces lignes à la fin** :
 ```bash
 #Allows access to the frontend and the backend with an easier to remember address:
 192.168.10.1	movit	movit.plus
@@ -264,7 +272,14 @@ After=network.target network-online.target
 ```
 Si DNSmasq n'est pas activé au démarrage, cette commande permettra de le faire : `sudo systemctl enable dnsmasq.service`. Cependant, il devrait déjà l'être.
 
-### 2.10. Conclusion
+### 2.10. Finalisation
+Pour finir, il faut activer systemd-networkd-wait-online qui s'occupe d'activer le _target_ `network-online` pour l'utilisation des services qui nécessite l'accès à internet au démarrage. Il faut également désactiver `networking.service` puisqu'il interfère avec le processus mis en place plus haut.
+```bash
+systemctl enable systemd-networkd-wait-online.service
+systemctl disable networking.service
+```
+
+### 2.11. Conclusion
 Une fois que toutes ces étapes sont complétées, il est possible de redémarrer le Raspberry Pi. L'AP deviendra alors visible et accessible. Il permettra une connection internet en passant par le réseau auquel il est connecté et il offrira une connection aux serveurs qu'il exécutera par le biais de l'addresse [movit.plus](http://movit.plus).
 ___
 
@@ -341,6 +356,26 @@ WantedBy=multi-user.target
 
 ```
 
+> Aussi, si désiré, un service permettant l'activation au démarrage du script `firstBootSetup.sh` peut être ajouté :
+> - **movit_setup.service**
+> ```bash
+> [Unit]
+> Description=-------> MOVIT+ first boot setup script
+> After=network-online.target dnsmasq.service rc-local.service
+> Wants=network-online.target
+>
+> [Service]
+> # Increase process niceness (priority) for faster execution
+> Nice=-10
+> Type=forking
+> User=root
+> ExecStart=/home/pi/firstBootSetup.sh --fromService
+> TimeoutStartSec=40min 00s
+> ExecStartPost=reboot
+>
+> [Install]
+> WantedBy=multi-user.target
+> ```
 
 
 ### 3.2. Utilisation des services
@@ -351,14 +386,15 @@ sudo systemctl enable movit_frontend.service
 sudo systemctl enable movit_acquisition.service
 ```
 
-> **\*\* Il est recommandé de ne pas activer ces services avant la fin de l'installation du projet \*\***
+> Il est recommandé de **ne pas activer ces services avant la fin de l'installation du projet**
 > Voir la section [Installation de MOvIT +](#4-installation-de-movit)
 
-Il sera probablement nécessaire d'effectuer la commande suivante pour pouvoir utiliser et tester les services immédiatement sans redémarrer le système :
+Pour pouvoir utiliser et tester les services immédiatement sans redémarrer le système, il sera nécessaire d'effectuer la commande suivante :
 ```bash
 sudo systemctl daemon-reload
 ```
-Il est possible de connaitre l'état, arrêter et partir les services avec les commandes suivantes
+
+Il est possible de connaitre l'état, arrêter et partir les services avec les commandes suivantes :
 ```bash
 systemctl status nom-du-service.service
 sudo systemctl start nom-du-service.service
@@ -370,7 +406,7 @@ Les commandes suivantes listent les services qui seront lancé au démarrage :
 systemctl list-unit-files | grep enabled
 systemctl list-unit-files | grep disabled
 ```
-> [Exemple de réponse](https://pastebin.com/iXuyHpXC) d'un des systèmes fonctionnels lors de l'exécution de ces commandes pour référence...
+> [Exemple de réponse](https://pastebin.com/shxSRXkR) d'un des systèmes fonctionnels lors de l'exécution de ces commandes.
 
 ### 3.3. Optimisation du temps de démarrage
 Certains services et certaines fonctionnalités peuvent être désactivées pour accélérer le démarrage du RaspberryPi. Dans le fichier `/boot/config.txt`, il faut ajouter ces lignes à la fin :
@@ -393,6 +429,8 @@ Il faut également exécuter ces commandes :
 ```bash
 sudo systemctl disable hciuart #Service systemd qui initialise le Bluetooth
 sudo systemctl disable dhcpcd.service #Service de dhcpcd inutile
+systemctl disable triggerhappy.service
+systemctl disable triggerhappy.socket
 ```
 
 Voir l'exemple de réponse plus haut aux commandes `systemctl list-unit-files` pour plus de détails.
@@ -403,25 +441,45 @@ ___
 <br>
 
 # 4. Installation de MOvIT +
-Les instructions d'installation des composantes de Movit + sont disponibles dans les `README.md` des répertoires GitHub correspondants.
-L'installation devrait ainsi se faire dans l'ordre suivant :
+> Voir le README du répertoire parent pour plus de détails sur les différentes partie du projet.
+### Installation de GitHub
+Si _git_ n'est pas installé, il faut exécuter cette commande : `sudo apt-get install -y git`
 
-##### À MODIFIER POUR AJOUTER LA MÉTHODE D'INSTALLATION PAR LE RÉPERTOIRE PARENT
-- **MOvIT-Detect :** Capteurs, code d’acquisition en C++ et communication avec les bus I2C
+### Installation initiale de MOvIt Plus
 
-- **MOvIT-Detect-Frontend :** Code en JavaScript permettant l’affichage d’une page web et l’interaction avec les couches inférieures
+L'installation de MOvIt requiert un `git clone` habituel, mais comporte quelques subtilités avec les sous-modules. Ce répertoire devrait être installé sous `home/pi/`. La commande suivante installe tous les dossiers nécessaires, y compris les sous répertoires.
+```bash
+git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+```
+### Installation complémentaire
 
-- **MOvIT-Detect-Backend :** Code sous forme graphique avec Node-Red, base de données Mongo et communication entre toutes ces parties
+Cepandant, plusieurs autres étapes sont nécessaires au fonctionnement du projet. Les instructions d'installation du reste des composantes de Movit Plus sont disponibles dans les `README.md` des répertoires GitHub correspondants. L'installation selon ces guides devrait ainsi se faire dans l'ordre suivant :
+1. **MOvIT-Detect :** Capteurs, code d’acquisition en C++ et communication avec les bus I2C
+2. **MOvIT-Detect-Frontend :** Code en JavaScript permettant l’affichage d’une page web et l’interaction avec les couches inférieures
+3. **MOvIT-Detect-Backend :** Code sous forme graphique avec Node-Red, base de données Mongo et communication entre toutes ces parties
 ___
 
 <br>
 <br>
 
 # 5. Mises à jour du système
-Un système de mise à jour sera mis en place dans le futur, afin de facilement pouvoir utilser les dernières versions développées, probablement en entrant une seule ligne de commande.
+### Mise à jour du projet par script
+Si une mise à jour est disponible, il faut simplement exécuter le script `updateProject.sh`. Or, pour permettre l'exécution de commandes potentiellements ajoutés au script de mise à jour, il est préférable d'aller chercher et d'exécuter le script le plus récent avec la commande suivante. 
+```bash
+curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
+```
 
-    Documentation à venir...
-    
+Voir la documentation sur le [script de mise à jour](https://github.com/introlab/MOvITPlus#script-de-mise-%c3%a0-jour).
+
+### Mise à jour du projet manuellement
+Une des parties de la mise est jour est simplement l'utilisation de la commande `git pull` dans le dossier parent. En plus du `git pull` habituel, il peut être nécessaire de mettre à jour les sous-répertoires également :
+```bash
+git pull
+git submodule update --init --recursive
+```
+- Charge les versions des sous-répertoires liées (tag de versions des sous-répertoires)
+- Met à jour les scripts et les autres fichiers contenus par le répertoire parent
+> Les services devraient être arrêté avant de procéder ainsi. L'utilisation du script est préférable.
 ___
 
 <br>
