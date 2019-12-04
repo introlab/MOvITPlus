@@ -7,6 +7,11 @@ ____
 ## Table des matières :
 - [MOvIT Plus](#movit-plus)
   - [Table des matières :](#table-des-mati%c3%a8res)
+- [Documentation des parties du projet](#documentation-des-parties-du-projet)
+  - [MOvIT-Detect-Frontend](#movit-detect-frontend)
+  - [MOvIT-Detect-Backend](#movit-detect-backend)
+  - [MOvIT-Detect](#movit-detect)
+  - [MOvIT-Hardware](#movit-hardware)
 - [Procédures d'installation](#proc%c3%a9dures-dinstallation)
   - [1. Installation rapide](#1-installation-rapide)
     - [1.2. Flashage](#12-flashage)
@@ -20,14 +25,10 @@ ____
   - [3. Génération d'images](#3-g%c3%a9n%c3%a9ration-dimages)
       - [Préparation du système](#pr%c3%a9paration-du-syst%c3%a8me)
       - [Création d'une image](#cr%c3%a9ation-dune-image)
-- [Documentation des parties du projet](#documentation-des-parties-du-projet)
-  - [MOvIT-Detect-Frontend](#movit-detect-frontend)
-  - [MOvIT-Detect-Backend](#movit-detect-backend)
-  - [MOvIT-Detect](#movit-detect)
-  - [MOvIT-Hardware](#movit-hardware)
+  - [4. Mise à jour du système](#4-mise-%c3%a0-jour-du-syst%c3%a8me)
 - [Documentation des scripts](#documentation-des-scripts)
     - [Service d'initialisation](#service-dinitialisation)
-    - [Script d'initialisation de système](#script-dinitialisation-de-syst%c3%a8me)
+    - [Script d'initialisation au démarrage](#script-dinitialisation-au-d%c3%a9marrage)
     - [Script de mise à jour](#script-de-mise-%c3%a0-jour)
     - [Script de configuration](#script-de-configuration)
     - [Script de création d'images](#script-de-cr%c3%a9ation-dimages)
@@ -40,6 +41,28 @@ ____
     - [Mise à jour des sous-répertoires](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires)
   - [Astuces](#astuces)
 ____
+<br>
+
+
+
+# Documentation des parties du projet
+|![UNITE_CENTRALE.JPG](General_project_structure.png)|
+|:----------:|
+|**Figure 1 : Structure générale du projet**|
+
+## MOvIT-Detect-Frontend
+**Site web interactif :** C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et à interpréter. 
+
+## MOvIT-Detect-Backend
+**Backend, base de données et scripts** : Le backend du système a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement sur une interface visuelle. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB localement. Les données sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, et ainsi utilisé par le frontend pour afficher l'information.
+
+## MOvIT-Detect
+**Acquisition des capteurs et traitement des données** : Contient tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend se fait via MQTT. Ce code est écrit en C++ et fonctionne sur Raspberry Pi Zero W. Il pourrait être modifié et compilé pour d'autres architectures relativement facilement.
+
+## MOvIT-Hardware
+**Matériel et composantes** : Ce répertoire contient tous les fichiers nécessaires à la fabrication, ce qui permet de recréer le système en entier. Il contient tous les designs des cases à imprimer en 3D ainsi que les circuits imprimées utilisés et une liste du matériel nécessaire.
+____
+
 <br>
 
 
@@ -106,36 +129,21 @@ Toutes ces étapes peuvent être réalisé avec le [script de configuration](#sc
 
 #### Création d'une image
 Lorsque le système est proprement configuré, sur un autre ordinateur tournant préférablement sous Linux, il faut suivre les [instructions disponibles sur ce site](https://medium.com/platformer-blog/creating-a-custom-raspbian-os-image-for-production-3fcb43ff3630). Pour rendre le processus plus rapide dans le cas où plusieurs images doivent être générée et testée, le script `CreateImage.sh` peut être modifié accordement à votre installation.
+
+## 4. Mise à jour du système
+La méthode de mise à jour implémentée consiste en l'exécution d'un script. Au moment de débuter une mise à jour, la version la plus récente de celui-ci se trouve sur le repertoire en ligne du projet. Pour ces raisons, les mises à jour se font avec la commande suivante : 
+```bash
+curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
+```
+Voir la [documentation des scripts](#script-de-mise-%c3%a0-jour "Script de mise à jour") plus bas pour de plus amples détails.
 ____
-<br>
-
-
-# Documentation des parties du projet
-|![UNITE_CENTRALE.JPG](General_project_structure.png)|
-|:----------:|
-|**Figure 1 : Structure générale du projet**|
-
-## MOvIT-Detect-Frontend
-**Site web interactif :** C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et à interpréter. 
-
-## MOvIT-Detect-Backend
-**Backend, base de données et scripts** : Le backend du système a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement sur une interface visuelle. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB localement. Les données sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, et ainsi utilisé par le frontend pour afficher l'information.
-
-## MOvIT-Detect
-**Acquisition des capteurs et traitement des données** : Contient tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend se fait via MQTT. Ce code est écrit en C++ et fonctionne sur Raspberry Pi Zero W. Il pourrait être modifié et compilé pour d'autres architectures relativement facilement.
-
-## MOvIT-Hardware
-**Matériel et composantes** : Ce répertoire contient tous les fichiers nécessaires à la fabrication, ce qui permet de recréer le système en entier. Il contient tous les designs des cases à imprimer en 3D ainsi que les circuits imprimées utilisés et une liste du matériel nécessaire.
-____
-
-<br>
 <br>
 
 # Documentation des scripts
 ### Service d'initialisation
 Un service nommé `movit_setup.service` s'occupe de lancer le script d'initialisation du système `firstBootSetup.sh` au bon moment dans la sécance de démarrage. Celui-ci se trouve dans `/etc/systemd/system/` et permet notamment de redémarrer le système si le script s'exécute avec succès. Il est activé par défaut dans les images préconfigurées afin de s'exécuter au premier démarrage et il se désactive uniquement si le script termine sa tâche avec succès.
 
-### Script d'initialisation de système
+### Script d'initialisation au démarrage
 **`firstBootSetup.sh`**
 Le script effectue la configuration de son _hostname_ et de quelques autres paramètres spécifiques à chaque appareil.
 Le script procède ensuite à l'installation de chacune des composantes du projet dans leur version stable la plus à jour. Celles-ci correspondent aux tags de version référencés dans ce répertoire parent. [Ces tags peuvent être mis à jour](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires "Mise à jour des sous-répertoires"). La configuration se termine par l'écriture du temps système sur le RTC _(Real Time Clock)_ puis avec un lancement du script de mise à jour (`updateProject.sh`) avec l'argument `--sys-config`.
@@ -148,7 +156,7 @@ Ce script doit demeurer sous `/home/pi/` à cause du service qui le lance au dé
 
 Additionnelement, l'ajout de l'argument **`--console-log`** redirige la sortie de l'exécution à la console. Les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
 
-Ce script peut également être utilisé pour mettre à jour tous les fichiers en lien avec l'adresse MAC physique d'un appareil. Par exemple, si la carte SD est installée dans un autre RaspberryPi, les références à l'adresse MAC doivent être changées pour correspondre à cette nouvelle adresse. Pour ce faire, il faut appeler le script avec l'argument `--nogit` pour éviter une nouvelle tentative d'installation des répertoires avec _Git_.
+Ce script peut également être utilisé pour mettre à jour tous les fichiers en lien avec l'adresse MAC physique d'un appareil. Par exemple, si la carte SD est installée dans un autre RaspberryPi, les références à l'adresse MAC doivent être changées pour correspondre à cette nouvelle adresse. Pour se faire, il faut appeler le script (idéalement avec l'argument `--nogit` pour éviter une nouvelle tentative d'installation des répertoires avec _Git_). Il est aussi possible de simplement réactiver le service avant de changer la carte SD d'appareil.
 
 > Ce script enregistre la sortie de ses exécutions dans `/home/pi/firstBootSetup.log`
 

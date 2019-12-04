@@ -92,8 +92,16 @@ EOF
         if [[ $1 != --nogit && $2 != --nogit ]]; then
             #export GIT_SSL_NO_VERIFY=1 #If device date is wrong, this command will make git work anyways
             
-            echo -e "###\n### Installing necessary GitHub directories...\n###"
+
+            if [ -d "$MovitPath/" ]; then
+            echo -e "###\n### 'MOvITPlus/' folder detected !"
+            echo -e "### Skipping installation of GitHub directories ###"
+            echo -e "### Delete folder and relaunch this script to reinstall directories...\n###"
+            else
+            echo -e "###\n### No 'MOvITPlus/' folder detected"
+            echo -e "### Installing necessary GitHub directories...\n###";
             cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+            fi
 
             echo "### Making updateProject.sh executable in case it wasn't..."
             chmod +x $MovitPath/updateProject.sh

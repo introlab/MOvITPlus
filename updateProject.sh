@@ -107,6 +107,8 @@ ExecStart=$MovitPath/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 [Install]
 WantedBy=multi-user.target
 EOF
+    #--
+    systemctl enable networking.service
     #----------------------------------------
 
     echo "### Done updating system configuration"
@@ -173,6 +175,11 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         
         echo "### Done updating all GitHub repositories"
         echo "Databases and other settings may need to be resetted manually"
+
+        echo "### Calling system config update script for additionnal steps :"
+        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        $MovitPath/./updateProject.sh --sys-config
+        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     }
 
     echo "Using Movit folder location : $MovitPath"
