@@ -108,6 +108,13 @@ ExecStart=$MovitPath/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 [Install]
 WantedBy=multi-user.target
 EOF
+
+    systemctl daemon-reload
+    echo -e "###\n### Enabling startup services...\n###"
+    systemctl enable movit_acquisition.service
+    systemctl enable movit_frontend.service
+    systemctl enable movit_backend.service
+
     #--Bug fix 4/12/19
     systemctl enable networking.service
 
@@ -139,11 +146,6 @@ elif [[ $1 == $InitArg || $2 == $InitArg ]]; then
 
     echo -e "###\n### Compiling acquisition software...\n###"
     cd $MovitPath/MOvIT-Detect/Movit-Pi && sudo -u pi make -f MakefilePI all
-
-    echo -e "###\n### Enabling startup services...\n###"
-    systemctl enable movit_acquisition.service
-    systemctl enable movit_frontend.service
-    systemctl enable movit_backend.service
 
     #----------------------------------------
 
