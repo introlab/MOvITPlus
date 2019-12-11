@@ -183,7 +183,12 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         systemctl start movit_frontend.service
         systemctl start movit_backend.service
         
-        echo "Updating 'firstBootSetup.sh' in $HomePath"
+        echo -e "###\n### Enabling startup services...\n###"
+        systemctl enable movit_acquisition.service
+        systemctl enable movit_frontend.service
+        systemctl enable movit_backend.service
+
+        echo "### Updating 'firstBootSetup.sh' in $HomePath"
         sudo -u pi cp $MovitPath/firstBootSetup.sh $HomePath/firstBootSetup.sh
 
         echo "### Done updating"

@@ -125,11 +125,6 @@ EOF
             echo "### Script successful, see updateProject.log..."
 
 
-            echo -e "###\n### Enabling startup services...\n###"
-            systemctl enable movit_acquisition.service
-            systemctl enable movit_frontend.service
-            systemctl enable movit_backend.service
-
             #This next part of the script is long to execute. Should be launched manually if needed
             #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
             #$MovitPath/./updateProject.sh --init-project
