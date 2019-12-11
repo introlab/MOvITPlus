@@ -8,7 +8,8 @@
 #######################################################
 
 # Exits if any command fails
-set -e
+onexit(){ echo "Something went wrong with the last command, exiting..."; exit 1; }
+trap onexit ERR
 
 #Variables---------------------
 HomePath="/home/pi"
@@ -107,8 +108,9 @@ ExecStart=$MovitPath/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 [Install]
 WantedBy=multi-user.target
 EOF
-    #--
+    #--Bug fix 4/12/19
     systemctl enable networking.service
+
     #----------------------------------------
 
     echo "### Done updating system configuration"
@@ -158,8 +160,9 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     #----------------------------------------
     #Update function
     updateGithub () {
-        echo "Update available, proceeding..."
-
+        echo "### Update available, proceeding..."
+        echo "### If the update fails because of uncommitted changes, you may want to delete 'MOvitPlus' folder"
+        echo "###   and start this script with the '$InitArg' argument or simply discard local changes using git."
         echo "### Stopping outdated services..."
         systemctl stop movit_acquisition.service
         systemctl stop movit_frontend.service
@@ -167,6 +170,11 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
 
         echo "### Updating repositories..."
         cd $MovitPath/ && sudo -u pi git pull && sudo -u pi git submodule update --init --recursive
+        echo -e "### Git update successful\n###"
+        echo -e "### WARNING : ADDITIONNAL STEPS MAY BE REQUIRED TO FINISH UPDATE"
+        echo -e "### - Acquisition software may need to be recompiled."
+        echo -e "### - Modules for the backend and the frontend may need to be updated with Yarn and NPM on major updates.\n###"
+        
 
         echo "### Starting updated services..."
         systemctl start movit_acquisition.service
@@ -176,10 +184,10 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         echo "### Done updating all GitHub repositories"
         echo "Databases and other settings may need to be resetted manually"
 
-        echo "### Calling system config update script for additionnal steps :"
-        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        $MovitPath/./updateProject.sh --sys-config
-        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+        #echo "### Calling system config update script for additionnal steps :"
+        #echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        #$MovitPath/./updateProject.sh --sys-config
+        #echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     }
 
     echo "Using Movit folder location : $MovitPath"

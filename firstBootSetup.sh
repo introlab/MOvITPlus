@@ -94,24 +94,37 @@ EOF
             
 
             if [ -d "$MovitPath/" ]; then
-            echo -e "###\n### 'MOvITPlus/' folder detected !"
+            #--If a MOvITPlus installation is detected : 
+            echo -e "###\n### 'MOvITPlus/' folder detected"
             echo -e "### Skipping installation of GitHub directories ###"
-            echo -e "### Delete folder and relaunch this script to reinstall directories...\n###"
-            else
-            echo -e "###\n### No 'MOvITPlus/' folder detected"
-            echo -e "### Installing necessary GitHub directories...\n###";
-            cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
-            fi
-
+            echo -e "### INFO : Delete folder and relaunch this script to reinstall directories...\n###"
+            #--
             echo "### Making updateProject.sh executable in case it wasn't..."
             chmod +x $MovitPath/updateProject.sh
+            #--Update installation...
+            echo -e "###\n### Updating project :"
+            echo -e "### Executing online version of 'updateProject.sh' with '--git-update'...\n###"
+            curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
+            echo "Script successful, see updateProject.log"
 
+
+            else
+            #--If no MOvITPlus installation :
+            echo -e "###\n### 'MOvITPlus/' folder not detected"
+            echo -e "### Installing necessary GitHub directories...\n###";
+            cd $HomePath/ && sudo -u pi git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
+            #--
+            echo "### Making updateProject.sh executable in case it wasn't..."
+            chmod +x $MovitPath/updateProject.sh
+            fi
+
+
+            echo -e "### Updating system configuration :"
             echo -e "###\n### Executing 'updateProject.sh' with '--sys-config'...\n###"
             $MovitPath/./updateProject.sh --sys-config
             echo "### Script successful, see updateProject.log..."
 
-            #This next part of the script is long to execute
-            #TO BE FULLY IMPLEMETED AND TESTED IN FUTURE VERSIONS
+            #This next part of the script is long to execute. See updateProject script...
             #echo -e "###\n### Executing 'updateProject.sh' with '--init-project'...\n###"
             #$MovitPath/./updateProject.sh --init-project
             #echo "Script successful, see updateProject.log"

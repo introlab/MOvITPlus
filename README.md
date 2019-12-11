@@ -4,9 +4,26 @@ Ce répertoire contient tous les éléments nécessaires pour faire fonctionner 
 
 ____
 
+# Documentation des parties du projet
+|![UNITE_CENTRALE.JPG](General_project_structure.png)|
+|:----------:|
+|**Figure 1 : Structure générale du projet**|
+
+## MOvIT-Detect-Frontend
+**Site web interactif :** C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et à interpréter. 
+
+## MOvIT-Detect-Backend
+**Backend, base de données et scripts** : Le backend du système a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement sur une interface visuelle. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB localement. Les données sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, et ainsi utilisé par le frontend pour afficher l'information.
+
+## MOvIT-Detect
+**Acquisition des capteurs et traitement des données** : Contient tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend se fait via MQTT. Ce code est écrit en C++ et fonctionne sur Raspberry Pi Zero W. Il pourrait être modifié et compilé pour d'autres architectures relativement facilement.
+
+## MOvIT-Hardware
+**Matériel et composantes** : Ce répertoire contient tous les fichiers nécessaires à la fabrication, ce qui permet de recréer le système en entier. Il contient tous les designs des cases à imprimer en 3D ainsi que les circuits imprimées utilisés et une liste du matériel nécessaire.
+____
+
 ## Table des matières :
-- [MOvIT Plus](#movit-plus)
-  - [Table des matières :](#table-des-mati%c3%a8res)
+
 - [Documentation des parties du projet](#documentation-des-parties-du-projet)
   - [MOvIT-Detect-Frontend](#movit-detect-frontend)
   - [MOvIT-Detect-Backend](#movit-detect-backend)
@@ -42,27 +59,6 @@ ____
   - [Astuces](#astuces)
 ____
 <br>
-
-
-
-# Documentation des parties du projet
-|![UNITE_CENTRALE.JPG](General_project_structure.png)|
-|:----------:|
-|**Figure 1 : Structure générale du projet**|
-
-## MOvIT-Detect-Frontend
-**Site web interactif :** C'est le frontend du système, utilisé par le clinicien et le patient. Ce code utilise React et Redux afin de créer une application web fluide. Les données sont affichées sous forme de graphique facile à lire et à interpréter. 
-
-## MOvIT-Detect-Backend
-**Backend, base de données et scripts** : Le backend du système a été conçu en node-red, ce qui permet d'effectuer des modifications rapidement et simplement sur une interface visuelle. Il reçoit les données via MQTT du code d'acquisition et enregistre les données dans une base de données MongoDB localement. Les données sont alors traitées et peuvent être affichées à l'aide de requête GET et POST, et ainsi utilisé par le frontend pour afficher l'information.
-
-## MOvIT-Detect
-**Acquisition des capteurs et traitement des données** : Contient tout le code nécessaire pour communiquer avec des capteurs via I2C et SPI à partir d'un Raspberry Pi Zero W et des circuits imprimés faits sur mesure. La communication avec le backend se fait via MQTT. Ce code est écrit en C++ et fonctionne sur Raspberry Pi Zero W. Il pourrait être modifié et compilé pour d'autres architectures relativement facilement.
-
-## MOvIT-Hardware
-**Matériel et composantes** : Ce répertoire contient tous les fichiers nécessaires à la fabrication, ce qui permet de recréer le système en entier. Il contient tous les designs des cases à imprimer en 3D ainsi que les circuits imprimées utilisés et une liste du matériel nécessaire.
-____
-
 <br>
 
 
@@ -131,9 +127,13 @@ Toutes ces étapes peuvent être réalisé avec le [script de configuration](#sc
 Lorsque le système est proprement configuré, sur un autre ordinateur tournant préférablement sous Linux, il faut suivre les [instructions disponibles sur ce site](https://medium.com/platformer-blog/creating-a-custom-raspbian-os-image-for-production-3fcb43ff3630). Pour rendre le processus plus rapide dans le cas où plusieurs images doivent être générée et testée, le script `CreateImage.sh` peut être modifié accordement à votre installation.
 
 ## 4. Mise à jour du système
-La méthode de mise à jour implémentée consiste en l'exécution d'un script. Au moment de débuter une mise à jour, la version la plus récente de celui-ci se trouve sur le repertoire en ligne du projet. Pour ces raisons, les mises à jour se font avec la commande suivante : 
+La méthode de mise à jour implémentée consiste en l'exécution d'un script. Au moment de débuter une mise à jour, la version la plus récente de celui-ci se trouve sur le repertoire en ligne du projet. Pour ces raisons, la mise à jour du projet avec Git se fait avec la commande suivante : 
 ```bash
 curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
+```
+De plus, pour les mises à jours de la configuration du système s'il y lieu, un simple appel au script `updateProject.sh` avec l'argument `--sys-config` suffit.
+```bash
+sudo /home/pi/MOvITPlus/./updateProject.sh --sys-config
 ```
 Voir la [documentation des scripts](#script-de-mise-%c3%a0-jour "Script de mise à jour") plus bas pour de plus amples détails.
 ____
@@ -164,8 +164,8 @@ Ce script peut également être utilisé pour mettre à jour tous les fichiers e
 ### Script de mise à jour
 **`updateProject.sh`**
 Le script de mise à jour permet la mise à jour des fichiers nécessaires au projet, la mise à jour de la configuration du RaspberryPi et surtout l'initialisation d'une nouvelle instance du projet. Voici les options qui peuvent être entrées en argument :
-   - **`--sys-config`** : Mise à jour de la configuration du système (ex: services de démarrage)
    - **`--init-project`** : Initialisation du projet (ex: nouvelle base de donnée et installation avec Yarn et NPM)
+   - **`--sys-config`** : Mise à jour de la configuration du système (ex: services de démarrage)
    - **`--git-update`** : Mise à jour des répertoires du projet avec Git (devrait être exécuté avec `curl`, voir plus bas)
 
 Additionnellement, l'ajout de l'argument **`--console-log`** redirige la sortie de l'exécution à la console. Son utilisation permettra de montrer le progrès de NPM et de Yarn plus clairement lors de leur exécution. Les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
@@ -213,18 +213,18 @@ Les réseaux domestiques sont ainsi à prioriser. Un partage de connection LTE p
 ### Problème d'installation
 > Notamment avec le script `updateProject.sh` et l'argument `--init-project` ou avec `npm install` et `yarn install`.
 
-Bien qu'il soit probablement plus rapide de recommencer le processus complet, certains problèmes d'installation avec NPM et Yarn peuvent être résous facilement. Ces problèmes peuvent survenir spécialement si le Pi est débrancher pendant son initialisation.
+Bien qu'il soit probablement plus rapide de recommencer le processus complet, certains problèmes d'installation avec NPM et Yarn peuvent être résous facilement. Ces problèmes peuvent survenir spécialement si le Pi est débranché pendant son initialisation.
 
 Avec le frontend et Yarn :
 ```bash
 cd ~/MOvITPlus/MOvIT-Detect-Frontend && sudo rm -r node_modules/ #Suprime les modules installés
-yarn cache clean #Force Yarn à tout télécharger prochaine fois
+yarn cache clean #Force Yarn à tout télécharger lors de sa prochaine exécution
 ```
 
 Avec le backend et NPM :
 ```bash
 cd ~/MOvITPlus/MOvIT-Detect-Backend && sudo rm -r node_modules/ #Suprime les modules installés
-npm cache verify #Force NPM à tout télécharger prochaine fois
+npm cache verify #Force NPM à tout télécharger lors de sa prochaine exécution
 ```
 ____
 <br>
@@ -240,7 +240,7 @@ Cette commande permet de mettre à jour les tags des sous-répertoires à leur v
 
 En faisant `git add`, suivit des dossiers et fichiers à mettre à jour, puis les commandes habituelles `git commit` et `git push`, il est possible de rendre ces changements officiels. Le prochain clone avec les sous-modules ira ainsi chercher les versions les plus à jour du répertoire.
 
-> [Documentation sur les sous-modules GitHub](https://git-scm.com/book/en/v2/Git-Tools-Submodules "GitHub Submodules")
+> Consultez la [documentation sur les sous-modules GitHub](https://git-scm.com/book/en/v2/Git-Tools-Submodules "GitHub Submodules") pour plus de détails.
 
 
 ## Astuces
