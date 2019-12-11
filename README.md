@@ -21,8 +21,9 @@ ____
 ## MOvIT-Hardware
 **Matériel et composantes** : Ce répertoire contient tous les fichiers nécessaires à la fabrication, ce qui permet de recréer le système en entier. Il contient tous les designs des cases à imprimer en 3D ainsi que les circuits imprimées utilisés et une liste du matériel nécessaire.
 ____
+<br>
 
-## Table des matières :
+# Table des matières :
 
 - [Documentation des parties du projet](#documentation-des-parties-du-projet)
   - [MOvIT-Detect-Frontend](#movit-detect-frontend)
@@ -34,10 +35,7 @@ ____
     - [1.2. Flashage](#12-flashage)
     - [1.3. Configuration réseau](#13-configuration-r%c3%a9seau)
     - [1.4. Initialisation automatisée](#14-initialisation-automatis%c3%a9e)
-    - [1.5. Installation du projet](#15-installation-du-projet)
-      - [Connection à l'appareil](#connection-%c3%a0-lappareil)
-      - [Lancement de l'initialisation](#lancement-de-linitialisation)
-    - [1.6. Vérification](#16-v%c3%a9rification)
+    - [1.5. Vérification](#15-v%c3%a9rification)
   - [2. Installation manuelle](#2-installation-manuelle)
   - [3. Génération d'images](#3-g%c3%a9n%c3%a9ration-dimages)
       - [Préparation du système](#pr%c3%a9paration-du-syst%c3%a8me)
@@ -52,7 +50,7 @@ ____
 - [Déboggage](#d%c3%a9boggage)
     - [Problèmes de réseau](#probl%c3%a8mes-de-r%c3%a9seau)
       - [Spécification de la connection réseau](#sp%c3%a9cification-de-la-connection-r%c3%a9seau)
-    - [Problème d'installation](#probl%c3%a8me-dinstallation)
+    - [Problèmes d'installation](#probl%c3%a8mes-dinstallation)
 - [Autre documentation](#autre-documentation)
   - [Utilisation de Github pour le développement](#utilisation-de-github-pour-le-d%c3%a9veloppement)
     - [Mise à jour des sous-répertoires](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires)
@@ -89,27 +87,10 @@ Des scripts s'activant automatiquement permettent d'initialiser un nouvel appare
 
 > Attention : **l'appareil ne doit pas être débranché** pendant son initialisation!
 
-> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner([spécification de cette connection internet](#sp%c3%a9cification-de-la-connection-r%c3%a9seau)). L'[étape 1.3](#13-configuration-sans-fil) peut être répété si une erreur s'est glissée dans le fichier `wpa_supplicant.conf`.
-> Si les scripts ne fonctionnent pas, il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée (voir [documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)).  Pour plus de détails, voir la section [déboggage]().
+> L'initialisation automatisé **nécessite une connection à internet** pour fonctionner([spécification de cette connection internet](#sp%c3%a9cification-de-la-connection-r%c3%a9seau)). L'[étape 1.3](#13-configuration-r%c3%a9seau) peut être répété si une erreur s'est glissée dans le fichier `wpa_supplicant.conf`.
+> Si les scripts ne fonctionnent pas, il peut être nécessaire de se connecter en SSH et de relancer le script lorsque la configuration réseau est réparée ([documentation de configuration wifi](https://github.com/introlab/MOvITPlus/blob/master/docs/FR/InstallationLogiciel/ConfigurationSysteme.md#21-connection-%c3%a0-un-r%c3%a9seau-wi-fi)).  Pour plus de détails, voir la section [déboggage](#d%c3%a9boggage).
 
-### 1.5. Installation du projet
-#### Connection à l'appareil
-Avec l'état actuel du projet, il est nécessaire de se connecter à l'appareil en SSH (ou avec un clavier, un écran et les adaptateurs appropriés) pour activer manuellement un script d'installation. La connexion se fait donc, à partir d'un autre ordinateur connecté au même réseau, avec la commande `ssh pi@hostname`, où hostname est le nom de l'appareil.
-
-> Pour trouver le nom du Raspberry Pi, il suffit de regarder le nom du point d'accès créé par le Pi. Autrement, si celui-ci n'a pas encore réussi à terminer sa configuration ou qu'un erreur est survenu pendant celle-ci, alors le hostname du Pi sera `Movit-NOCONF`.
-
-L'utilisateur est `pi` et le mot de passe `movitdev` par défaut.
-#### Lancement de l'initialisation
-Une fois connecté, pour initialiser le projet, il faut exécuter la commande suivante :
-```bash
-sudo /home/pi/MOvITPlus/./updateProject.sh --init-project
-```
-L'exécution de ce script peut prendre environ **30 minutes** dans l'état actuel du projet. Il est possible de suivre le résultat de l'exécution du script en temps réel avec une commande comme `tail -fn 50 #nom_du_fichier.log`, qui affichera les 50 dernières lignes ainsi que celles qui se rajouteront en temps réel. Voir la [documentation des scripts](#documentation-des-scripts) pour plus de détails.
-
-
-> L'ajout de l'argument `--console-log` pour le script `updateProject.sh` montrera davantage de détails sur la progression directement dans la console. **Attention :** les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
-
-### 1.6. Vérification
+### 1.5. Vérification
 À ce point-ci, le système devrait être correctement configuré. Pour tester s'il est fonctionnel, il suffit de se connecter sur le point d'accès de l'appareil (Movit-******), puis d'accéder à l'adresse `movit.plus` dans un navigateur. Lorsqu'une page apparait, il suffit de se connecter avec les identifiants voulus. Voir la documentation de la partie frontend ou la documentation d'utilisation pour plus de détails.
 
 
@@ -170,9 +151,11 @@ Le script de mise à jour permet la mise à jour des fichiers nécessaires au pr
    - **`--sys-config`** : Mise à jour de la configuration du système (ex: services de démarrage)
    - **`--git-update`** : Mise à jour des répertoires du projet avec Git (devrait être exécuté avec `curl`, voir plus bas)
 
-Additionnellement, l'ajout de l'argument **`--console-log`** redirige la sortie de l'exécution à la console. Son utilisation permettra de montrer le progrès de NPM et de Yarn plus clairement lors de leur exécution. Les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
+Additionnellement, l'ajout de l'argument **`--console-log`** redirige la sortie de l'exécution à la console. Les logs ne sont pas sauvegardés lors de l'utilisation de cet argument.
 
-Avec **`--init-project`**, le script s'occupe d'installer le backend, d'initialiser la base de données, d'installer le frontend puis finalement de compiler ~~les librairies et~~ le code d'acquisition. Il termine en activant tous les services pour le prochain démarrage.
+Avec **`--init-project`**, le script s'occupe d'installer le backend, d'initialiser la base de données, d'installer le frontend puis finalement de compiler le code d'acquisition. Il termine en activant tous les services pour le prochain démarrage.
+L'exécution de ce script peut prendre environ **30 minutes** dans l'état actuel du projet.
+> Pour voir davantage de détails sur la progression de Yarn et NPM directement dans la console, il est possible d'ajouter l'argument `--console-log`.
 
 Pour l'argument **`--git-update`**, le script devrait être exécuté avec la commande suivante de façon à aller chercher la dernière version du script de mise à jour.
 ```bash
@@ -200,6 +183,13 @@ ___
 # Déboggage
 Si des problèmes surviennent lors de l'exécution des scripts, la façon la plus facile de règler les problèmes est d'utiliser l'information contenue dans les fichiers _.log_. Les deux fichiers qui devraient être générés sont `firstBootScript.log` et `updateProject.log.log` dans le répertoire ` /home/pi/`.
 
+### Connection à l'appareil
+Avant de débogger, il faut d'abord se connecter à l'appareil en SSH (ou avec un clavier, un écran et les adaptateurs appropriés). La connexion se fait à partir d'un autre ordinateur connecté au même réseau avec la commande `ssh pi@hostname`, où hostname est le nom de l'appareil.
+
+> Pour trouver le nom du Raspberry Pi, il suffit de regarder le nom du point d'accès créé par le Pi. Autrement, si celui-ci n'a pas encore réussi à terminer sa configuration ou qu'un erreur est survenu pendant celle-ci, alors le hostname du Pi sera `Movit-NOCONF`.
+
+L'utilisateur est `pi` et le mot de passe `movitdev` par défaut.
+
 ### Problèmes de réseau
 Les scripts quitterons rapidement avec un message d'erreur semblable si un problème est detecté avec la configuration réseau :
 ```bash
@@ -212,7 +202,7 @@ Cette connection est critique au fonctionnement du système et à son initilisat
 Le réseau doit supporter l'**échange de _ping_** avec des serveurs externes ainsi que la découverte et la **communication avec les autres appareils connectés sur le même réseau** pour les fonctions de SSH. Cela signifie donc que certains réseaux publiques se prêtent difficiliement à ce cas d'utilisation. Les "_captive portals_" ou redirections sur une page web avant d'établir une connection (_sign-in page_) peuvent également rendre le processus [beaucoup plus complexe](https://superuser.com/questions/132392/using-command-line-to-connect-to-a-wireless-network-with-an-http-login).
 Les réseaux domestiques sont ainsi à prioriser. Un partage de connection LTE peut aussi dépanner.
 
-### Problème d'installation
+### Problèmes d'installation
 > Notamment avec le script `updateProject.sh` et l'argument `--init-project` ou avec `npm install` et `yarn install`.
 
 Bien qu'il soit probablement plus rapide de recommencer le processus complet, certains problèmes d'installation avec NPM et Yarn peuvent être résous facilement. Ces problèmes peuvent survenir spécialement si le Pi est débranché pendant son initialisation.
@@ -246,6 +236,7 @@ En faisant `git add`, suivit des dossiers et fichiers à mettre à jour, puis le
 
 
 ## Astuces
+- Il est possible de suivre le résultat de l'exécution d'un des scripts qui produit un fichier _.log_ en temps réel avec une commande comme `tail -fn 50 nomdufichier.log`, qui affichera les 50 dernières lignes ainsi que celles qui se rajouteront en temps réel.
 - Pour exécuter uniquement certaines parties d'un script, il peut être plus rapide de faire un `if false; then` en début, et `fi` en fin du segment qui doit être ignoré que de commenter toutes les lignes.
 - Pour bien comprendre le fonctionnement des scripts : [Bash scripting cheatsheet](https://devhints.io/bash)
 <br>

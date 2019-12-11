@@ -183,13 +183,10 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         systemctl start movit_frontend.service
         systemctl start movit_backend.service
         
-        echo "### Done updating all GitHub repositories"
-        echo "Databases and other settings may need to be resetted manually"
+        echo "Updating 'firstBootSetup.sh' in $HomePath"
+        sudo -u pi cp $MovitPath/firstBootSetup.sh $HomePath/firstBootSetup.sh
 
-        #echo "### Calling system config update script for additionnal steps :"
-        #echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        #$MovitPath/./updateProject.sh --sys-config
-        #echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+        echo "### Done updating"
     }
 
     echo "Using Movit folder location : $MovitPath"
@@ -197,8 +194,6 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
     #Figuring out if an update is available and calling update function if so
     [ $(git rev-parse HEAD) = $(git ls-remote $(git rev-parse --abbrev-ref @{u} | sed 's/\// /g') | cut -f1) ] && echo "Already up to date, nothing to do" || updateGithub
     #----------------------------------------
-
-    
 
 
 else
