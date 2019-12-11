@@ -131,6 +131,8 @@ La méthode de mise à jour implémentée consiste en l'exécution d'un script. 
 ```bash
 curl -s https://raw.githubusercontent.com/introlab/MOvITPlus/master/updateProject.sh | sudo bash -s - --git-update
 ```
+> Ce script avec cet argument ne met pas à jour les modules du backend et du frontend. Ces étapes doivent être faites manuellement au besoin. Il recompile cependant le code d'acquisition.
+
 De plus, pour les mises à jours de la configuration du système s'il y lieu, un simple appel au script `updateProject.sh` avec l'argument `--sys-config` suffit.
 ```bash
 sudo /home/pi/MOvITPlus/./updateProject.sh --sys-config

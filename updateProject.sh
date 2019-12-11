@@ -171,10 +171,12 @@ elif [[ $1 == $GitArg || $2 == $GitArg ]]; then
         echo "### Updating repositories..."
         cd $MovitPath/ && sudo -u pi git pull && sudo -u pi git submodule update --init --recursive
         echo -e "### Git update successful\n###"
+
+        echo -e "###\n### Compiling acquisition software...\n###"
+        cd $MovitPath/MOvIT-Detect/Movit-Pi && sudo -u pi make -f MakefilePI all
+
         echo -e "### WARNING : ADDITIONNAL STEPS MAY BE REQUIRED TO FINISH UPDATE"
-        echo -e "### - Acquisition software may need to be recompiled."
-        echo -e "### - Modules for the backend and the frontend may need to be updated with Yarn and NPM on major updates.\n###"
-        
+        echo -e "### - Modules for the backend and the frontend may need to be updated with Yarn and NPM on major updates."
 
         echo "### Starting updated services..."
         systemctl start movit_acquisition.service
