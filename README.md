@@ -48,9 +48,11 @@ ____
     - [Script de configuration](#script-de-configuration)
     - [Script de création d'images](#script-de-cr%c3%a9ation-dimages)
 - [Déboggage](#d%c3%a9boggage)
+    - [Connection à l'appareil](#connection-%c3%a0-lappareil)
     - [Problèmes de réseau](#probl%c3%a8mes-de-r%c3%a9seau)
       - [Spécification de la connection réseau](#sp%c3%a9cification-de-la-connection-r%c3%a9seau)
     - [Problèmes d'installation](#probl%c3%a8mes-dinstallation)
+    - [Problemes de performance](#probl%c3%a8mes-de-performance)
 - [Autre documentation](#autre-documentation)
   - [Utilisation de Github pour le développement](#utilisation-de-github-pour-le-d%c3%a9veloppement)
     - [Mise à jour des sous-répertoires](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires)
@@ -101,8 +103,10 @@ Il également possible d'utiliser le script **`MovitPlusSetup.sh`**. Ce dernier 
 
 ## 3. Génération d'images
 #### Préparation du système
-Afin d'avoir une image fonctionnelle et pratique, plusieurs étapes s'imposent. Bien évidemment, la majorité de la configuration décrite dans la documentation doit être complétée, mais il faut également retirer la configuration dans `wpa_supplicant.conf`, retirer `70-persistent-net.rules`, retirer le dossier `/home/pi/MOvITPlus`, retirer les fichiers logs sous `/home/pi`, mettre à jour `/etc/hostname`, `/etc/hosts` et `/etc/hostapd/hostapd.conf` avec le _hostname_ Movit-NOCONF puis finalement activer le service `movit_setup.service`.
+Afin d'avoir une image fonctionnelle et pratique, plusieurs étapes s'imposent. Bien évidemment, la majorité de la configuration décrite dans la documentation doit être complétée, mais il faut également retirer la configuration dans `wpa_supplicant.conf`, retirer `70-persistent-net.rules`, retirer les fichiers logs sous `/home/pi`, mettre à jour `/etc/hostname`, `/etc/hosts` et `/etc/hostapd/hostapd.conf` avec le _hostname_ Movit-NOCONF puis finalement activer le service `movit_setup.service`.
 Toutes ces étapes peuvent être réalisé avec le [script de configuration](#script-de-configuration) et son option `--prepare`.
+
+> Attention : Le script n'à pas été maintenu à jour ni testé.
 
 #### Création d'une image
 Lorsque le système est proprement configuré, sur un autre ordinateur tournant préférablement sous Linux, il faut suivre les [instructions disponibles sur ce site](https://medium.com/platformer-blog/creating-a-custom-raspbian-os-image-for-production-3fcb43ff3630). Pour rendre le processus plus rapide dans le cas où plusieurs images doivent être générée et testée, le script `CreateImage.sh` peut être modifié accordement à votre installation.
@@ -218,6 +222,15 @@ Avec le backend et NPM :
 cd ~/MOvITPlus/MOvIT-Detect-Backend && sudo rm -r node_modules/ #Suprime les modules installés
 npm cache verify #Force NPM à tout télécharger lors de sa prochaine exécution
 ```
+
+### Problèmes de performance
+Le Raspberry Zero n'a qu'un seul coeur et il risque de manquer la réception de données des capteurs par les ports SPI et I²C dans certains cas. Les lectures s'excutant à toutes les secondes, il possible qu'une de celles-ci soit uniquement partielle. Le code d'acquisition peut également crasher (la détection des crashs se fait avec un watchdog dans le `main.cpp`) et redémarrer (grâce au service avec *systemd*) à cause de ce même problème de lecture s'il reste pris dans l'attente des données d'un des capteurs.
+
+L'influence la plus importante sur la fréquence de ces crashs est l'utilisation élevée du processeur par d'autres programmes. En plus de la commande `sudo systemctl status movit_acquisition.service` qui retourne l'état du service gérant l'exécution du code d'acquitision, la commande suivante rapporte chacun des démarrages de celui-ci, incluant le démarrage initial. Il est donc possible d'évaluer la fréquence de crash du code d'acquisition.
+```bash
+journalctl -u movit_acquisition.service | grep Started
+```
+De plus, la commande `htop` peut permettre de visualiser les processus actifs et l'utilisation du processeur.
 ____
 <br>
 
