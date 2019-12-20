@@ -53,6 +53,7 @@ ____
       - [Spécification de la connection réseau](#sp%c3%a9cification-de-la-connection-r%c3%a9seau)
     - [Problèmes d'installation](#probl%c3%a8mes-dinstallation)
     - [Problemes de performance](#probl%c3%a8mes-de-performance)
+    - [Autres problèmes](#autres-probl%c3%a8mes)
 - [Autre documentation](#autre-documentation)
   - [Utilisation de Github pour le développement](#utilisation-de-github-pour-le-d%c3%a9veloppement)
     - [Mise à jour des sous-répertoires](#mise-%c3%a0-jour-des-sous-r%c3%a9pertoires)
@@ -230,7 +231,12 @@ L'influence la plus importante sur la fréquence de ces crashs est l'utilisation
 ```bash
 journalctl -u movit_acquisition.service | grep Started
 ```
+> La rotation automatique des logs (avec _logrotate_), causera la perte des parties de logs plus anciennes occasionnellement. La commande ci-haut n'est donc pas fiable à 100%, il faut également se fier aux dates et heures enregistrées.
+
 De plus, la commande `htop` peut permettre de visualiser les processus actifs et l'utilisation du processeur.
+
+### Autres problèmes
+Certains autres problèmes reliés plus spécifiquement à certaine partie du code sont détaillés dans leur documentation respective. Cette documentation se trouve dans les _README.md_ ainsi que directement dans les parties de code consernées.
 ____
 <br>
 

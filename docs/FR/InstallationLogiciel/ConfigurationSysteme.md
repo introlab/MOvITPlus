@@ -73,7 +73,7 @@ ___
 Il est possible d'utiliser la carte réseau du Raspberry Pi Zero W à la fois comme client et point d'accès. Ce point d'accès peut ainsi fournir à la fois une connection internet et une connection à l'interface web du projet. Les instructions sont tirées principalement d'[ici](https://community.ptc.com/t5/IoT-Tech-Tips/Using-the-Raspberry-Pi-as-a-WIFI-hotspot/td-p/535058).
 
 Fonctionnement en bref :
-- **ifupdown :** Met en fonction les connections sans fil configurées. Deux instances de ifup sont créées; _ifup@wlan0_, pour la connection au wi-fi, et _ifup@ap0_, pour la gestion du point d'accès. Ces instances font appels à **wpa_supplicant** / **_dhclient_** et **hostapd** respectivement.
+- **ifupdown :** Met en fonction les connections sans fil configurées. Deux instances de ifup sont créées; **ifup@wlan0**, pour la connection au wi-fi, et **ifup@ap0**, pour la gestion du point d'accès. Ces instances font appels à **wpa_supplicant** / **_dhclient_** et **hostapd** respectivement.
   - **wpa_supplicant / dhclient :** Gère la connection à d'autres points d'accès wi-fi
   - **hostapd :** Permet la création d'un point d'accès à même le RaspberryPi
 - **dnsmasq :** Fournit les services DHCP, soit l'assignation d'addresse IP aux appareils connectés à un réseau (AP), et DNS, soit l'utilisation de l'addresse [movit.plus](http://movit.plus) à la place de [192.168.10.1](http://192.168.10.1).
@@ -273,14 +273,30 @@ After=network.target network-online.target
 Si DNSmasq n'est pas activé au démarrage, cette commande permettra de le faire : `sudo systemctl enable dnsmasq.service`. Cependant, il devrait déjà l'être.
 
 ### 2.10. Finalisation
-Pour finir, il faut activer systemd-networkd-wait-online qui s'occupe d'activer le _target_ `network-online` pour l'utilisation des services qui nécessite l'accès à internet au démarrage. Il faut également désactiver `networking.service` puisqu'il interfère avec le processus mis en place plus haut.
+Pour finir, il faut activer `systemd-networkd-wait-online.service` qui s'occupe d'activer `network-online.target` pour l'utilisation des services qui nécessite l'accès à internet au démarrage. Il faut également s'assurer que `networking.service` est activé puisqu'il gère le processus mis en place plus haut.
 ```bash
 systemctl enable systemd-networkd-wait-online.service
-systemctl disable networking.service
+systemctl enable networking.service
 ```
 
 ### 2.11. Conclusion
 Une fois que toutes ces étapes sont complétées, il est possible de redémarrer le Raspberry Pi. L'AP deviendra alors visible et accessible. Il permettra une connection internet en passant par le réseau auquel il est connecté et il offrira une connection aux serveurs qu'il exécutera par le biais de l'addresse [movit.plus](http://movit.plus).
+>Les services qui devrait être actif ainsi que les instances qu'ils contrôlent après un redémarrage devraient être les suivants :
+> - systemd-networkd-wait-online.service
+> - networking.service
+> - ifup@wlan0.service
+>     - wpa_supplicant
+>     - wpa_cli
+>     - dhclient
+> - ifup@ap0.service
+>     - hostapd
+> - dnsmasq.service
+>
+>Il est ainsi possible de regarder leur status avec
+>```bash
+> systemctl status nom_du_.service 
+>``` 
+
 ___
 
 <br>
