@@ -15,7 +15,7 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 ### **Module de l’unité centrale de contrôle**
 
 |![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.jpg)|
-|:----------:|:----------:|
+|:----------:|
 |**Figure 1.1 : Unité centrale de contrôle**|
 |![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.JPG)|
 |**Figure 1.2 : Unité centrale de contrôle hors de son case**|
@@ -204,16 +204,12 @@ Une fois connecté au réseau WiFi :
 
 1. Connectez-vous à l'adresse [movit.plus](movit.plus) à l'aide de votre navigateur Internet.
 
-|![PAGE_LOGIN.PNG](images/PAGE_LOGIN.PNG)|
+|![PAGE_LOGIN.png](images/PAGE_LOGIN.png)|
 |:----------:|
 |**Figure 21 : Page de connexion**|
 
 2. Sélectionnez "Clinicien" dans l'interface, comme montré à la figure 21.
-> Les mots de passe par défaut sont les suivants :
-> | Utilisateur   | Mot de passe  |
-> | :-----------: |:-------------:|
-> | Client        | movit-user    |
-> | Clinicien     | movit-admin   |
+> Les mots de passe par défaut sont les suivants : `Client` : `movit-user` et `Clinicien` : `movit-admin`
 
 
 |![PAGE_CONFIGURATION.PNG](images/PAGE_CONFIGURATION.png)|
@@ -250,6 +246,8 @@ Une fois connecté au réseau WiFi :
 |**Figure 25 : Permission d'envoie des données à TelAsk**|
 
 7. Cochez la case de permission concernant l'envoie des données à TelAsk si désiré.
+
+8. Cocher les cases concernant l'activation du système de notification en général, ainsi que la vibration et les lumières du module de notification.
 
 Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plate-forme.
 
