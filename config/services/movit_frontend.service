@@ -1,0 +1,18 @@
+[Unit]
+Description=-------- MOVIT+ FRONTEND Express server
+After=movit_backend.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+#The next line is the "yarn" command that runs on boot
+#  To change its behavior please refer to the corresponding script in package.json
+#  Package.json is located in the "WorkingDirectory".
+ExecStart=/usr/bin/yarn start
+WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=-------- MOVIT+ BACKEND with node-red
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/home/pi/.config/nvm/versions/node/v10.16.3/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,19 @@
+[Unit]
+Description=-------- MOVIT+ acquisition software
+After=network-online.target mosquitto.service
+StartLimitIntervalSec=0
+
+[Service]
+# Set process niceness (priority) to maximum
+#	(without being a near real-time process)
+Nice=-20
+Type=simple
+# Ensures the process always restarts when it crashes
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect/Movit-Pi/Executables/movit-pi
+
+[Install]
+WantedBy=multi-user.target
+
