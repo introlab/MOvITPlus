@@ -29,12 +29,12 @@
 - [4. Installation de l'application MOvIT+](#4-installation-de-lapplication-movit)
   - [4.1 Téléchargement du code à partir de GitHub](#41-téléchargement-du-code-à-partir-de-github)
   - [4.2 Installation des sous-systèmes](#42-installation-des-sous-systèmes)
-- [3. Configuration du démarrage](#3-configuration-du-démarrage)
-    - [3.1. Services avec systemd](#31-services-avec-systemd)
-    - [3.2. Utilisation des services](#32-utilisation-des-services)
-    - [3.3. Optimisation du temps de démarrage](#33-optimisation-du-temps-de-démarrage)
-- [5. Mises à jour du système](#5-mises-à-jour-du-système)
-    - [Mise à jour du projet manuellement](#mise-à-jour-du-projet-manuellement)
+- [5. Configuration du démarrage](#5-configuration-du-démarrage)
+  - [5.1. Services avec systemd](#51-services-avec-systemd)
+  - [5.2. Utilisation des services](#52-utilisation-des-services)
+- [6. Optimisation du temps de démarrage](#6-optimisation-du-temps-de-démarrage)
+- [7. Mises à jour du système](#7-mises-à-jour-du-système)
+  - [Mise à jour du projet manuellement](#mise-à-jour-du-projet-manuellement)
 ___
 <br>
 <br>
@@ -242,25 +242,15 @@ git clone https://github.com/introlab/MOvITPlus.git --recurse-submodules
 ## 4.2 Installation des sous-systèmes
 
 Plusieurs autres étapes sont nécessaires au fonctionnement du projet. Les instructions d'installation du reste des composantes de MOvIT+ sont disponibles dans les `README.md` des répertoires GitHub correspondants. L'installation selon ces guides devrait ainsi se faire dans l'ordre suivant :
-1. **[MOvIT-Detect](../../../MOvIT-Detect/README.md) :** Capteurs, code d’acquisition en C++ et communication avec le bus I2C et les périphériques.
-2. **[MOvIT-Detect-Backend](../../../MOvIT-Detect-Backend/README.md) :** Code sous forme graphique avec Node-Red, base de données Mongo et communication entre toutes ces parties
-3. **[MOvIT-Detect-Frontend](../../../MOvIT-Detect-Frontend/README.md) :** Code en JavaScript permettant l’affichage d’une page web et l’interaction avec les couches inférieures
+1. **[MOvIT-Detect](https://github.com/introlab/MOvIT-Detect/blob/master/README.md) :** Capteurs, code d’acquisition en C++ et communication avec le bus I2C et les périphériques.
+2. **[MOvIT-Detect-Backend](https://github.com/introlab/MOvIT-Detect-Backend/blob/master/README.md) :** Code sous forme graphique avec Node-Red, base de données Mongo et communication entre toutes ces parties
+3. **[MOvIT-Detect-Frontend](https://github.com/introlab/MOvIT-Detect-Frontend/blob/master/README.md) :** Code en JavaScript permettant l’affichage d’une page web et l’interaction avec les couches inférieures
 ___
 
 
-
-
-
-
-
-
-
-<br>
-<br>
-
-# 3. Configuration du démarrage
+# 5. Configuration du démarrage
 Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi Zero d'exécuter le code conçu dès le branchement de l'appareil.
-### 3.1. Services avec systemd
+## 5.1. Services avec systemd
 Puisque l'image utilisé est Raspbian Buster Lite, alors le processus de démarrage des services se fait avec _systemd_. Celui-ci nécessite des fichiers `.service` dans le dossier `/etc/systemd/system/` pour tous les services qu'il peut gérer. Ainsi, il faut créer ces fichiers et y définir les paramètres voulus pour chaques composants.
 
 Après s'être diriger dans le bon dossier via `cd /etc/systemd/system/`, il faut faire `sudo nano nom-du-service.service`, où _nom-du-service.service_ est un des fichiers ci-dessous. Puis il faut copier le contenu respectif et répéter le tout pour chacun des services requis :
@@ -328,29 +318,7 @@ WantedBy=multi-user.target
 
 ```
 
-> Aussi, si désiré, un service permettant l'activation au démarrage du script `firstBootSetup.sh` peut être ajouté :
-> - **movit_setup.service**
-> ```bash
-> [Unit]
-> Description=-------> MOVIT+ first boot setup script
-> After=network-online.target dnsmasq.service rc-local.service
-> Wants=network-online.target
->
-> [Service]
-> # Increase process niceness (priority) for faster execution
-> Nice=-10
-> Type=forking
-> User=root
-> ExecStart=/home/pi/firstBootSetup.sh --fromService
-> TimeoutStartSec=40min 00s
-> ExecStartPost=reboot
->
-> [Install]
-> WantedBy=multi-user.target
-> ```
-
-
-### 3.2. Utilisation des services
+## 5.2. Utilisation des services
 Afin que les services soit lancés au démarrage, les commandes suivantes sont essentielles :
 ```bash
 sudo systemctl enable movit_backend.service
@@ -380,7 +348,7 @@ systemctl list-unit-files | grep disabled
 ```
 > [Exemple de réponse](https://pastebin.com/shxSRXkR) d'un des systèmes fonctionnels lors de l'exécution de ces commandes.
 
-### 3.3. Optimisation du temps de démarrage
+# 6. Optimisation du temps de démarrage
 Certains services et certaines fonctionnalités peuvent être désactivées pour accélérer le démarrage du RaspberryPi. Dans le fichier `/boot/config.txt`, il faut ajouter ces lignes à la fin :
 ```bash
 #disable bluetooth
@@ -409,16 +377,9 @@ Voir l'exemple de réponse plus haut aux commandes `systemctl list-unit-files` p
 D'autres optimisations pourraient être faites, notamment en utilisant une version de Linux comportant uniquement les fonctionnalités nécessaires.
 ___
 
-<br>
-<br>
+# 7. Mises à jour du système
 
-
-<br>
-<br>
-
-# 5. Mises à jour du système
-
-### Mise à jour du projet manuellement
+## Mise à jour du projet manuellement
 Une des parties de la mise est jour est simplement l'utilisation de la commande `git pull` dans le dossier parent. En plus du `git pull` habituel, il peut être nécessaire de mettre à jour les sous-répertoires également :
 ```bash
 git pull
