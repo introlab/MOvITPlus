@@ -2,13 +2,13 @@
 sudo apt-get update
 sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git \
 	libmosquittopp-dev mosquitto-clients \
-	mongodb mongodb-server libkrb5-dev libzmq3-dev
+	mongodb mongodb-server libkrb5-dev libzmq3-dev autoconf
 
 #stop mosquitto
 sudo systemctl stop mosquitto
 
 #mosquitto configuration
-sudo echo "admin:movitplus\n" | sudo tee /etc/mosquitto/passwd
+sudo echo "admin:movitplus" | sudo tee /etc/mosquitto/passwd
 sudo mosquitto_passwd -U /etc/mosquitto/passwd
 sudo cp network/mosquitto.conf /etc/mosquitto/mosquitto.conf
 sudo systemctl start mosquitto
@@ -33,3 +33,16 @@ sudo cp default/hostapd /etc/default/hostapd
 #iptables
 sudo iptables -t nat -A POSTROUTING -s 192.168.10.0/24 ! -d 192.168.10.0/24 -j MASQUERADE
 sudo apt-get install -y iptables-persistent
+
+#Copy service files
+sudo cp services/movit_acquisition.service /lib/systemd/system
+sudo cp services/movit_backend.service /lib/systemd/system
+sudo cp services/movit_frontend.service /lib/systemd/system
+
+# Reload systemd configs
+sudo systemctl daemon-reload
+
+# Enable services
+sudo systemctl enable movit_acquisition.service
+sudo systemctl enable movit_backend.service
+sudo systemctl enable movit_frontend.service

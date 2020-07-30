@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/home/pi/.config/nvm/versions/node/v10.16.3/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect-Backend/node_modules/node-red/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
 
 [Install]
 WantedBy=multi-user.target
