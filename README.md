@@ -45,6 +45,8 @@ ____
 # Procédure d'installation
 ## 1. Installation rapide (recommandée)
 
+> L'image la plus récente n'est pas encore disponible. Il est recommandé de télécharger le code pour l'installation et de suivre la procédure à l'étape [installation manuelle]().
+
 L'image préconfigurée est disponible sous l'onglet ["Releases"]([https://](https://github.com/introlab/MOvITPlus/releases)) de GitHub. Utilisez la dernière version à jour.
 
 ### 1.2. Flashage
