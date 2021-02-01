@@ -103,7 +103,7 @@ sudo wget -qO- https://deb.nodesource.com/setup_10.x | sudo bash -
 sudo apt-get update
 
 # Installation (tout sur la même ligne)
-sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git libmosquittopp-dev mosquitto-clients mongodb mongodb-server libkrb5-dev libzmq3-dev nodejs yarn
+sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git libmosquittopp-dev mosquitto-clients mongodb mongodb-server libkrb5-dev libzmq3-dev nodejs yarn python3 python3-venv
 ```
 
 # 3.3 Changer le mot de passe
