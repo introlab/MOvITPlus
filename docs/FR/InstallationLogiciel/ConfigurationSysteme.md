@@ -59,6 +59,7 @@ L'entièreté des configurations ci-dessous sont basées sur une image de [Raspb
 
 
 ## 2.2. Image préconfigurée
+> N'est pas à jour. Utilisez la configuration système de base pour l'instant.
 Une image du système préconfiguré est disponible dans la section ["Releases"](https://github.com/introlab/MOvITPlus/releases) sur GitHub directment. Utiliser la dernière version de cette image permet notamment d'éviter d'avoir à faire toutes les étapes de configuration qui suivent. 
 Il peut cependant être utile de faire toute cette configuration manuellement pour mettre à jour l'image de base de RaspberryPi OS ou simplement pour permettre une meilleure compréhension du système.
 
