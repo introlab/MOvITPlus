@@ -33,17 +33,17 @@ ____
   - [MOvIT-Hardware](#movit-hardware)
 - [Table des matières :](#table-des-matières-)
 - [Procédure d'installation](#procédure-dinstallation)
-  - [1. Installation rapide (recommandée)](#1-installation-rapide-recommandée)
+  - [1. Installation rapide (recommandée)](#1-installation-rapide)
     - [1.2. Flashage](#12-flashage)
     - [1.3. Configuration du réseau sans fil (wifi)](#13-configuration-du-réseau-sans-fil-wifi)
-  - [2. Installation manuelle](#2-installation-manuelle)
+  - [2. Installation manuelle](#2-installation-manuelle-recommandée)
   - [3. Connection SSH à l'appareil](#3-connection-ssh-à-lappareil)
   - [4. Mise à jour du système](#4-mise-à-jour-du-système)
 ____
 <br>
 
 # Procédure d'installation
-## 1. Installation rapide (recommandée)
+## 1. Installation rapide
 
 > L'image la plus récente n'est pas encore disponible. Il est recommandé de télécharger le code pour l'installation et de suivre la procédure à l'étape [installation manuelle](#2-installation-manuelle).
 
@@ -67,7 +67,7 @@ network={
 }
 ```
 
-## 2. Installation manuelle
+## 2. Installation manuelle (recommandée)
 Un nouveau système peut être installé manuellement en suivant la documentation sur la [configuration d'un nouveau système](docs/FR/InstallationLogiciel/ConfigurationSysteme.md "Configuration du système"), puis la documentation de chacune des parties du projet ([MOvIT-Detect](), [MOvIT-Detect-Backend](), [MOvIT-Detect-Frontend]()).
 
 ## 3. Connection SSH à l'appareil
