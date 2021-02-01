@@ -33,10 +33,10 @@ ____
   - [MOvIT-Hardware](#movit-hardware)
 - [Table des matières :](#table-des-matières-)
 - [Procédure d'installation](#procédure-dinstallation)
-  - [1. Installation rapide (recommandée)](#1-installation-rapide)
+  - [1. Installation rapide](#1-installation-rapide)
     - [1.2. Flashage](#12-flashage)
     - [1.3. Configuration du réseau sans fil (wifi)](#13-configuration-du-réseau-sans-fil-wifi)
-  - [2. Installation manuelle](#2-installation-manuelle-recommandée)
+  - [2. Installation manuelle (recommandée)](#2-installation-manuelle-recommandée)
   - [3. Connection SSH à l'appareil](#3-connection-ssh-à-lappareil)
   - [4. Mise à jour du système](#4-mise-à-jour-du-système)
 ____
