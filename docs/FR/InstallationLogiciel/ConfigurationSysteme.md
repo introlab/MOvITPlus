@@ -250,7 +250,7 @@ ___
 
 
 # 5. Configuration du démarrage
-Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi Zero d'exécuter le code conçu dès le branchement de l'appareil.
+Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi d'exécuter le code conçu dès le branchement de l'appareil.
 ## 5.1. Services avec systemd
 Puisque l'image utilisé est Raspbian Buster Lite, alors le processus de démarrage des services se fait avec _systemd_. Celui-ci nécessite des fichiers `.service` dans le dossier `/etc/systemd/system/` pour tous les services qu'il peut gérer. Ainsi, il faut créer ces fichiers et y définir les paramètres voulus pour chaques composants.
 
@@ -324,7 +324,7 @@ Afin que les services soit lancés au démarrage, les commandes suivantes sont e
 ```bash
 sudo systemctl enable movit_backend.service
 sudo systemctl enable movit_frontend.service
-sudo systemctl enable movit_acquisition.service
+sudo systemctl enable movit_detect_python.service
 ```
 
 > Il est recommandé de **ne pas activer ces services avant la fin de l'installation du projet**
