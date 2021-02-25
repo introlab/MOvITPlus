@@ -267,7 +267,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/usr/local/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect-Backend/node_modules/node-red/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
 
 [Install]
 WantedBy=multi-user.target
@@ -292,14 +292,13 @@ ExecStart=/usr/bin/yarn start
 WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target```
 ```
 
-
-- **movit_acquisition.service**
+- **movit_detect_python.service**
 ```bash
 [Unit]
-Description=-------- MOVIT+ acquisition software
+Description=-------- MOVIT+ detect software (python)
 After=network-online.target mosquitto.service
 StartLimitIntervalSec=0
 
@@ -311,12 +310,13 @@ Type=simple
 # Ensures the process always restarts when it crashes
 Restart=always
 RestartSec=1
-User=root
-ExecStart=/home/pi/MOvIT-Detect/Movit-Pi/Executables/movit-pi
+User=pi
+Group=pi
+Environment=PYTHONPATH=/home/pi/MOvITPlus/MOvIT-Detect/python
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect/python/venv/bin/python3 /home/pi/MOvITPlus/MOvIT-Detect/python/launcher.py 
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 ## 5.2. Utilisation des services
