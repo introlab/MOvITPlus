@@ -250,7 +250,7 @@ ___
 
 
 # 5. Configuration du démarrage
-Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi Zero d'exécuter le code conçu dès le branchement de l'appareil.
+Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi d'exécuter le code conçu dès le branchement de l'appareil.
 ## 5.1. Services avec systemd
 Puisque l'image utilisé est Raspbian Buster Lite, alors le processus de démarrage des services se fait avec _systemd_. Celui-ci nécessite des fichiers `.service` dans le dossier `/etc/systemd/system/` pour tous les services qu'il peut gérer. Ainsi, il faut créer ces fichiers et y définir les paramètres voulus pour chaques composants.
 
@@ -267,7 +267,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart=/usr/local/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect-Backend/node_modules/node-red/bin/node-red-pi -u /home/pi/MOvITPlus/MOvIT-Detect-Backend --max-old-space-size=256
 
 [Install]
 WantedBy=multi-user.target
@@ -292,14 +292,13 @@ ExecStart=/usr/bin/yarn start
 WorkingDirectory=/home/pi/MOvITPlus/MOvIT-Detect-Frontend/
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target```
 ```
 
-
-- **movit_acquisition.service**
+- **movit_detect_python.service**
 ```bash
 [Unit]
-Description=-------- MOVIT+ acquisition software
+Description=-------- MOVIT+ detect software (python)
 After=network-online.target mosquitto.service
 StartLimitIntervalSec=0
 
@@ -311,12 +310,13 @@ Type=simple
 # Ensures the process always restarts when it crashes
 Restart=always
 RestartSec=1
-User=root
-ExecStart=/home/pi/MOvIT-Detect/Movit-Pi/Executables/movit-pi
+User=pi
+Group=pi
+Environment=PYTHONPATH=/home/pi/MOvITPlus/MOvIT-Detect/python
+ExecStart=/home/pi/MOvITPlus/MOvIT-Detect/python/venv/bin/python3 /home/pi/MOvITPlus/MOvIT-Detect/python/launcher.py 
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 ## 5.2. Utilisation des services
@@ -324,7 +324,7 @@ Afin que les services soit lancés au démarrage, les commandes suivantes sont e
 ```bash
 sudo systemctl enable movit_backend.service
 sudo systemctl enable movit_frontend.service
-sudo systemctl enable movit_acquisition.service
+sudo systemctl enable movit_detect_python.service
 ```
 
 > Il est recommandé de **ne pas activer ces services avant la fin de l'installation du projet**
