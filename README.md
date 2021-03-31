@@ -83,10 +83,10 @@ Cette section est en construction.
 
 Faire ces lignes de commandes dans le terminal : 
 
+```bash
 cd MOvITPlus
-
 git pull origin master
-
 ./update.sh
+```
 ____
 <br>
