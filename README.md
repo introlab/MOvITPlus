@@ -81,5 +81,9 @@ ssh pi@192.168.10.1
 
 Cette section est en construction.
 
+Faire ces lignes de commandes dans le terminal : 
+cd MOvITPlus
+git pull origin master
+./update.sh
 ____
 <br>
