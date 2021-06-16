@@ -65,68 +65,89 @@ The pressureData object contains all the pressure information at a specific time
 # Example JSON
 ``` json
 {
-  "createdAt": 0,
-  "userId": "",
-  "maxAngle": 0,
-  "weight": 0,
-  "chairId": "",
-  "date": "YYYYMMDD",
-  "timezone": 0,
-  "minAngle": 0,
-  "rev": "A",
-  "tilt": {
-    "distribution": {
-      "index": [
-        "Less than 0°",
-        "0° to 15°",
-        "0° to 30°",
-        "30° to 45°",
-        "More than 45°"
-      ],
-      "duration_ms": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    "tiltCount": {
-      "index": [
-        "Good angle and duration",
-        "Good angle but insufficient duration",
-        "Wrong angle but good duration",
-        "Cancelled tilt",
-        "Snoozed tilt"
-      ],
-      "count": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    "slidingTravelGoalPercent": 0.0,
-    "slidingRestGoalPercent": 0.0
-  },
-  "pressure": {
-    "relievePressureGoalPercent": 0.0,
-    "relievePressurePersonalGoalPercent": 0.0,
-    "byTimestamp": {
-      "1543412675000": {
-        "center": {
-          "x": 0,
-          "y": 0
+    "createdAt": 1623853098,
+    "userId": "1234",
+    "maxAngle": 50,
+    "weight": 53,
+    "chairId": "7EE21E",
+    "date": "20210615",
+    "timezone": -4,
+    "minAngle": 0,
+    "rev": "A",
+    "tilt": {
+        "distribution": {
+            "index": [
+                "Less than 0°",
+                "0° to 15°",
+                "15° to 30°",
+                "30° to 45°",
+                "More than 45°"
+            ],
+            "duration_ms": [
+                0,
+                1000,
+                16000,
+                3000,
+                0
+            ]
         },
-        "quadrants": {
-          "x": [0,0,0,0],
-          "y": [0,0,0,0]
+        "tiltCount": {
+            "index": [
+                "Good angle and duration",
+                "Good angle but insufficient duration",
+                "Wrong angle but good duration",
+                "Cancelled tilt",
+                "Snoozed tilt"
+            ],
+            "count_user": [
+                0,
+                1,
+                0,
+                8,
+                0
+            ],
+            "count_clinician": [
+                0,
+                1,
+                0,
+                2,
+                0
+            ]
         },
-        "angle": 0
-      }
+        "slidingTravelGoalPercent": 0.0018034265103697023,
+        "slidingRestGoalPercent": 1
+    },
+    "pressure": {
+        "dailySittingTimeMinsPerHour": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            20,
+            24,
+            0,
+            29,
+            60,
+            60,
+            2,
+            0,
+            0,
+            0,
+            0
+        ],
+        "relievePressureGoalPercent": 0,
+        "releivePressurePersonalGoalPercent": 0,
+        "byTimestamp": {}
     }
-  }
 }
 ```
 
