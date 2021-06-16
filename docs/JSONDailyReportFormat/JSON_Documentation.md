@@ -151,10 +151,6 @@ The pressureData object contains all the pressure information at a specific time
 }
 ```
 
-# Sample JSON File
-
-* TODO
-
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
 
