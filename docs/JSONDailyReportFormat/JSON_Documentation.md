@@ -36,9 +36,10 @@ This object contains all the tilt data for a specified day. It is separated in m
 |distribution.duration_ms|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
 |tiltCount|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index ||||
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
-|tiltCount.count|Contains data related to the number of tilt done in a day. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
-|slidingTravelGoal|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
-|slidingRestGoal|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
+|tiltCount.count_user|Contains data related to the number of tilt done in a day according to the personal goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
+|tiltCount.count_clinician|Contains data related to the number of tilt done in a day according to the recommended goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
+|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
+|slidingRestGoalPercent|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
 
 ---
 
