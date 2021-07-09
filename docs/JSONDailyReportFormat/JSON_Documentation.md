@@ -36,9 +36,10 @@ This object contains all the tilt data for a specified day. It is separated in m
 |distribution.duration_ms|The actual data representing the time spent in each of the five categories of the index | ms | Integer array | greater or equal to 0 |
 |tiltCount|Contains data related to the number of tilt done in a day. The data is contained in data, and the explanation of each element in the index ||||
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
-|tiltCount.count|Contains data related to the number of tilt done in a day. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
-|slidingTravelGoal|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
-|slidingRestGoal|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
+|tiltCount.count_user|Contains data related to the number of tilt done in a day according to the personal goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
+|tiltCount.count_clinician|Contains data related to the number of tilt done in a day according to the recommended goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
+|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
+|slidingRestGoalPercent|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
 
 ---
 
@@ -63,99 +64,181 @@ The pressureData object contains all the pressure information at a specific time
 ---
 
 # Example JSON
-``` json
+``` .json
+
 {
+
     "createdAt": 1623853098,
+
     "userId": "1234",
+
     "maxAngle": 50,
+
     "weight": 53,
+
     "chairId": "7EE21E",
+
     "date": "20210615",
+
     "timezone": -4,
+
     "minAngle": 0,
+
     "rev": "A",
+
     "tilt": {
+
         "distribution": {
+
             "index": [
+
                 "Less than 0°",
+
                 "0° to 15°",
+
                 "15° to 30°",
+
                 "30° to 45°",
+
                 "More than 45°"
+
             ],
+
             "duration_ms": [
+
                 0,
+
                 1000,
+
                 16000,
+
                 3000,
+
                 0
+
             ]
+
         },
+
         "tiltCount": {
+
             "index": [
+
                 "Good angle and duration",
+
                 "Good angle but insufficient duration",
+
                 "Wrong angle but good duration",
+
                 "Cancelled tilt",
+
                 "Snoozed tilt"
+
             ],
+
             "count_user": [
+
                 0,
+
                 1,
+
                 0,
+
                 8,
+
                 0
+
             ],
+
             "count_clinician": [
+
                 0,
+
                 1,
+
                 0,
+
                 2,
+
                 0
+
             ]
+
         },
+
         "slidingTravelGoalPercent": 0.0018034265103697023,
+
         "slidingRestGoalPercent": 1
+
     },
+
     "pressure": {
+
         "dailySittingTimeMinsPerHour": [
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             0,
+
             20,
+
             24,
+
             0,
+
             29,
+
             60,
+
             60,
+
             2,
+
             0,
+
             0,
+
             0,
+
             0
+
         ],
+
         "relievePressureGoalPercent": 0,
+
         "releivePressurePersonalGoalPercent": 0,
+
         "byTimestamp": {}
+
     }
+
 }
 ```
 
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
-
-## Center of Pressure Graph
-![PressureCenter](pressure_graph/pressure_center.png)
 
 ## Relieving Pressure Goal Progress Bar
 ![RelievePressureGoal](pressure_graph/relieving_pressure_personal_and_clinician_goal.png)
