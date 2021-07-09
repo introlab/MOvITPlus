@@ -38,8 +38,8 @@ This object contains all the tilt data for a specified day. It is separated in m
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
 |tiltCount.count_user|Contains data related to the number of tilt done in a day according to the personal goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
 |tiltCount.count_clinician|Contains data related to the number of tilt done in a day according to the recommended goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
-|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
-|slidingRestGoalPercent|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
+|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Integer | 0 to 100|
+|slidingRestGoalPercent|The sliding while at rest completion goal | % | Integer  | 0 to 100|
 
 ---
 
@@ -48,192 +48,98 @@ This object contains all the pressure data for a specified day. It is separated 
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
-|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Float | 0.0 to 100.0|
-|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Float  | 0.0 to 100.0|
-|byTimestamp|Contains an object used as a dictionnary sorted by timestamps in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
-
-### pressureData Object
-The pressureData object contains all the pressure information at a specific time. This data represents the overall center of pressure as well as the per quadrant center of pressure. Here is the description of each field:
-
-| Key        | Description           | Unit  | Datatype  | Range |
-| :-------------|:-------------|:-----:|:-----:|:-----:|
-|center|The center of pressure of the patient in x and y coordinate|Inch|Float|-4.0 to 4.0|
-|quadrants|The center of pressure of the patient per quadrant starting at the top left quadrant at index 0, then clockwise in an x and y array of coordinate|Inch|Float|-4.0 to 4.0|
-|angle|The angle of the chair at this time|degree|Integer|-360° to 360°|
-
+|dailySittingTimeMinsPerHour|The time spent sitting in the chair in minutes during the day according to the time of day between 0h00 and 23h00.| Minute | Integer | 0 to 60 |
+|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Integer | 0 to 100|
+|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Integer  | 0 to 100|
+|byTimestamp|Not yet implemented||Object||
 ---
 
 # Example JSON
 ``` .json
-
 {
-
-    "createdAt": 1623853098,
-
+    "createdAt": 1625838059,
     "userId": "1234",
-
     "maxAngle": 50,
-
-    "weight": 53,
-
-    "chairId": "7EE21E",
-
-    "date": "20210615",
-
-    "timezone": -4,
-
     "minAngle": 0,
-
+    "weight": 50,
+    "chairId": "7EDCBB",
+    "date": "20210708",
+    "timezone": -4,
     "rev": "A",
-
     "tilt": {
-
         "distribution": {
-
             "index": [
-
                 "Less than 0°",
-
                 "0° to 15°",
-
                 "15° to 30°",
-
                 "30° to 45°",
-
                 "More than 45°"
-
             ],
-
             "duration_ms": [
-
                 0,
-
                 1000,
-
-                16000,
-
-                3000,
-
+                183000,
+                0,
                 0
-
             ]
-
         },
-
         "tiltCount": {
-
             "index": [
-
                 "Good angle and duration",
-
                 "Good angle but insufficient duration",
-
                 "Wrong angle but good duration",
-
                 "Cancelled tilt",
-
                 "Snoozed tilt"
-
             ],
-
             "count_user": [
-
-                0,
-
-                1,
-
-                0,
-
-                8,
-
-                0
-
-            ],
-
-            "count_clinician": [
-
-                0,
-
-                1,
-
-                0,
-
                 2,
-
+                1,
+                0,
+                6,
                 0
-
+            ],
+            "count_clinician": [
+                1,
+                0,
+                1,
+                9,
+                0
             ]
-
         },
-
-        "slidingTravelGoalPercent": 0.0018034265103697023,
-
-        "slidingRestGoalPercent": 1
-
+        "slidingTravelGoalPercent": 2,
+        "slidingRestGoalPercent": 23
     },
-
     "pressure": {
-
         "dailySittingTimeMinsPerHour": [
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
-            20,
-
-            24,
-
             0,
-
-            29,
-
+            0,
+            38,
             60,
-
             60,
-
-            2,
-
+            30,
             0,
-
             0,
-
             0,
-
+            0,
             0
-
         ],
-
-        "relievePressureGoalPercent": 0,
-
-        "releivePressurePersonalGoalPercent": 0,
-
+        "relievePressurePersonalGoalPercent": 22,
+        "releivePressureRecommendedGoalPercent": 9,
         "byTimestamp": {}
-
     }
-
 }
 ```
 
