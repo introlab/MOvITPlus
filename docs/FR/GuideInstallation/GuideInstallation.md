@@ -57,11 +57,11 @@ La Figure 6 montre le module capteur de déplacement par flux optique. **Nous ne
 
 ### **Câbles de branchement des modules (RJ-12 et RJ-45)**
 
-|![RJ12.JPG](images/RJ12.JPG)|![RJ45.JPG](images/RJ45.JPG)|
-|:----------:|:----------:|
-|**Figure 7 : Câble RJ-12*|*Figure 8 : Câble RJ-45**|
+|![RJ12.JPG](images/RJ12.JPG)|
+|:----------:|
+|**Figure 7 : Câble RJ-12*|
 
-La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis. Les câbles peuvent être interchangés au besoin. Il est possible de reconnaître le câble RJ-45, montré à la Figure 8, puisqu'il comprend 8 contacts au lieu de 6 pour le RJ-12. La longueur maximale du câble doit être de 30 cm (1 pied). Ce câble sert à relier le module de déplacement par flux optique.
+La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis. Les câbles peuvent être interchangés au besoin. Les cables RJ-12 comprennent 6 contacts.
 
 ### **Batterie et câble USB**
 
