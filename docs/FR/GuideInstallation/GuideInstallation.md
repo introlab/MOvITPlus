@@ -20,7 +20,7 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 |![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.JPG)|
 |**Figure 1.2 : Unité centrale de contrôle hors de son case**|
 
-La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation, huit (8) ports de connexion RJ-12 (en gris) pour les modules / capteurs à connecter et un port RJ-45 (en noir) utilisé pour le module capteur de déplacement par flux optique.
+La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion RJ-12 (en gris) pour les modules / capteurs à connecter.
 
 ### **Module de centrale inertielle (x2)**
 
@@ -47,15 +47,7 @@ La Figure 3 présente le module de notification. Il est composé d'un bouton pou
 
 Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comportes 9 cellules de pression disposés en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus) servant de protection et permettant une installation facile. Les 2 systèmes sont connetés par un câble plat.
 
-### **Module capteur de déplacement**
-
-|![DEPLACEMENT.JPG](images/DEPLACEMENT.JPG)|
-|:----------:|
-|**Figure 6 : Module capteur de déplacement par flux optique**|
-
-La Figure 6 montre le module capteur de déplacement par flux optique. **Nous ne prenons aucune image de l'environnement.  La caméra mesure les déplacements d'une image à l'autre et nous donne les déplacements cartésiens (x,y) en temps réel, comme une souris d'ordinateur**. La caméra doit être dirigée vers le sol ou les roues pour son bon fonctionnement.
-
-### **Câbles de branchement des modules (RJ-12 et RJ-45)**
+### **Câbles de branchement des modules (RJ-12)**
 
 |![RJ12.JPG](images/RJ12.JPG)|
 |:----------:|
@@ -97,8 +89,8 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |:----------:|
 |**Figure 12 : Ouvrir la housse Latitude -  Orthofab**|
 
-* L'unité centrale de contrôle doit être installée à l'arrière du fauteuil, le plus bas possible, car le câble RJ-45 du module de déplacement, qui sera installé dans les prochaines étapes, ne doit pas dépasser 30cm de long (1 pied).
-* Les connecteurs RJ-12 et RJ-45 doivent être facilement accessibles.
+* L'unité centrale de contrôle doit être installée à l'arrière du fauteuil, le plus bas possible.
+* Les connecteurs RJ-12 doivent être facilement accessibles.
 * Le connecteur USB doit être facilement accessible pour brancher la batterie.
 * Un bon endroit pour l'installation est dans la housse « Latitude – Orthofab » qui protègera l'unité centrale et la batterie des intempéries.
   * Dans l’éventualité où l’espace est insuffisant au bas du fauteuil ou que la housse est absente, un petit sac peut être accroché au bas du fauteuil et être utilisé comme alternative pour le rangement de l’unité centrale de contrôle et de la batterie.  
@@ -126,21 +118,10 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |**Figure 14 : Installation du module centrale inertielle mobile**|
 
 1. Installez le module IMU Mobile sur la partie bascule du fauteuil avec du velcro :
-   * Le module doit être orienté vers l'arrière
+   * Le module peut être orienté selon le choix de l'utilisateur.
 2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
-
-### ÉTAPE 4 - INSTALLER LE MODULE DE DÉPLACEMENT (FLUX OPTIQUE)
-
-|![INSTALLATION_MODULE_DEPLACEMENT.JPG](images/INSTALLATION_MODULE_DEPLACEMENT.JPG)|
-|:----------:|
-|**Figure 15 : Installation du module de déplacement**|
-
-1. Installez le module de dépacement avec du velcro :
-   * Le module doit être fixé à plus de 8 cm du sol.
-   * La caméra doit être orientée vers le sol.
-2. Connectez le câble RJ-45 (le plus court possible) à l'unité centrale. Utilisez le seul port RJ-45 disponible sur le côté.
 
 ### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATION**
 
