@@ -146,17 +146,23 @@ This object contains all the pressure data for a specified day. It is separated 
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
 
-## Relieving Pressure Goal Progress Bar
-![RelievePressureGoal](pressure_graph/relieving_pressure_personal_and_clinician_goal.png)
+## Relieving Pressure Goal - Progress Bar
+![RelievePressureGoal](pressure_graph/reducePressionProgress_en.JPG)
 
-## Distribution of Angles Pie Chart
-![PressureCenter](tilt_graph/tilt_distribution.png)
+## Time spent in the wheelchair during the day - Bar Graph
+![RelievePressureGoal](pressure_graph/timeSitting_en.JPG)
 
-## Number of Tilts Achieved in a Day Bar Graph
-![PressureCenter](tilt_graph/tilts_made.png)
+## Distribution of Angles - Pie Chart
+![PressureCenter](tilt_graph/AngleDistribution_en.JPG)
+
+## Number of Tilts Achieved in a Day - Recommended goal - Bar Graph 
+![PressureCenter](tilt_graph/tiltMadeRecommended_en.JPG)
+
+## Number of Tilts Achieved in a Day - Personal goal - Bar Graph 
+![PressureCenter](tilt_graph/tiltMadePersonal_en.JPG)
 
 ## Reduce Sliding at Rest Progress Bar
-![PressureCenter](tilt_graph/sliding_rest_goal.png)
+![PressureCenter](tilt_graph/reduceSlidingRest_en.JPG)
 
 ## Reduce Sliding During Travel Progress Bar
-![PressureCenter](tilt_graph/sliding_travel_goal.png)
+![PressureCenter](tilt_graph/reduceSlidingMoving_en.JPG)
