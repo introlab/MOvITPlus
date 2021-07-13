@@ -161,8 +161,8 @@ Here are the differents graphs and chart generated from the above sample file
 ## Number of Tilts Achieved in a Day - Personal goal - Bar Graph 
 ![PressureCenter](tilt_graph/tiltMadePersonal_en.JPG)
 
-## Reduce Sliding at Rest Progress Bar
+## Reduce Sliding at Rest - Progress Bar
 ![PressureCenter](tilt_graph/reduceSlidingRest_en.JPG)
 
-## Reduce Sliding During Travel Progress Bar
+## Reduce Sliding During Travel - Progress Bar
 ![PressureCenter](tilt_graph/reduceSlidingMoving_en.JPG)
