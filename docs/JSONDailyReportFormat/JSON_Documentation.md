@@ -57,13 +57,13 @@ This object contains all the pressure data for a specified day. It is separated 
 # Example JSON
 ``` .json
 {
-    "createdAt": 1625838059,
+    "createdAt": 1626180008,
     "userId": "1234",
     "maxAngle": 50,
     "minAngle": 0,
     "weight": 50,
-    "chairId": "7EDCBB",
-    "date": "20210708",
+    "chairId": "18F6B4",
+    "date": "20210712",
     "timezone": -4,
     "rev": "A",
     "tilt": {
@@ -77,10 +77,10 @@ This object contains all the pressure data for a specified day. It is separated 
             ],
             "duration_ms": [
                 0,
-                1000,
-                183000,
-                0,
-                0
+                64000,
+                143000,
+                578000,
+                653000
             ]
         },
         "tiltCount": {
@@ -92,22 +92,22 @@ This object contains all the pressure data for a specified day. It is separated 
                 "Snoozed tilt"
             ],
             "count_user": [
+                11,
+                3,
                 2,
-                1,
-                0,
-                6,
-                0
+                2,
+                2
             ],
             "count_clinician": [
-                1,
-                0,
-                1,
-                9,
-                0
+                6,
+                6,
+                2,
+                7,
+                2
             ]
         },
-        "slidingTravelGoalPercent": 2,
-        "slidingRestGoalPercent": 23
+        "slidingTravelGoalPercent": 7,
+        "slidingRestGoalPercent": 70
     },
     "pressure": {
         "dailySittingTimeMinsPerHour": [
@@ -122,22 +122,22 @@ This object contains all the pressure data for a specified day. It is separated 
             0,
             0,
             0,
-            0,
-            0,
-            0,
-            0,
-            38,
+            46,
             60,
             60,
-            30,
+            59,
+            60,
+            53,
+            0,
+            0,
             0,
             0,
             0,
             0,
             0
         ],
-        "relievePressurePersonalGoalPercent": 22,
-        "releivePressureRecommendedGoalPercent": 9,
+        "relievePressurePersonalGoalPercent": 61,
+        "releivePressureRecommendedGoalPercent": 28,
         "byTimestamp": {}
     }
 }
