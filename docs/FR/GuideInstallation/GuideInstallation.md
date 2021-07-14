@@ -51,7 +51,7 @@ Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquis
 
 |![RJ12.JPG](images/RJ12.JPG)|
 |:----------:|
-|**Figure 7 : Câble RJ-12*|
+|**Figure 7 : Câble RJ-12**|
 
 La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis. Les câbles peuvent être interchangés au besoin. Les cables RJ-12 comprennent 6 contacts.
 
@@ -90,11 +90,11 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |**Figure 12 : Ouvrir la housse Latitude -  Orthofab**|
 
 * L'unité centrale de contrôle doit être installée à l'arrière du fauteuil, le plus bas possible.
-* Les connecteurs RJ-12 doivent être facilement accessibles.
+* Les connecteurs ``RJ-12`` doivent être facilement accessibles.
 * Le connecteur USB doit être facilement accessible pour brancher la batterie.
-* Un bon endroit pour l'installation est dans la housse « Latitude – Orthofab » qui protègera l'unité centrale et la batterie des intempéries.
+* Un bon endroit pour l'installation est dans la housse ``Latitude – Orthofab``, qui protègera l'unité centrale et la batterie des intempéries.
   * Dans l’éventualité où l’espace est insuffisant au bas du fauteuil ou que la housse est absente, un petit sac peut être accroché au bas du fauteuil et être utilisé comme alternative pour le rangement de l’unité centrale de contrôle et de la batterie.  
-  * Ouvrez la housse « Latitude – Orthofab » tel qu’illustré à la figure x. Rouler ensuite la housse vers le bas pour découvrir le dos de la chaise.
+  * Ouvrez la housse ``Latitude – Orthofab`` tel qu’illustré à la figure x. Roulez ensuite la housse vers le bas pour découvrir le dos de la chaise.
   * Laissez la housse ouverte (ou le sac) pendant toute l'installation.
   * La housse permet de laisser passer les fils de chaque côté facilement.
 
@@ -105,9 +105,9 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |![INSTALLATION_IMU_FIXE.JPG](images/INSTALLATION_IMU_FIXE.JPG)|
 |**Figure 13 : Installation du module centrale inertielle fixe**|
 
-1. Installez le module IMU Fixe sur la partie base du fauteuil avec du velcro :
+1. Installez le module ``IMU Fixe`` sur la partie base du fauteuil, avec du velcro :
    * Le module doit être orienté avec le connecteur vers le bas.
-2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
@@ -117,9 +117,9 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |:----------:|
 |**Figure 14 : Installation du module centrale inertielle mobile**|
 
-1. Installez le module IMU Mobile sur la partie bascule du fauteuil avec du velcro :
+1. Installez le module ``IMU Mobile`` sur la partie bascule du fauteuil avec du velcro :
    * Le module peut être orienté selon le choix de l'utilisateur.
-2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
@@ -133,7 +133,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
    * Le module de notification et son branchement ne doivent pas être accrochant.
    * Le bouton doit se trouver vers le haut.
    * Le câble doit se diriger vers l'arrière du fauteuil.
-2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 disponibles.
    * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches (tie-wraps).
 
 ### ÉTAPE 6 - INSTALLER LE MODULE DE TAPIS DE PRESSION
@@ -145,7 +145,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir Figure 17).
     1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
     2. Le boitier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil (voir Figure 18).
-2. Connectez un câble RJ-12 (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 ### ÉTAPE 7 - INSTALLER LA BATTERIE
 
@@ -159,7 +159,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 ### ÉTAPE 8 - FINITION
 
 1. Fixez les câbles qui "trainent" avec des attaches (tie-wraps).
-2. Fermer la housse « Latitude – Orthofab ».
+2. Fermer la housse ``Latitude – Orthofab``.
 
 ## CONFIGURATION LOGICIELLE DU SYSTÈME
 
@@ -175,9 +175,9 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |:----------:|
 |**Figure 20 : Configuration du point d'accès WiFi**|
 
-Quand le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez vous au réseau qui se nomme **Movit-XXXXXX**, où XXXXX est le numéro du point d'accès qui est identifié sur chaque unité centrale de contrôle par une étiquette. Un example est donné à la Figure 20.
+Quand le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès qui est identifié sur chaque unité 'centrale de contrôle' par une étiquette. Un exemple est donné à la Figure 20.
 
-> Le mot de passe par défaut du point d'accès est : "movitplus"`
+> Le mot de passe par défaut du point d'accès est : ``movitplus``.
 
 ### ÉTAPE 3 - SE CONNECTER À L'INTERFACE WEB DU SYSTÈME
 
@@ -189,7 +189,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 21 : Page de connexion**|
 
-2. Sélectionnez "Clinicien" dans l'interface, comme montré à la figure 21.
+2. Sélectionnez ``Clinicien`` dans l'interface, comme montré à la figure 21.
 > Les mots de passe par défaut sont les suivants : `Client` : `movit-user` et `Clinicien` : `movit-admin`
 
 
@@ -197,39 +197,39 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 22 : Page de Configuration**|
 
-3. Cliquez sur l'onglet Configuration dans le menu du haut. Vous obtiendrez une page telle que montré à la Figure 22. Sur cette page, il faut configurer dans l'ordre (les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent):
+3. Cliquez sur l'onglet 'Configuration' dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
-    2. L'identifiant TelAsk de l'usager. Ceci sera donné par votre coordonnatrice de projet.
+    2. L'identifiant TelAsk de l'usager. Cette information vous sera donnée par votre coordonnatrice de projet.
     3. L'angle maximal de bascule.
     4. L'angle minimal de bascule.
     5. Le poids en kg de l'usager.
-    6. Adresse de connexion SFTP pour transférer les fichiers à TelAsk. Par défaut à  "www.cati.telask.ca".
-    7. Nom d'usager SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
+    6. L'adresse de connexion SFTP, pour transférer les fichiers à TelAsk. Par défaut, elle est à ``www.cati.telask.ca``.
+    7. Le nom d'usager SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
     8. Mot de passe SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
-> Cliquez sur "Sauvegarder" pour enregistrer votre configuration.
+> Cliquez sur ``Sauvegarder`` pour enregistrer votre configuration.
 
-4. Cliquez sur l'onglet Paramètres correspondant à l'engrenage dans le menu du haut à droite.
+4. Cliquez sur l'onglet "Paramètres" (correspondant à l'engrenage) dans le menu du haut à droite.
 
 |![INTERNET_CONFIGURATION.PNG](images/INTERNET_CONFIGURATION.PNG)|
 |:----------:|
 |**Figure 23 : Configuration du WiFi pour Internet**|
 
-5. Configurez le réseau WiFi pour avoir accès à Internet tel que montré à la figure 23. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk. Vous devez entrer le nom de réseau ainsi que le mot de passe.
+5. Configurez le réseau WiFi pour avoir accès à Internet, tel que montré à la figure 23. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk. Vous devez entrer le nom de réseau, ainsi que le mot de passe.
 
 |![VALIDATION_CAPTEURS.PNG](images/VALIDATION_CAPTEURS.PNG)|
 |:----------:|
 |**Figure 24 : Validation du fonctionnement des capteurs**|
 
-6. Validez la communication avec les modules capteurs. La page de configuration montre à la Figure 24 quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles RJ-12 sont bien connectés.
+6. Validez la communication avec les modules capteurs. À la figure 24, la page de configuration montre quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles RJ-12 sont bien connectés.
 
 |![PERMISSIONS.png](images/PERMISSIONS.png)|
 |:----------:|
-|**Figure 25 : Permission d'envoie des données à TelAsk**|
+|**Figure 25 : Permission d'envoi des données à TelAsk**|
 
-7. Cochez la case de permission concernant l'envoie des données à TelAsk si désiré.
+7. Cochez la case de ``Permission concernant l'envoi des données à TelAsk`` si désiré.
 
-8. Cocher les cases concernant l'activation du système de notification en général, ainsi que la vibration et les lumières du module de notification.
+8. Cocher les cases concernant l'activation du système de notifications en général, ainsi que la vibration et les lumières du module de notification.
 
-Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plate-forme.
+Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plateforme.
 
 
