@@ -20,7 +20,7 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 |![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.JPG)|
 |**Figure 1.2 : Unité centrale de contrôle hors de son case**|
 
-La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion RJ-12 (en gris) pour les modules / capteurs à connecter.
+La Figure 1 montre ``l'unité centrale de contrôle du système (UC)``. Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion ``RJ-12`` (en gris) pour les modules / capteurs à connecter.
 
 ### **Module de centrale inertielle (x2)**
 
@@ -28,7 +28,7 @@ La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est com
 |:----------:|
 |**Figure 2 : Centrale Inertielle (IMU)**|
 
-La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés IMU Fixe et IMU Mobile. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants MPU6050 qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesure l'angle de bascule. Nous mesurons l'angle de l'IMU fix par rapport à l'IMU mobile.
+La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés ``IMU Fixe`` et ``IMU Mobile``. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants ``MPU6050``, qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesurer l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à celui de l'IMU mobile.
 
 ### **Module de notification**
 
@@ -37,7 +37,7 @@ La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types d
 |![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
 |**Figure 3 : Module de notification**|
 
-La Figure 3 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electro-luminescente (DELs, rouge et vert) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le temps d'effectuer une bascule.
+La Figure 3 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electro-luminescente (DELs, une rouge et une verte) ainsi que d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
 
 ### **Module du tapis de pression**
 
@@ -51,9 +51,9 @@ Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquis
 
 |![RJ12.JPG](images/RJ12.JPG)|
 |:----------:|
-|**Figure 7 : Câble RJ-12**|
+|**Figure 7 : Câble ``RJ-12``**|
 
-La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires à connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmis ceux fournis. Les câbles peuvent être interchangés au besoin. Les cables RJ-12 comprennent 6 contacts.
+La Figure 7 présente les câbles ``RJ-12`` de différentes longueurs. Ceux-ci sont nécessaires pour connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmi ceux fournis, et ils peuvent être interchangés au besoin. Les cables ``RJ-12`` comprennent 6 contacts.
 
 ### **Batterie et câble USB**
 
@@ -61,7 +61,7 @@ La Figure 7 présente les câbles RJ-12 de différentes longueurs nécessaires �
 |:----------:|
 |**Figure 9: Batterie USB**|
 
-La Figure 9 montre la batterie USB qui sert à alimenter tout le système avec les capteurs et le module central de contrôle. **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
+La Figure 9 montre la batterie USB (qui sert à alimenter tout le système avec les capteurs), et le module central de contrôle. **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
 
 ## MATÉRIEL SUPPLÉMENTAIRE D'INSTALLATION REQUIS
 
@@ -220,7 +220,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 24 : Validation du fonctionnement des capteurs**|
 
-6. Validez la communication avec les modules capteurs. À la figure 24, la page de configuration montre quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles RJ-12 sont bien connectés.
+6. Validez la communication avec les modules capteurs. À la figure 24, la page de configuration montre quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles ``RJ-12`` sont bien connectés.
 
 |![PERMISSIONS.png](images/PERMISSIONS.png)|
 |:----------:|
