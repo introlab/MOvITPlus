@@ -76,7 +76,7 @@ La Figure 9 montre la batterie USB (qui sert à alimenter tout le système avec 
 |![SCHEMA_GLOBAL.PNG](images/SCHEMA_GLOBAL.PNG)|
 |**Figure 10 : Schéma global**|
 
-La Figure 10 présente le schéma de connexion global du système. Les prochaines sections décrivent étape par étape comment connecter tous les modules.
+La Figure 10 présente le schéma de connexion global du système. Les prochaines sections décrivent, étape par étape, comment connecter tous les modules.
 
 ### ÉTAPE 1 - INSTALLER L'UNITÉ CENTRALE DE CONTRÔLE
 
@@ -87,7 +87,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 
 |![HOUSSE.JPG](images/HOUSSE.JPG)|
 |:----------:|
-|**Figure 12 : Ouvrir la housse Latitude -  Orthofab**|
+|**Figure 12 : Ouvrir la housse ``Latitude – Orthofab``**|
 
 * L'unité centrale de contrôle doit être installée à l'arrière du fauteuil, le plus bas possible.
 * Les connecteurs ``RJ-12`` doivent être facilement accessibles.
@@ -175,7 +175,7 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |:----------:|
 |**Figure 20 : Configuration du point d'accès WiFi**|
 
-Quand le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès qui est identifié sur chaque unité 'centrale de contrôle' par une étiquette. Un exemple est donné à la Figure 20.
+Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès qui est identifié sur chaque unité 'centrale de contrôle' par une étiquette. Un exemple est donné à la Figure 20.
 
 > Le mot de passe par défaut du point d'accès est : ``movitplus``.
 
