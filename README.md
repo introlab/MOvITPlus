@@ -50,7 +50,7 @@ ____
 L'image préconfigurée est disponible sous l'onglet ["Releases"]([https://](https://github.com/introlab/MOvITPlus/releases)) de GitHub. Utilisez la dernière version à jour.
 
 ### 1.2. Flashage
-L'image doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD. Avec ce logiciel, il suffit de **brancher la carte** SD avec un adaptateur approprié, de **sélectionner l'image** téléchargée, puis de **lancer le flashage**. Une fois terminé, il peut être nécessaire de sortir et de réinsérer la carte afin de faire une dernière modification telle que décrite ci-dessous.
+L'image doit être flashée à l'aide d'un logiciel comme [Balena Etcher](https://www.balena.io/etcher/ "Site officiel de Balena Etcher") sur une carte SD. Avec ce logiciel, il suffit de ``brancher la carte`` SD avec un adaptateur approprié, de ``sélectionner l'image`` téléchargée, puis de ``lancer le flashage``. Une fois terminé, il peut être nécessaire de sortir et de réinsérer la carte, afin de faire une dernière modification telle que décrite ci-dessous.
 
 ### 1.3. Configuration du réseau sans fil (wifi)
 Il est recommandé de **placer un fichier nommé `wpa_supplicant.conf` dans la partition `boot`** d'une carte SD nouvellement flashée. Celui-ci doit être rempli selon la structure ci-bas avec les informations pour se connecter au réseau wifi choisi. Le système l'utilisera afin de permettre une connexion au réseau wifi spécifié dès les premiers démarrages.
