@@ -38,8 +38,8 @@ This object contains all the tilt data for a specified day. It is separated in m
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
 |tiltCount.count_user|Contains data related to the number of tilt done in a day according to the personal goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
 |tiltCount.count_clinician|Contains data related to the number of tilt done in a day according to the recommended goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
-|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Integer | 0 to 100|
-|slidingRestGoalPercent|The sliding while at rest completion goal | % | Integer  | 0 to 100|
+|slidingTravelGoalPercent|The sliding while travelling completion goal. If the percentage is equal to -1 it means that there is no data for this day | % | Integer | 0 to 100|
+|slidingRestGoalPercent|The sliding while at rest completion goal. If the percentage is equal to -1 it means that there is no data for this day | % | Integer  | 0 to 100|
 
 ---
 
@@ -49,8 +49,8 @@ This object contains all the pressure data for a specified day. It is separated 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
 |dailySittingTimeMinsPerHour|The time spent sitting in the chair in minutes during the day according to the time of day between 0h00 and 23h00.| Minute | Integer | 0 to 60 |
-|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Integer | 0 to 100|
-|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Integer  | 0 to 100|
+|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician. If the percentage is equal to -1 it means that there is no data for this day| % | Integer | 0 to 100|
+|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient. If the percentage is equal to -1 it means that there is no data for this day| % | Integer  | 0 to 100|
 |byTimestamp|Not yet implemented||Object||
 ---
 
