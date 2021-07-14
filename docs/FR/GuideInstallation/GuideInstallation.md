@@ -37,7 +37,7 @@ La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types d
 |![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
 |**Figure 3 : Module de notification**|
 
-La Figure 3 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electro-luminescente (DELs, une rouge et une verte) ainsi que d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
+La Figure 3 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
 
 ### **Module du tapis de pression**
 
@@ -175,7 +175,7 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |:----------:|
 |**Figure 20 : Configuration du point d'accès WiFi**|
 
-Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès qui est identifié sur chaque unité 'centrale de contrôle' par une étiquette. Un exemple est donné à la Figure 20.
+Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la Figure 20.
 
 > Le mot de passe par défaut du point d'accès est : ``movitplus``.
 
@@ -197,15 +197,15 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 22 : Page de Configuration**|
 
-3. Cliquez sur l'onglet 'Configuration' dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
+3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
-    2. L'identifiant TelAsk de l'usager. Cette information vous sera donnée par votre coordonnatrice de projet.
+    2. L'identifiant TelAsk de l'usager. **Cette information vous sera donnée par votre coordonnatrice de projet.**
     3. L'angle maximal de bascule ``en degrés?``.
     4. L'angle minimal de bascule ``en degrés?``.
     5. Le poids en ``kilogrammes (kg)`` de l'usager.
     6. L'adresse de connexion SFTP, pour transférer les fichiers à TelAsk. Par défaut, elle est à ``www.cati.telask.ca``.
-    7. Le nom d'usager SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
-    8. Mot de passe SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
+    7. Le nom d'usager SFTP à utiliser pour le transfert de données. **Demandez à votre coordonnatrice de projet pour les détails.**
+    8. Mot de passe SFTP à utiliser pour le transfert de données. **Demandez à votre coordonnatrice de projet pour les détails.**
 > Cliquez sur ``Sauvegarder`` pour enregistrer votre configuration.
 
 4. Cliquez sur l'onglet "Paramètres" (correspondant à l'engrenage) dans le menu du haut à droite.
@@ -230,6 +230,6 @@ Une fois connecté au réseau WiFi :
 
 8. Cocher les cases concernant l'activation du système de notifications en général, ainsi que la vibration et les lumières du module de notification.
 
-Bravo! Le système est maintenant prêt à être utilisé. Veuillez vous référer au guide d'utilisation pour opérer la plateforme.
+Bravo! Le système est maintenant prêt à être utilisé. **Veuillez vous référer au guide d'utilisation pour opérer la plateforme.**
 
 
