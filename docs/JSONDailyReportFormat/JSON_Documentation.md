@@ -38,8 +38,8 @@ This object contains all the tilt data for a specified day. It is separated in m
 |tiltCount.index|Explanation of each value of the data array sorted by index. The length of the array is 5||Integer Array||
 |tiltCount.count_user|Contains data related to the number of tilt done in a day according to the personal goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
 |tiltCount.count_clinician|Contains data related to the number of tilt done in a day according to the recommended goal. The data is contained in count, and the explanation of each element in the index | Number of tilt  | Integer array | greater or equal to 0|
-|slidingTravelGoalPercent|The sliding while travelling completion goal | % | Float | 0.0 to 100.0|
-|slidingRestGoalPercent|The sliding while at rest completion goal | % | Float  | 0.0 to 100.0|
+|slidingTravelGoalPercent|The sliding while travelling completion goal. If the percentage is equal to -1 it means that there is no data for this day | % | Integer | 0 to 100|
+|slidingRestGoalPercent|The sliding while at rest completion goal. If the percentage is equal to -1 it means that there is no data for this day | % | Integer  | 0 to 100|
 
 ---
 
@@ -48,209 +48,121 @@ This object contains all the pressure data for a specified day. It is separated 
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
-|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician| % | Float | 0.0 to 100.0|
-|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient| % | Float  | 0.0 to 100.0|
-|byTimestamp|Contains an object used as a dictionnary sorted by timestamps in ms. Each timestamp contains a pressureData object explained later. The pressure data can be taken at a maximum of 1 Hz. Each of these objects will need to be shown in a chart||Object||
-
-### pressureData Object
-The pressureData object contains all the pressure information at a specific time. This data represents the overall center of pressure as well as the per quadrant center of pressure. Here is the description of each field:
-
-| Key        | Description           | Unit  | Datatype  | Range |
-| :-------------|:-------------|:-----:|:-----:|:-----:|
-|center|The center of pressure of the patient in x and y coordinate|Inch|Float|-4.0 to 4.0|
-|quadrants|The center of pressure of the patient per quadrant starting at the top left quadrant at index 0, then clockwise in an x and y array of coordinate|Inch|Float|-4.0 to 4.0|
-|angle|The angle of the chair at this time|degree|Integer|-360° to 360°|
-
+|dailySittingTimeMinsPerHour|The time spent sitting in the chair in minutes during the day according to the time of day between 0h00 and 23h00.| Minute | Integer | 0 to 60 |
+|relievePressureGoalPercent|The percentage of completion of the relieve pressure goal set by the clinician. If the percentage is equal to -1 it means that there is no data for this day| % | Integer | 0 to 100|
+|relievePressurePersonalGoalPercent|The percentage of completion of the relieve pressure goal set by the patient. If the percentage is equal to -1 it means that there is no data for this day| % | Integer  | 0 to 100|
+|byTimestamp|Not yet implemented||Object||
 ---
 
 # Example JSON
 ``` .json
-
 {
-
-    "createdAt": 1623853098,
-
+    "createdAt": 1626180008,
     "userId": "1234",
-
     "maxAngle": 50,
-
-    "weight": 53,
-
-    "chairId": "7EE21E",
-
-    "date": "20210615",
-
-    "timezone": -4,
-
     "minAngle": 0,
-
+    "weight": 50,
+    "chairId": "18F6B4",
+    "date": "20210712",
+    "timezone": -4,
     "rev": "A",
-
     "tilt": {
-
         "distribution": {
-
             "index": [
-
                 "Less than 0°",
-
                 "0° to 15°",
-
                 "15° to 30°",
-
                 "30° to 45°",
-
                 "More than 45°"
-
             ],
-
             "duration_ms": [
-
                 0,
-
-                1000,
-
-                16000,
-
-                3000,
-
-                0
-
+                64000,
+                143000,
+                578000,
+                653000
             ]
-
         },
-
         "tiltCount": {
-
             "index": [
-
                 "Good angle and duration",
-
                 "Good angle but insufficient duration",
-
                 "Wrong angle but good duration",
-
                 "Cancelled tilt",
-
                 "Snoozed tilt"
-
             ],
-
             "count_user": [
-
-                0,
-
-                1,
-
-                0,
-
-                8,
-
-                0
-
-            ],
-
-            "count_clinician": [
-
-                0,
-
-                1,
-
-                0,
-
+                11,
+                3,
                 2,
-
-                0
-
+                2,
+                2
+            ],
+            "count_clinician": [
+                6,
+                6,
+                2,
+                7,
+                2
             ]
-
         },
-
-        "slidingTravelGoalPercent": 0.0018034265103697023,
-
-        "slidingRestGoalPercent": 1
-
+        "slidingTravelGoalPercent": 8,
+        "slidingRestGoalPercent": 70
     },
-
     "pressure": {
-
         "dailySittingTimeMinsPerHour": [
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
             0,
-
-            0,
-
-            0,
-
-            20,
-
-            24,
-
-            0,
-
-            29,
-
+            46,
             60,
-
             60,
-
-            2,
-
+            59,
+            60,
+            53,
             0,
-
             0,
-
             0,
-
+            0,
+            0,
+            0,
             0
-
         ],
-
-        "relievePressureGoalPercent": 0,
-
-        "releivePressurePersonalGoalPercent": 0,
-
+        "relievePressurePersonalGoalPercent": 61,
+        "releivePressureRecommendedGoalPercent": 29,
         "byTimestamp": {}
-
     }
-
 }
 ```
 
 # Example Graphs
 Here are the differents graphs and chart generated from the above sample file
 
-## Relieving Pressure Goal Progress Bar
-![RelievePressureGoal](pressure_graph/relieving_pressure_personal_and_clinician_goal.png)
+## Relieving Pressure Goal - Progress Bar
+![RelievePressureGoal](pressure_graph/reducePressionProgress_en.JPG)
 
-## Distribution of Angles Pie Chart
-![PressureCenter](tilt_graph/tilt_distribution.png)
+## Time spent in the wheelchair during the day - Bar Graph
+![RelievePressureGoal](pressure_graph/timeSitting_en.JPG)
 
-## Number of Tilts Achieved in a Day Bar Graph
-![PressureCenter](tilt_graph/tilts_made.png)
+## Distribution of Angles - Pie Chart
+![PressureCenter](tilt_graph/AngleDistribution_en.JPG)
 
-## Reduce Sliding at Rest Progress Bar
-![PressureCenter](tilt_graph/sliding_rest_goal.png)
+## Number of Tilts Achieved in a Day - Recommended goal - Bar Graph 
+![PressureCenter](tilt_graph/tiltMadeRecommended_en.JPG)
 
-## Reduce Sliding During Travel Progress Bar
-![PressureCenter](tilt_graph/sliding_travel_goal.png)
+## Number of Tilts Achieved in a Day - Personal goal - Bar Graph 
+![PressureCenter](tilt_graph/tiltMadePersonal_en.JPG)
+
+## Reduce Sliding at Rest - Progress Bar
+![PressureCenter](tilt_graph/reduceSlidingRest_en.JPG)
+
+## Reduce Sliding During Travel - Progress Bar
+![PressureCenter](tilt_graph/reduceSlidingMoving_en.JPG)
