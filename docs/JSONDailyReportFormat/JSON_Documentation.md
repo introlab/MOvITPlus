@@ -106,7 +106,7 @@ This object contains all the pressure data for a specified day. It is separated 
                 2
             ]
         },
-        "slidingTravelGoalPercent": 7,
+        "slidingTravelGoalPercent": 6,
         "slidingRestGoalPercent": 70
     },
     "pressure": {
@@ -137,7 +137,7 @@ This object contains all the pressure data for a specified day. It is separated 
             0
         ],
         "relievePressurePersonalGoalPercent": 61,
-        "releivePressureRecommendedGoalPercent": 28,
+        "releivePressureRecommendedGoalPercent": 29,
         "byTimestamp": {}
     }
 }
