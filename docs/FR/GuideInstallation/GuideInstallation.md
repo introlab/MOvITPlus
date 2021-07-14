@@ -45,7 +45,7 @@ La Figure 3 présente le module de notification. Il est composé d'un bouton pou
 |:----------:|:----------:|
 |**Figure 4 : Tapis de pression avec connecteur**|**Figure 5 : Module de pression**|
 
-Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comportes 9 cellules de pression disposés en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus) servant de protection et permettant une installation facile. Les 2 systèmes sont connetés par un câble plat.
+Les Figures 4 et 5 présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comporte 9 cellules de pression, disposées en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus), servant de protection et permettant une installation facile. Enfin, les 2 systèmes sont connectés avec un câble plat.
 
 ### **Câbles de branchement des modules (RJ-12)**
 
@@ -189,7 +189,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 21 : Page de connexion**|
 
-2. Sélectionnez ``Clinicien`` dans l'interface, comme montré à la figure 21.
+2. Sélectionnez ``Clinicien`` dans l'interface, tel que montré à la figure 21.
 > Les mots de passe par défaut sont les suivants : `Client` : `movit-user` et `Clinicien` : `movit-admin`
 
 
@@ -200,9 +200,9 @@ Une fois connecté au réseau WiFi :
 3. Cliquez sur l'onglet 'Configuration' dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
     2. L'identifiant TelAsk de l'usager. Cette information vous sera donnée par votre coordonnatrice de projet.
-    3. L'angle maximal de bascule.
-    4. L'angle minimal de bascule.
-    5. Le poids en kg de l'usager.
+    3. L'angle maximal de bascule ``en degrés?``.
+    4. L'angle minimal de bascule ``en degrés?``.
+    5. Le poids en ``kilogrammes (kg)`` de l'usager.
     6. L'adresse de connexion SFTP, pour transférer les fichiers à TelAsk. Par défaut, elle est à ``www.cati.telask.ca``.
     7. Le nom d'usager SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
     8. Mot de passe SFTP à utiliser pour le transfert de données. Demandez à votre coordonnatrice de projet pour les détails.
