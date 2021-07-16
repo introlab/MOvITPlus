@@ -109,10 +109,10 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
    * Le module peut être orienté selon le choix de l'utilisateur.
    * Il doit être placé sur la partie la plus vibrante de la base. Par exemple:
     
-     * > Amylior/Amsystem : sur le garde-boue
+     * > Fauteuils Amylior/Amsystem : sur le garde-boue
 ![INSTALLATION_IMU_MOBILE.JPG](images/imu_fixe_amylior.JPG)
 **Figure 13 : Position de l'IMU fixe sur un fauteuil Amylior**
-     * > Othofab : sur la surface verticale à l'arrière de la base
+     * > Fauteuils Othofab : sur la surface verticale à l'arrière de la base
        
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
