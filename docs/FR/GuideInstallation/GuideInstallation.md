@@ -28,7 +28,7 @@ La Figure 1 montre l'unité centrale de contrôle du système (UC). Elle est com
 |:----------:|
 |**Figure 2 : Centrale Inertielle (IMU)**|
 
-La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés IMU Fixe et IMU Mobile. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants MPU6050 qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesure l'angle de bascule. Nous mesurons l'angle de l'IMU fix par rapport à l'IMU mobile.
+La Figure 2 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés IMU Fixe et IMU Mobile. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants MPU6050 qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesure l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à l'IMU mobile.
 
 ### **Module de notification**
 
