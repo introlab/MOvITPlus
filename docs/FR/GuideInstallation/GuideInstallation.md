@@ -67,7 +67,7 @@ La Figure 8 montre la batterie USB (qui sert à alimenter tout le système avec 
 
 * Velcro
 * Ciseaux
-* Tie-Wraps (au besoin)
+* _Tie-Wraps_ (au besoin)
 
 ## PROCÉDURE D'INSTALLATION MATÉRIELLE
 
@@ -140,7 +140,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
    * Le bouton doit se trouver vers le haut.
    * Le câble doit se diriger vers l'arrière du fauteuil.
 2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 disponibles.
-   * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches (tie-wraps).
+   * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches (_tie-wraps_).
 
 ### ÉTAPE 6 - INSTALLER LE MODULE DE TAPIS DE PRESSION
 
@@ -164,7 +164,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 
 ### ÉTAPE 8 - FINITION
 
-1. Fixez les câbles qui "trainent" avec des attaches (tie-wraps).
+1. Fixez les câbles qui "trainent" avec des attaches (_tie-wraps_).
 2. Fermer la housse ``Latitude – Orthofab``.
 
 ## CONFIGURATION LOGICIELLE DU SYSTÈME
@@ -215,7 +215,7 @@ Une fois connecté au réseau WiFi :
     8. Mot de passe SFTP à utiliser pour le transfert de données. **Demandez à votre coordonnatrice de projet pour les détails.**
 > Cliquez sur ``Sauvegarder`` pour enregistrer votre configuration.
 
-4. Cliquez sur l'onglet "Paramètres" (correspondant à l'engrenage) dans le menu du haut à droite.
+4. Cliquez sur l'onglet ``Paramètres`` (correspondant à l'engrenage) dans le menu du haut à droite.
 
 |![INTERNET_CONFIGURATION.PNG](images/INTERNET_CONFIGURATION.PNG)|
 |:----------:|
