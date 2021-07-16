@@ -20,7 +20,7 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 |![UNITE_CENTRALE.JPG](images/pi_sans_case.jpg)|
 |**Figure 2 : Unité centrale de contrôle hors de son case**|
 
-Les figures 1 et 2 montrent ``l'unité centrale de contrôle du système (UC)``. Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion ``RJ-12`` (en gris) pour les modules / capteurs à connecter.
+Les ``Figures 1 et 2`` montrent ``l'unité centrale de contrôle du système (UC)``. Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion ``RJ-12`` (en gris) pour les modules / capteurs à connecter.
 
 ### **Module de centrale inertielle (x2)**
 
@@ -28,7 +28,7 @@ Les figures 1 et 2 montrent ``l'unité centrale de contrôle du système (UC)``.
 |:----------:|
 |**Figure 3 : Centrales Inertielles (IMUs)**|
 
-La Figure 3 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés ``IMU Fixe`` et ``IMU Mobile``. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants ``MPU6050``, qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesurer l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à celui de l'IMU mobile.
+La ``Figure 3`` montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés ``IMU Fixe`` et ``IMU Mobile``. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants ``MPU6050``, qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesurer l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à celui de l'IMU mobile.
 
 ### **Module de notification**
 
@@ -37,7 +37,7 @@ La Figure 3 montre un module de centrale inertielle. Nous utilisons deux types d
 |![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
 |**Figure 4 : Module de notification**|
 
-La Figure 4 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes électroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
+La ``Figure 4`` présente le module de notification. Il est composé d'un bouton poussoir, deux diodes électroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
 
 ### **Module du tapis de pression**
 
@@ -45,7 +45,7 @@ La Figure 4 présente le module de notification. Il est composé d'un bouton pou
 |:----------:|:----------:|
 |**Figure 5 : Tapis de pression avec connecteur**|**Figure 6 : Module de pression**|
 
-Les Figures 5 et 6 présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comporte 9 cellules de pression, disposées en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus), servant de protection et permettant une installation facile. Enfin, les 2 systèmes sont connectés avec un câble plat.
+Les ``Figures 5 et 6`` présentent le tapis de pression ainsi que le module d'acquisition des signaux du tapis de pression. Le tapis comporte 9 cellules de pression, disposées en carré de 3x3. Les cellules sont recouvertes de deux membranes flexibles de caoutchouc (dessous,dessus), servant de protection et permettant une installation facile. Enfin, les 2 systèmes sont connectés avec un câble plat.
 
 ### **Câbles de branchement des modules (RJ-12)**
 
@@ -61,7 +61,7 @@ La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différent
 |:----------:|
 |**Figure 8: Batterie USB**|
 
-La Figure 8 montre la batterie USB (qui sert à alimenter tout le système avec les capteurs, et le module central de contrôle). **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
+La ``Figure 8`` montre la batterie USB qui sert à alimenter tout le système (avec les capteurs et le module central de contrôle). **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
 
 ## MATÉRIEL SUPPLÉMENTAIRE D'INSTALLATION REQUIS
 
@@ -76,7 +76,7 @@ La Figure 8 montre la batterie USB (qui sert à alimenter tout le système avec 
 |![SCHEMA_GLOBAL.PNG](images/SCHEMA_GLOBAL.PNG)|
 |**Figure 9 : Schéma global**|
 
-La Figure 9 présente le schéma de connexion global du système. Les prochaines sections décrivent, étape par étape, comment connecter tous les modules.
+La ``Figure 9`` présente le schéma de connexion global du système. Les prochaines sections décrivent, étape par étape, comment connecter tous les modules.
 
 ### ÉTAPE 1 - INSTALLER L'UNITÉ CENTRALE DE CONTRÔLE
 
@@ -94,7 +94,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 * Le connecteur USB doit être facilement accessible pour brancher la batterie.
 * Un bon endroit pour l'installation est dans la housse ``Latitude – Orthofab``, qui protègera l'unité centrale et la batterie des intempéries.
   * Dans l’éventualité où l’espace est insuffisant au bas du fauteuil ou que la housse est absente, un petit sac peut être accroché au bas du fauteuil et être utilisé comme alternative pour le rangement de l’unité centrale de contrôle et de la batterie.  
-  * Ouvrez la housse ``Latitude – Orthofab`` tel qu’illustré à la figure x. Roulez ensuite la housse vers le bas pour découvrir le dos de la chaise.
+  * Ouvrez la housse ``Latitude – Orthofab`` tel qu’illustré à la ``Figure 11``. Roulez ensuite la housse vers le bas pour découvrir le dos de la chaise.
   * Laissez la housse ouverte (ou le sac) pendant toute l'installation.
   * La housse permet de laisser passer les fils de chaque côté facilement.
 
@@ -124,7 +124,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 |:----------:|
 |**Figure 14 : Installation du module centrale inertielle mobile**|
 
-1. Installez le module ``IMU Mobile`` sur la partie bascule du fauteuil avec du velcro :
+1. Installez le module ``IMU Mobile`` sur la _partie bascule_ du fauteuil avec du velcro :
    * Le module peut être orienté selon le choix de l'utilisateur.
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
@@ -149,9 +149,9 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 |:----------:|:----------:|
 |**Figure 16 : Installation du tapis de pression**|**Figure 17 : Connexion du tapis de pression avec le module de pression**|
 
-1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir Figure 17).
+1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir ``Figure 16``).
     1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
-    2. Le boitier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil (voir Figure 18).
+    2. Le boîtier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil (voir ``Figure 17``).
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
 ### ÉTAPE 7 - INSTALLER LA BATTERIE
@@ -182,7 +182,7 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |:----------:|
 |**Figure 19 : Configuration du point d'accès WiFi**|
 
-Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la Figure 20. 
+Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la ``Figure 19``. 
 >NOTE: Utilisez le réseau ``Movit-NOCONF`` le cas échéant
 
 > Le mot de passe par défaut du point d'accès est : ``movitplus``.
@@ -197,7 +197,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 20 : Page de connexion**|
 
-2. Sélectionnez ``Clinicien`` dans l'interface, tel que montré à la figure 21.
+2. Sélectionnez ``Clinicien`` dans l'interface, tel que montré à la ``Figure 20``.
 > Les mots de passe par défaut sont les suivants : `Client` : `movit-user` et `Clinicien` : `movit-admin`
 
 
@@ -205,7 +205,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 21 : Page de Configuration**|
 
-3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
+3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, tel que montrée à la ``Figure 21``. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
     2. L'identifiant TelAsk de l'usager. **Cette information vous sera donnée par votre coordonnatrice de projet.**
     3. L'angle maximal de bascule ``en degrés``.
@@ -222,13 +222,13 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 22 : Configuration du WiFi pour Internet**|
 
-5. Configurez le réseau WiFi pour avoir accès à Internet, tel que montré à la figure 23. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk. Vous devez entrer le nom de réseau, ainsi que le mot de passe.
+5. Configurez le réseau WiFi pour avoir accès à Internet, tel que montré à la ``Figure 22``. Cette étape est nécessaire si vous voulez transmettre des données à TelAsk. Vous devez entrer le nom de réseau, ainsi que le mot de passe.
 
 |![VALIDATION_CAPTEURS.PNG](images/VALIDATION_CAPTEURS.PNG)|
 |:----------:|
 |**Figure 23 : Validation du fonctionnement des capteurs**|
 
-6. Validez la communication avec les modules capteurs. À la figure 24, la page de configuration montre quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles ``RJ-12`` sont bien connectés.
+6. Validez la communication avec les modules capteurs. À la ``Figure 23``, la page de configuration montre quels capteurs sont connectés. Vous devriez voir des points verts à droite de chaque module. Si vous voyez des points rouges, vérifiez que vos câbles ``RJ-12`` sont bien connectés.
 
 |![PERMISSIONS.png](images/PERMISSIONS.png)|
 |:----------:|
