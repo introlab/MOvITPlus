@@ -6,7 +6,7 @@
 
 ## INTRODUCTION
 
-Ce guide explique les étapes à suivre pour installer tous les modules nécessaires au bon fonctionnement du système MOvIT+ ainsi que sa configuration sur n’importe quel fauteuil roulant (motorisé ou non).  Ce guide prévoit que tous les modules capteurs nécessaires, décrits dans la prochaine section, soient préalablement assemblés et prêts à être utilisés.
+Ce guide explique les étapes à suivre pour installer tous les modules nécessaires au bon fonctionnement du système MOvIT+, ainsi que sa configuration sur n’importe quel fauteuil roulant (motorisé ou non). Il prévoit que tous les modules capteurs nécessaires, décrits dans la prochaine section, soient préalablement assemblés et prêts à être utilisés.
 
 ## MODULES REQUIS
 
