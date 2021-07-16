@@ -107,7 +107,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 
 1. Installez le module ``IMU Fixe`` sur la _partie base_ du fauteuil, avec du velcro :
    * Le module peut être orienté selon le choix de l'utilisateur.
-   * Il doit être placé sur la partie la plus vibrante de la base. Par exemple:
+   * Il doit être placé sur la partie la plus vibrante de la base. **Par exemple:**
     
      * > Fauteuils Amylior/Amsystem : sur le garde-boue
 ![INSTALLATION_IMU_MOBILE.JPG](images/imu_fixe_amylior.JPG)
