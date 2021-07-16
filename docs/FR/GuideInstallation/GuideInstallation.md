@@ -80,7 +80,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 
 ### ÉTAPE 1 - INSTALLER L'UNITÉ CENTRALE DE CONTRÔLE
 
-|![INSTALLATION_BATTERIE.png](images/INSTALLATION_BATTERIE.png)||
+|![INSTALLATION_BATTERIE.png](images/INSTALLATION_BATTERIE.JPG)||
 |:----------:|:----------:|
 |**Figure 11 : Installation de l'unité centrale de contrôle**||
 
@@ -155,7 +155,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 
 ### ÉTAPE 7 - INSTALLER LA BATTERIE
 
-|![INSTALLATION_BATTERIE.png](images/INSTALLATION_BATTERIE.png)|
+|![INSTALLATION_BATTERIE.png](images/INSTALLATION_BATTERIE.JPG)|
 |:----------:|
 |**Figure 19 : Installation de la batterie**|
 
