@@ -26,7 +26,7 @@ Les figures 1 et 2 montrent ``l'unité centrale de contrôle du système (UC)``.
 
 |![IMU.JPG](images/IMU.JPG)|
 |:----------:|
-|**Figure 3 : Centrale Inertielle (IMU)**|
+|**Figure 3 : Centrales Inertielles (IMUs)**|
 
 La Figure 3 montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés ``IMU Fixe`` et ``IMU Mobile``. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants ``MPU6050``, qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesurer l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à celui de l'IMU mobile.
 
@@ -179,7 +179,7 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 
 |![WIFI_CONFIGURATION.PNG](images/WIFI_CONFIGURATION.PNG)|
 |:----------:|
-|**Figure 29 : Configuration du point d'accès WiFi**|
+|**Figure 19 : Configuration du point d'accès WiFi**|
 
 Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la Figure 20. 
 >NOTE: Utilisez le réseau ``Movit-NOCONF`` le cas échéant
