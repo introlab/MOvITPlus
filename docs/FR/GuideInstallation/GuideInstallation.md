@@ -109,12 +109,10 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
    * Le module peut être orienté selon le choix de l'utilisateur.
    * Il doit être placé sur la partie la plus vibrante de la base. Ex:
      * > Amylior/Amsystem : sur le garde-boue
+![INSTALLATION_IMU_MOBILE.JPG](images/imu_fixe_amylior.JPG)
+**Figure 14 : Position de l'IMU fixe sur un fauteuil Amylior**
      * > Othofab : sur la surface verticale à l'arrière de la base
        
-|![INSTALLATION_IMU_MOBILE.JPG](images/imu_fixe_amylior.JPG)|
-|:----------:|
-|**Figure 14 : Position de l'IMU fixe sur un fauteuil Amylior**|
-
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
