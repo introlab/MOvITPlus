@@ -16,7 +16,7 @@ The root object contains all the required data to recreate the graphics and stor
 |userId|The user Id provided by TelAsk||String||
 |maxAngle|The maximum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
 |minAngle|The minimum angle of tilt the wheelchair can acheive|degree|Integer|-360° to 360°|
-|weight|The weight of the patient|Kg|Integer|greater or equal to 0|
+|weight|The weight of the user|kg|Integer|greater or equal to 0|
 |chairId|The unique identifier of the chair||String||
 |date|A user readable date in YYYYMMDD format||String||
 |timezone|The timezone of the device|hours|Integer|-11 to 12|
