@@ -37,7 +37,7 @@ La Figure 3 montre un module de centrale inertielle. Nous utilisons deux types d
 |![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
 |**Figure 4 : Module de notification**|
 
-La Figure 4 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes electroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
+La Figure 4 présente le module de notification. Il est composé d'un bouton poussoir, deux diodes électroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
 
 ### **Module du tapis de pression**
 
@@ -53,7 +53,7 @@ Les Figures 5 et 6 présentent le tapis de pression ainsi que le module d'acquis
 |:----------:|
 |**Figure 7 : Câble ``RJ-12``**|
 
-La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différentes longueurs. Ceux-ci sont nécessaires pour connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmi ceux fournis, et ils peuvent être interchangés au besoin. Les cables ``RJ-12`` comprennent 6 contacts.
+La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différentes longueurs. Ceux-ci sont nécessaires pour connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmi ceux fournis, et ils peuvent être interchangés au besoin. Les câbles ``RJ-12`` comprennent 6 contacts.
 
 ### **Batterie et câble USB**
 
@@ -61,7 +61,7 @@ La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différent
 |:----------:|
 |**Figure 8: Batterie USB**|
 
-La Figure 8 montre la batterie USB (qui sert à alimenter tout le système avec les capteurs), et le module central de contrôle. **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
+La Figure 8 montre la batterie USB (qui sert à alimenter tout le système avec les capteurs, et le module central de contrôle). **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
 
 ## MATÉRIEL SUPPLÉMENTAIRE D'INSTALLATION REQUIS
 
@@ -113,7 +113,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 **Figure 13 : Position de l'IMU fixe sur un fauteuil Amylior**
      * > Othofab : sur la surface verticale à l'arrière de la base
        
-2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
@@ -139,7 +139,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
    * Le module de notification et son branchement ne doivent pas être accrochant.
    * Le bouton doit se trouver vers le haut.
    * Le câble doit se diriger vers l'arrière du fauteuil.
-2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
    * Les câbles peuvent être fixés aux appuie-bras à l’aide d’attaches (_tie-wraps_).
 
 ### ÉTAPE 6 - INSTALLER LE MODULE DE TAPIS DE PRESSION
@@ -151,7 +151,7 @@ La Figure 9 présente le schéma de connexion global du système. Les prochaines
 1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir Figure 17).
     1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
     2. Le boitier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil (voir Figure 18).
-2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
 ### ÉTAPE 7 - INSTALLER LA BATTERIE
 
