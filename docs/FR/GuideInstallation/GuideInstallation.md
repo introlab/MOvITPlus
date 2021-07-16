@@ -200,9 +200,9 @@ Une fois connecté au réseau WiFi :
 3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, tel que montrée à la Figure 22. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
     2. L'identifiant TelAsk de l'usager. **Cette information vous sera donnée par votre coordonnatrice de projet.**
-    3. L'angle maximal de bascule ``en degrés?``.
-    4. L'angle minimal de bascule ``en degrés?``.
-    5. Le poids en ``kilogrammes (kg)`` de l'usager.
+    3. L'angle maximal de bascule ``en degrés``.
+    4. L'angle minimal de bascule ``en degrés``.
+    5. Le poids ``en kilogrammes (kg)`` de l'usager.
     6. L'adresse de connexion SFTP, pour transférer les fichiers à TelAsk. Par défaut, elle est à ``www.cati.telask.ca``.
     7. Le nom d'usager SFTP à utiliser pour le transfert de données. **Demandez à votre coordonnatrice de projet pour les détails.**
     8. Mot de passe SFTP à utiliser pour le transfert de données. **Demandez à votre coordonnatrice de projet pour les détails.**
@@ -228,7 +228,11 @@ Une fois connecté au réseau WiFi :
 
 7. Cochez la case de ``Permission concernant l'envoi des données à TelAsk`` si désiré.
 
-8. Cocher les cases concernant l'activation du système de notifications en général, ainsi que la vibration et les lumières du module de notification.
+8. Cochez la case ``Notifications et enregistrements des bascules`` pour activer les notifications et l'enregistement de l'activité.
+
+9. Cochez, au choix, les cases ``Clignoter la lumière lors d'une notification`` et ``Vibrer lors d'une notification``.
+
+10. Réglez le ``temps de snooze (en minutes)``, pour mettre en pause et rappeler plus tard une notification.
 
 Bravo! Le système est maintenant prêt à être utilisé. **Veuillez vous référer au guide d'utilisation pour opérer la plateforme.**
 
