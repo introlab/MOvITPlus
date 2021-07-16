@@ -106,8 +106,16 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 |**Figure 13 : Installation du module centrale inertielle fixe**|
 
 1. Installez le module ``IMU Fixe`` sur la partie base du fauteuil, avec du velcro :
-   * Le module doit être orienté avec le connecteur vers le bas.
-2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+   * Le module peut être orienté selon le choix de l'utilisateur.
+   * Il doit être placé sur la partie la plus vibrante de la base. Ex:
+     * > Amylior/Amsystem : sur le garde-boue
+     * > Othofab : sur la surface verticale à l'arrière de la base
+       
+|![INSTALLATION_IMU_MOBILE.JPG](images/imu_fixe_amylior.JPG)|
+|:----------:|
+|**Figure 14 : Position de l'IMU fixe sur un fauteuil Amylior**|
+
+2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
@@ -119,7 +127,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 
 1. Installez le module ``IMU Mobile`` sur la partie bascule du fauteuil avec du velcro :
    * Le module peut être orienté selon le choix de l'utilisateur.
-2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
@@ -145,7 +153,7 @@ La Figure 10 présente le schéma de connexion global du système. Les prochaine
 1. Installez le tapis de pression sous le fauteuil. Portez une attention particulière au sens et à la position du tapis. Le câble plat doit être vers le bas (en contact avec le fauteuil) et positionné de façon à ce que le câble plat sorte vers l’arrière (voir Figure 17).
     1. Le tapis de pression doit être installé le plus centré possible sur le fauteuil.
     2. Le boitier du module de pression et son câble ne doivent pas présenter de risque de coincement avec le système de bascule du fauteuil (voir Figure 18).
-2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
+2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 disponibles.
 
 ### ÉTAPE 7 - INSTALLER LA BATTERIE
 
@@ -175,7 +183,8 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |:----------:|
 |**Figure 20 : Configuration du point d'accès WiFi**|
 
-Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la Figure 20.
+Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la Figure 20. 
+>NOTE: Utilisez le réseau ``Movit-NOCONF`` le cas échéant
 
 > Le mot de passe par défaut du point d'accès est : ``movitplus``.
 
@@ -233,6 +242,10 @@ Une fois connecté au réseau WiFi :
 9. Cochez, au choix, les cases ``Clignoter la lumière lors d'une notification`` et ``Vibrer lors d'une notification``.
 
 10. Réglez le ``temps de snooze (en minutes)``, pour mettre en pause et rappeler plus tard une notification.
+
+|![PERMISSIONS.png](images/parametres_notif.png)|
+|:----------:|
+|**Figure 26 : Paramètres des notifications**|
 
 Bravo! Le système est maintenant prêt à être utilisé. **Veuillez vous référer au guide d'utilisation pour opérer la plateforme.**
 
