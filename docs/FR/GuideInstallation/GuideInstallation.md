@@ -128,7 +128,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
    * Le module peut être orienté selon le choix de l'utilisateur.
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
-> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
+> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'ils ne soient pas accrochants, et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
 ### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATIONS**
 
