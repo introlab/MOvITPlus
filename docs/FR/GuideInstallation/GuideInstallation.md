@@ -30,14 +30,14 @@ Les ``Figures 1 et 2`` montrent ``l'unité centrale de contrôle du système (UC
 
 La ``Figure 3`` montre un module de centrale inertielle. Nous utilisons deux types de modules dans le système. Ils sont identifiés ``IMU Fixe`` et ``IMU Mobile``. Physiquement, les deux modules sont identiques. Ils diffèrent seulement dans l'électronique qui est à l'intérieur. Plus précisément, la différence se trouve dans les composants ``MPU6050``, qui sont configurés pour répondre à deux adresses I2C différentes sur le bus de communication. En tandem, ces modules servent à mesurer l'angle de bascule. Nous mesurons l'angle de l'IMU fixe par rapport à celui de l'IMU mobile.
 
-### **Module de notification**
+### **Module de notifications**
 
 ||
 |:----------:|
 |![NOTIFICATION.JPG](images/NOTIFICATION.JPG)|
-|**Figure 4 : Module de notification**|
+|**Figure 4 : Module de notifications**|
 
-La ``Figure 4`` présente le module de notification. Il est composé d'un bouton poussoir, deux diodes électroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
+La ``Figure 4`` présente le module de notifications. Il est composé d'un bouton poussoir, deux diodes électroluminescentes (DELs, une rouge et une verte) et d'un moteur vibreur. Il sert à avertir l'utilisateur du fauteuil lorsque c'est le moment d'effectuer une bascule.
 
 ### **Module du tapis de pression**
 
@@ -130,14 +130,14 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 
 > La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
-### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATION**
+### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATIONS**
 
 |![INSTALLATION_MODULE_NOTIFICATION.JPG](images/INSTALLATION_MODULE_NOTIFICATION.JPG)|
 |:----------:|
-|**Figure 15 : Installation du module de notification**|
+|**Figure 15 : Installation du module de notifications**|
 
-1. Installez le module de notification avec du velcro sur un des appuie-bras du fauteuil:
-   * Le module de notification et son branchement ne doivent pas être accrochant.
+1. Installez le module de notifications avec du velcro sur un des appuie-bras du fauteuil:
+   * Le module de notifications et son branchement ne doivent pas être accrochant.
    * Le bouton doit se trouver vers le haut.
    * Le câble doit se diriger vers l'arrière du fauteuil.
 2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
@@ -183,7 +183,7 @@ Tous les modules sont alimentés par l'unité centrale de contrôle. Le système
 |**Figure 19 : Configuration du point d'accès WiFi**|
 
 Lorsque le système est démarré correctement, un point d'accès WiFi apparaît. À l'aide de votre tablette ou de votre ordinateur, connectez-vous au réseau qui se nomme ``Movit-XXXXXX``, où ``XXXXX`` est le numéro du point d'accès (qui est identifié sur chaque unité centrale de contrôle par une étiquette). Un exemple est donné à la ``Figure 19``. 
->NOTE: Utilisez le réseau ``Movit-NOCONF`` le cas échéant
+>NOTE: Utilisez le réseau ``Movit-NOCONF`` le cas échéant.
 
 > Le mot de passe par défaut du point d'accès est : ``movitplus``.
 
