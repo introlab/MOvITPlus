@@ -14,10 +14,10 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 
 ### **Module de l’unité centrale de contrôle**
 
-|![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.jpg)|
+|![UNITE_CENTRALE.JPG](images/pi_avec_case.jpg)|
 |:----------:|
 |**Figure 1.1 : Unité centrale de contrôle**|
-|![UNITE_CENTRALE.JPG](images/UNITE_CENTRALE.JPG)|
+|![UNITE_CENTRALE.JPG](images/pi_sans_case.jpg)|
 |**Figure 1.2 : Unité centrale de contrôle hors de son case**|
 
 La Figure 1 montre ``l'unité centrale de contrôle du système (UC)``. Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion ``RJ-12`` (en gris) pour les modules / capteurs à connecter.
