@@ -57,7 +57,7 @@ This object contains all the pressure data for a specified day. It is separated 
 # Example JSON
 ``` .json
 {
-    "createdAt": 1626180008,
+    "createdAt": 1626789509,
     "userId": "1234",
     "maxAngle": 50,
     "minAngle": 0,
@@ -106,8 +106,8 @@ This object contains all the pressure data for a specified day. It is separated 
                 2
             ]
         },
-        "slidingTravelGoalPercent": 8,
-        "slidingRestGoalPercent": 70
+        "slidingTravelGoalPercent": 70,
+        "slidingRestGoalPercent": 7
     },
     "pressure": {
         "dailySittingTimeMinsPerHour": [
@@ -122,10 +122,10 @@ This object contains all the pressure data for a specified day. It is separated 
             0,
             0,
             0,
-            46,
-            60,
-            60,
-            59,
+            4,
+            0,
+            0,
+            25,
             60,
             53,
             0,
@@ -137,32 +137,58 @@ This object contains all the pressure data for a specified day. It is separated 
             0
         ],
         "relievePressurePersonalGoalPercent": 61,
-        "releivePressureRecommendedGoalPercent": 29,
+        "releivePressureRecommendedGoalPercent": 28,
         "byTimestamp": {}
     }
 }
 ```
 
-# Example Graphs
-Here are the differents graphs and chart generated from the above sample file
+# Example Daily Graphs
+Here are the differents daily graphs and chart generated from the above sample file 
 
 ## Relieving Pressure Goal - Progress Bar
-![RelievePressureGoal](pressure_graph/reducePressionProgress_en.JPG)
+![RelievePressureGoal](pressure_graph/ReduirePressionProgession_12.JPG)
 
 ## Time spent in the wheelchair during the day - Bar Graph
-![RelievePressureGoal](pressure_graph/timeSitting_en.JPG)
+![RelievePressureGoal](pressure_graph/TempsFauteuil_12.JPG)
 
 ## Distribution of Angles - Pie Chart
-![PressureCenter](tilt_graph/AngleDistribution_en.JPG)
+![PressureCenter](tilt_graph/DistributionAngle_12.JPG)
 
 ## Number of Tilts Achieved in a Day - Recommended goal - Bar Graph 
-![PressureCenter](tilt_graph/tiltMadeRecommended_en.JPG)
+![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_12.JPG)
 
 ## Number of Tilts Achieved in a Day - Personal goal - Bar Graph 
-![PressureCenter](tilt_graph/tiltMadePersonal_en.JPG)
+![PressureCenter](tilt_graph/basculeRealiseePersonal_12.JPG)
 
 ## Reduce Sliding at Rest - Progress Bar
-![PressureCenter](tilt_graph/reduceSlidingRest_en.JPG)
+![PressureCenter](tilt_graph/ReduireGlissementRepos_12.JPG)
 
 ## Reduce Sliding During Travel - Progress Bar
-![PressureCenter](tilt_graph/reduceSlidingMoving_en.JPG)
+![PressureCenter](tilt_graph/ReduireGlissementDeplacement_12.JPG)
+
+
+
+# Example Monthly Graphs
+Here are the differents monthly graphs and chart generated from the above sample file
+
+## Relieving Pressure Goal - Bar Graph
+![RelievePressureGoal](pressure_graph/ReduirePressionProgessionRecommended_mois.JPG)
+
+## Time spent in the wheelchair during the day - Bar Graph
+![RelievePressureGoal](pressure_graph/TempsFauteuil_mois.JPG)
+
+## Distribution of Angles - Stacked Bar Graph
+![PressureCenter](tilt_graph/DistributionAngle_mois.JPG)
+
+## Number of Tilts Achieved in a Day - Recommended goal - Stacked Bar Graph 
+![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_mois.JPG)
+
+## Number of Tilts Achieved in a Day - Personal goal - Stacked Bar Graph 
+![PressureCenter](tilt_graph/basculeRealiseePersonal_mois.JPG)
+
+## Reduce Sliding at Rest - Bar Graph
+![PressureCenter](tilt_graph/ReduireGlissementRepos_mois.JPG)
+
+## Reduce Sliding During Travel - Bar Graph
+![PressureCenter](tilt_graph/ReduireGlissementDeplacement_mois.JPG)
