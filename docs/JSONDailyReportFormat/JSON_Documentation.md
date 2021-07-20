@@ -187,14 +187,22 @@ For each of the days of the month with tilt data, the indexes present in the JSO
 
 Example for day 14, the values obtained with the JSON file:
 ``` .json
-"distribution": {
-"index": ["duration_ms": [
-"Less than 0 °", 0
-"0 ° to 15 °", 3000
-"15 ° to 30 °", 0
-"30 ° to 45 °", 1326000
-"More than 45 °" 33000
-],]
+ "distribution": {
+            "index": [
+                "Less than 0°",
+                "0° to 15°",
+                "15° to 30°",
+                "30° to 45°",
+                "More than 45°"
+            ],
+            "duration_ms": [
+                0,
+                3000,
+                0,
+                1326000,
+                33000
+            ]
+         }
 ```
 The total tilt time is therefore: 3000 + 1326000 + 33000 = 1362000 ms.
 
@@ -216,14 +224,21 @@ For each of the days of the month with tilt data, the indexes present in the JSO
 
 Example for day 12, the values obtained with the JSON file:
 ``` .json
-"tiltCount": {
-"index": ["count_user": [
-"Good angle and duration", 11
-"Good angle but insufficient duration", 3
-"Wrong angle but good duration", 2
-"Canceled tilt", 2
-"Snoozed tilt" 2
-],],
+ "tiltCount": {
+            "index": [
+                "Good angle and duration",
+                "Good angle but insufficient duration",
+                "Wrong angle but good duration",
+                "Cancelled tilt",
+                "Snoozed tilt"
+            ],
+            "count_user": [
+                11,
+                3,
+                2,
+                2,
+                2
+            ],
 ```
 The displayed value "Good angle and good duration" is equal to 11.
 
