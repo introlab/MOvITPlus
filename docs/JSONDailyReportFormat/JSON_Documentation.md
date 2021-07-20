@@ -173,6 +173,7 @@ Here are the differents daily graphs and chart generated from the above sample f
 Here are the differents monthly graphs and chart generated from the above sample file
 
 ## Relieving Pressure Goal - Bar Graph
+![RelievePressureGoal](pressure_graph/ReduirePressionProgessionPersonal_mois.JPG)
 ![RelievePressureGoal](pressure_graph/ReduirePressionProgessionRecommended_mois.JPG)
 
 ## Time spent in the wheelchair during the day - Bar Graph
