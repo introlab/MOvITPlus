@@ -149,7 +149,13 @@ Here are the differents daily graphs and chart generated from the above sample f
 
 ## Relieving Pressure Goal - Progress Bar
 ![RelievePressureGoal](pressure_graph/ReduirePressionProgession_12.JPG)
-For each of the days of the month with tilt data, the indexes present in the JSON file: (Less than 0 °, 0 ° to 15 °, 15 ° to 30 °, 30 ° to 45 °, More than 45 °) are stacked according to the days of the month. The values of each index for a day are the percentages calculated with the values present in the JSON file for that day.
+
+## Time spent in the wheelchair during the day - Bar Graph
+![RelievePressureGoal](pressure_graph/TempsFauteuil_12.JPG)
+
+## Distribution of Angles - Pie Chart
+![PressureCenter](tilt_graph/DistributionAngle_12.JPG)
+For each of the days of the month with tilt data, the indexes present in the JSON file: (Less than 0°, 0° to 15°, 15° to 30°, 30° to 45°, More than 45°) are stacked according to the days of the month. The values of each index for a day are the percentages calculated with the values present in the JSON file for that day.
 
 Example for day 14, the values obtained with the JSON file:
 ``` .json
@@ -162,17 +168,11 @@ Example for day 14, the values obtained with the JSON file:
 "More than 45 °" 33000
 ],]
 ```
-The total tilt time is therefore: 3000 + 1326000 + 33000 = 1362000 ms
+The total tilt time is therefore: 3000 + 1326000 + 33000 = 1362000 ms.
 The percentage of the index "30° to 45°": (1,326,000 / 1,362,000) x 100% = 97.36%.
 The percentage of the index "45° and more": (33,000 / 1,362,000) x 100% = 2.42%.
 The percentage of the index "0° to 15°": (3000/1362000) x 100% = 0.22%.
 The other indexes equal 0%.
-
-## Time spent in the wheelchair during the day - Bar Graph
-![RelievePressureGoal](pressure_graph/TempsFauteuil_12.JPG)
-
-## Distribution of Angles - Pie Chart
-![PressureCenter](tilt_graph/DistributionAngle_12.JPG)
 
 ## Number of Tilts Achieved in a Day - Recommended goal - Bar Graph 
 ![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_12.JPG)
