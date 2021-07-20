@@ -156,29 +156,6 @@ Here are the differents daily graphs and chart generated from the above sample f
 ## Distribution of Angles - Pie Chart
 ![PressureCenter](tilt_graph/DistributionAngle_12.JPG)
 
-For each of the days of the month with tilt data, the indexes present in the JSON file: (Less than 0°, 0° to 15°, 15° to 30°, 30° to 45°, More than 45°) are stacked according to the days of the month. The values of each index for a day are the percentages calculated with the values present in the JSON file for that day.
-
-Example for day 14, the values obtained with the JSON file:
-``` .json
-"distribution": {
-"index": ["duration_ms": [
-"Less than 0 °", 0
-"0 ° to 15 °", 3000
-"15 ° to 30 °", 0
-"30 ° to 45 °", 1326000
-"More than 45 °" 33000
-],]
-```
-The total tilt time is therefore: 3000 + 1326000 + 33000 = 1362000 ms.
-
-The percentage of the index "30° to 45°": (1,326,000 / 1,362,000) x 100% = 97.36%.
-
-The percentage of the index "45° and more": (33,000 / 1,362,000) x 100% = 2.42%.
-
-The percentage of the index "0° to 15°": (3000/1362000) x 100% = 0.22%.
-
-The other indexes equal 0%.
-
 ## Number of Tilts Achieved in a Day - Recommended goal - Bar Graph 
 ![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_12.JPG)
 
@@ -204,13 +181,61 @@ Here are the differents monthly graphs and chart generated from the above sample
 ![RelievePressureGoal](pressure_graph/TempsFauteuil_mois.JPG)
 
 ## Distribution of Angles - Stacked Bar Graph
+For each of the days of the month with tilt data, the indexes present in the JSON file: (Less than 0°, 0° to 15°, 15° to 30°, 30° to 45°, More than 45°) are stacked according to the days of the month. The values of each index for a day are the percentages calculated with the values present in the JSON file for that day.
+
 ![PressureCenter](tilt_graph/DistributionAngle_mois.JPG)
+
+Example for day 14, the values obtained with the JSON file:
+``` .json
+"distribution": {
+"index": ["duration_ms": [
+"Less than 0 °", 0
+"0 ° to 15 °", 3000
+"15 ° to 30 °", 0
+"30 ° to 45 °", 1326000
+"More than 45 °" 33000
+],]
+```
+The total tilt time is therefore: 3000 + 1326000 + 33000 = 1362000 ms.
+
+The percentage of the index "30° to 45°": (1,326,000 / 1,362,000) x 100% = 97.36%.
+
+The percentage of the index "45° and more": (33,000 / 1,362,000) x 100% = 2.42%.
+
+The percentage of the index "0° to 15°": (3000/1362000) x 100% = 0.22%.
+
+The other indexes equal 0%.
 
 ## Number of Tilts Achieved in a Day - Recommended goal - Stacked Bar Graph 
 ![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_mois.JPG)
 
 ## Number of Tilts Achieved in a Day - Personal goal - Stacked Bar Graph 
+For each of the days of the month with tilt data, the indexes present in the JSON file: (Good angle and good duration, Good angle but insufficient duration, Good duration but insufficient angle, Canceled tilt) are stacked according to the days of the month . The values for each index for a day are the personal goal values present in the JSON file for that day.
+
 ![PressureCenter](tilt_graph/basculeRealiseePersonal_mois.JPG)
+
+Example for day 12, the values obtained with the JSON file:
+``` .json
+"tiltCount": {
+"index": ["count_user": [
+"Good angle and duration", 11
+"Good angle but insufficient duration", 3
+"Wrong angle but good duration", 2
+"Canceled tilt", 2
+"Snoozed tilt" 2
+],],
+```
+The displayed value "Good angle and good duration" is equal to 11.
+
+The displayed value "Good angle but insufficient duration" is equal to 3.
+
+The displayed value "Good duration but insufficient angle" is equal to 2.
+
+The displayed value "Canceled tilt" is equal to 2.
+
+The "Snoozed tilt" value is not displayed in the month chart.
+
+The total value of the total tilts is therefore: 11 + 3 + 2 + 2 = 18
 
 ## Reduce Sliding at Rest - Bar Graph
 ![PressureCenter](tilt_graph/ReduireGlissementRepos_mois.JPG)
