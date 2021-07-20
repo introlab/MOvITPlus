@@ -174,11 +174,69 @@ Here are the differents daily graphs and chart generated from the above sample f
 Here are the differents monthly graphs and chart generated from the above sample file
 
 ## Relieving Pressure Goal - Bar Graph
+For each of the days with data of tilts according to the personal goal, the value of the percentage obtained by the JSON file is displayed according to the day of the month.
+
 ![RelievePressureGoal](pressure_graph/ReduirePressionProgessionPersonal_mois.JPG)
 ![RelievePressureGoal](pressure_graph/ReduirePressionProgessionRecommended_mois.JPG)
 
+Example:
+
+For day 5, the value with the JSON file: "relievePressurePersonalGoalPercent": 0, "releivePressureRecommendedGoalPercent": 0,
+
+For day 8, the value with the JSON file: "relievePressurePersonalGoalPercent": 22, "releivePressureRecommendedGoalPercent": 9,
+
+For day 9, the value with the JSON file: "relievePressurePersonalGoalPercent": 18, "releivePressureRecommendedGoalPercent": 9,
+
+For day 12, the value with the JSON file: "relievePressurePersonalGoalPercent": 61, "releivePressureRecommendedGoalPercent": 28,
+
+For day 13, the value with the JSON file: "relievePressurePersonalGoalPercent": 42, "releivePressureRecommendedGoalPercent": 5,
+
+For day 14, the value with the JSON file: "relievePressurePersonalGoalPercent": 25, "releivePressureRecommendedGoalPercent": 7,
+
+
 ## Time spent in the wheelchair during the day - Bar Graph
+For each day of the month with chair time data, the total value of the time in hours is presented as a function of the day of the month.
+
 ![RelievePressureGoal](pressure_graph/TempsFauteuil_mois.JPG)
+
+Example for day 12, the values obtained with the JSON file:
+```.json
+"pressure": {
+        "dailySittingTimeMinsPerHour": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            25,
+            60,
+            53,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+```
+
+The total amount of time seated for this day is therefore:
+
+Total time = 4 + 25 + 60 + 53 = 142 minutes
+
+Minute to hour conversion = 142 [min] / 60 [min/h] = 2.36 hours
+
+The value on the 12th day of July is therefore 2.36 h.
 
 ## Distribution of Angles - Stacked Bar Graph
 For each of the days of the month with tilt data, the indexes present in the JSON file: (Less than 0°, 0° to 15°, 15° to 30°, 30° to 45°, More than 45°) are stacked according to the days of the month. The values of each index for a day are the percentages calculated with the values present in the JSON file for that day.
