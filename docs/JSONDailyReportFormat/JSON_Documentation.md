@@ -181,17 +181,17 @@ For each of the days with data of tilts according to the personal goal, the valu
 
 Example:
 
-For day 5, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 0, "relievePressureRecommendedGoalPercent": 0,```
+For day 5, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 0, "relievePressureRecommendedGoalPercent": 0,```
 
-For day 8, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 22, "relievePressureRecommendedGoalPercent": 9,``` 
+For day 8, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 22, "relievePressureRecommendedGoalPercent": 9,``` 
 
-For day 9, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 18, "relievePressureRecommendedGoalPercent": 9,```
+For day 9, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 18, "relievePressureRecommendedGoalPercent": 9,```
 
-For day 12, the value with the JSON file: ```.json"relievePressurePersonalGoalPercent": 61, "relievePressureRecommendedGoalPercent": 28,```
+For day 12, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 61, "relievePressureRecommendedGoalPercent": 28,```
 
-For day 13, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 42, "relievePressureRecommendedGoalPercent": 5,```
+For day 13, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 42, "relievePressureRecommendedGoalPercent": 5,```
 
-For day 14, the value with the JSON file: ```.json"relievePressurePersonalGoalPercent": 25, "relievePressureRecommendedGoalPercent": 7,```
+For day 14, the value with the JSON file: ```"relievePressurePersonalGoalPercent": 25, "relievePressureRecommendedGoalPercent": 7,```
 
 
 ## Time spent in the wheelchair during the day - Bar Graph
@@ -297,7 +297,7 @@ Example for day 12, the values obtained with the JSON file:
                 2
             ]
  ```
- The displayed value "Good angle and good duration" is equal to 6.
+The displayed value "Good angle and good duration" is equal to 6.
 
 The displayed value "Good angle but insufficient duration" is equal to 6.
 
@@ -345,8 +345,42 @@ The "Snoozed tilt" value is not displayed in the month chart.
 
 The total value of the total tilts is therefore: 11 + 3 + 2 + 2 = 18
 
-## Reduce Sliding at Rest - Bar Graph
+## Reduce Sliding at Rest - Bar Graphn
+
+For each of the days with data while moving, the percentage value obtained by the JSON file for a day is displayed according to the day of the month.
+
 ![PressureCenter](tilt_graph/ReduireGlissementRepos_mois.JPG)
 
+Example:
+
+For day 5, the value with the JSON file: ```"slidingTravelGoalPercent": 39,```
+
+For day 8, the value with the JSON file: ```"slidingTravelGoalPercent": 23,```
+
+For day 9, the value with the JSON file: ```"slidingTravelGoalPercent": 7,```
+
+For day 12, the value with the JSON file: ```"slidingTravelGoalPercent": 70,```
+
+For day 13, the value with the JSON file: ```"slidingTravelGoalPercent": 56,```
+
+For day 14, the value with the JSON file: ```"slidingTravelGoalPercent": 33,```
+
 ## Reduce Sliding During Travel - Bar Graph
+
+For each of the days with data at rest, the percentage value obtained by the JSON file for a day is displayed according to the day of the month.
+
 ![PressureCenter](tilt_graph/ReduireGlissementDeplacement_mois.JPG)
+
+Example:
+
+For day 5, the value with the JSON file: ```"slidingRestGoalPercent": 2,```
+
+For day 8, the value with the JSON file: ```"slidingRestGoalPercent": 2,```
+
+For day 9, the value with the JSON file: ```"slidingRestGoalPercent": 0,```
+
+For day 12, the value with the JSON file: ```"slidingRestGoalPercent": 7,```
+
+For day 13, the value with the JSON file: ```"slidingRestGoalPercent": 1,```
+
+For day 14, the value with the JSON file: ```"slidingRestGoalPercent": 9,```
