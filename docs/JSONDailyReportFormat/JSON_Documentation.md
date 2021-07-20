@@ -8,7 +8,7 @@ Each transmitted file name contains the userId, the chairId, and the date in reg
 The following section details the different fields in the transmitted JSON object. You can find an example at the end of this document. Each key in the object follows the camel case naming convention. All timestamps are in UNIX time in millisecond since January 1st, 1970 at UTC.
 
 ## Object Root Node
-The root object contains all the required data to recreate the graphics and store the data in a database. With the daily files it is possible to create graphs according to the day and the month. Here is the description of each top level field:
+The root object contains all the required data to recreate the graphics and store the data in a database. With the daily files it is possible to create daily graphics and monthly graphics. Here is the description of each top level field:
 
 | Key        | Description           | Unit  | Datatype  | Range |
 | :------------- |:-------------| :-----:| :-----:| :-----:|
