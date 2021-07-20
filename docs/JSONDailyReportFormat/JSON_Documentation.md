@@ -181,17 +181,17 @@ For each of the days with data of tilts according to the personal goal, the valu
 
 Example:
 
-For day 5, the value with the JSON file: "relievePressurePersonalGoalPercent": 0, "releivePressureRecommendedGoalPercent": 0,
+For day 5, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 0, "relievePressureRecommendedGoalPercent": 0,```
 
-For day 8, the value with the JSON file: "relievePressurePersonalGoalPercent": 22, "releivePressureRecommendedGoalPercent": 9,
+For day 8, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 22, "relievePressureRecommendedGoalPercent": 9,``` 
 
-For day 9, the value with the JSON file: "relievePressurePersonalGoalPercent": 18, "releivePressureRecommendedGoalPercent": 9,
+For day 9, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 18, "relievePressureRecommendedGoalPercent": 9,```
 
-For day 12, the value with the JSON file: "relievePressurePersonalGoalPercent": 61, "releivePressureRecommendedGoalPercent": 28,
+For day 12, the value with the JSON file: ```.json"relievePressurePersonalGoalPercent": 61, "relievePressureRecommendedGoalPercent": 28,```
 
-For day 13, the value with the JSON file: "relievePressurePersonalGoalPercent": 42, "releivePressureRecommendedGoalPercent": 5,
+For day 13, the value with the JSON file: ```.json "relievePressurePersonalGoalPercent": 42, "relievePressureRecommendedGoalPercent": 5,```
 
-For day 14, the value with the JSON file: "relievePressurePersonalGoalPercent": 25, "releivePressureRecommendedGoalPercent": 7,
+For day 14, the value with the JSON file: ```.json"relievePressurePersonalGoalPercent": 25, "relievePressureRecommendedGoalPercent": 7,```
 
 
 ## Time spent in the wheelchair during the day - Bar Graph
@@ -273,13 +273,48 @@ The percentage of the index "0° to 15°": (3000/1362000) x 100% = 0.22%.
 The other indexes equal 0%.
 
 ## Number of Tilts Achieved in a Day - Recommended goal - Stacked Bar Graph 
+For each of the days of the month with tilt data, the indexes present in the JSON file: (Good angle and good duration, Good angle but insufficient duration, Good duration but insufficient angle, Canceled tilt) are stacked according to the days of the month . The values for each index for a day are the recommended goal values present in the JSON file for that day.
+
 ![PressureCenter](tilt_graph/basculeRealiseeJourRecommended_mois.JPG)
+
+Example for day 12, the values obtained with the JSON file:
+
+
+``` .json
+ "tiltCount": {
+            "index": [
+                "Good angle and duration",
+                "Good angle but insufficient duration",
+                "Wrong angle but good duration",
+                "Cancelled tilt",
+                "Snoozed tilt"
+            ],
+  "count_clinician": [
+                6,
+                6,
+                2,
+                7,
+                2
+            ]
+ ```
+ The displayed value "Good angle and good duration" is equal to 6.
+
+The displayed value "Good angle but insufficient duration" is equal to 6.
+
+The displayed value "Good duration but insufficient angle" is equal to 2.
+
+The displayed value "Canceled tilt" is equal to 7.
+
+The "Snoozed tilt" value is not displayed in the month chart.
+
+The total value of the total tilts is therefore: 6 + 6 + 2 + 7 = 21
+ 
 
 ## Number of Tilts Achieved in a Day - Personal goal - Stacked Bar Graph 
 For each of the days of the month with tilt data, the indexes present in the JSON file: (Good angle and good duration, Good angle but insufficient duration, Good duration but insufficient angle, Canceled tilt) are stacked according to the days of the month . The values for each index for a day are the personal goal values present in the JSON file for that day.
 
 ![PressureCenter](tilt_graph/basculeRealiseePersonal_mois.JPG)
-
+            
 Example for day 12, the values obtained with the JSON file:
 ``` .json
  "tiltCount": {
