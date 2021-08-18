@@ -3,6 +3,7 @@
 > Révisions:
 > * 16/04/2019, Dominic Létourneau, Alex Morin. Écriture du document à partir de l'ancien guide d'installation.
 > * 12/12/2019, Charles Maheu. Correction et mise à jour de certaines informations. Ajout d'images plus représentatives.
+> * 16/07/2021, Raymond-Pierre Bouchard. Mise à jour du texte et des images. Amélioration de la lisibilité du rapport.
 
 ## INTRODUCTION
 
