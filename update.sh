@@ -6,6 +6,8 @@ sudo systemctl stop movit_detect_python.service
 
 # Update sources
 echo "MAJ code"
+# Synchronize submodule URLs
+git submodule sync
 git pull origin master
 git submodule update --init --recursive
 
