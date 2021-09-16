@@ -1,12 +1,12 @@
 [submodule "MOvIT-Detect-Frontend"]
 	path = MOvIT-Detect-Frontend
-	url = https://github.com/introlab/MOvIT-Detect-Frontend.git
+	url = ../MOvIT-Detect-Frontend.git
 [submodule "MOvIT-Detect-Backend"]
 	path = MOvIT-Detect-Backend
-	url = https://github.com/introlab/MOvIT-Detect-Backend.git
+	url = ../MOvIT-Detect-Backend.git
 [submodule "MOvIT-Detect"]
 	path = MOvIT-Detect
-	url = https://github.com/introlab/MOvIT-Detect.git
+	url = ../MOvIT-Detect.git
 [submodule "MOvIT-Hardware"]
 	path = MOvIT-Hardware
-	url = https://github.com/introlab/MOvIT-Hardware.git
+	url = ../MOvIT-Hardware.git
