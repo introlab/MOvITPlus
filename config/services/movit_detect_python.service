@@ -13,6 +13,8 @@ Restart=always
 RestartSec=1
 User=pi
 Group=pi
+StandardOutput=null
+StandardError=journal
 Environment=PYTHONPATH=/home/pi/MOvITPlus/MOvIT-Detect/python
 ExecStart=/home/pi/MOvITPlus/MOvIT-Detect/python/venv/bin/python3 /home/pi/MOvITPlus/MOvIT-Detect/python/launcher.py 
 
