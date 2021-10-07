@@ -4,6 +4,8 @@ After=movit_backend.service
 StartLimitIntervalSec=0
 
 [Service]
+StandardOutput=null
+StandardError=journal
 Type=simple
 Restart=always
 RestartSec=1
