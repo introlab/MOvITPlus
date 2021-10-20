@@ -12,6 +12,8 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
+StandardOutput=null
+StandardError=journal
 ExecStart=/home/pi/MOvITPlus/MOvIT-Detect/Movit-Pi/Executables/movit-pi
 
 [Install]

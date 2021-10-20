@@ -3,6 +3,8 @@ Description=-------- MOVIT+ BACKEND with node-red
 StartLimitIntervalSec=0
 
 [Service]
+StandardOutput=null
+StandardError=journal
 Type=simple
 Restart=always
 RestartSec=1

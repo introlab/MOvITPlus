@@ -105,6 +105,17 @@ sudo apt-get update
 # Installation (tout sur la même ligne)
 sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git libmosquittopp-dev mosquitto-clients mongodb mongodb-server libkrb5-dev libzmq3-dev nodejs yarn python3 python3-venv
 ```
+## Pour 64 bits
+```bash
+# Ajouter la source arm64 
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt-get update
+sudo apt-get install mongodb-org
+sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git libmosquittopp-dev mosquitto-clients libkrb5-dev libzmq3-dev nodejs yarn python3 python3-venv
+
+```
+
 
 # 3.3 Changer le mot de passe
 Pour changer le mot de passe, la commande `passwd` permet de choisir un mot de passe après avoir entré le mot de passe précédant, soit `raspberry` pour une installation fraîche de Rasbian.  Il est recommendé que le nouveau mot de passe soit `movitdev` par soucis d'uniformité entre les appareils.
@@ -119,6 +130,8 @@ Avant d'installer ces logiciels, il est nécessaire de faire la commande suivant
 sudo apt-get update
 sudo apt-get install dnsmasq hostapd -y
 ```
+
+
 
 ## Configuration de DNSmasq :
 Suite a cette commande, il faut mettre en place quelques fichiers de configuration. Le premier fichier à modifier est `/etc/dnsmasq.conf` dans lequel il faut ajouter quelques lignes à la fin, voici ces lignes:
