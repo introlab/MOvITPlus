@@ -19,7 +19,7 @@ Voici la liste des modules qui seront nécessaires à l'installation :
 |:----------:|
 |**Figure 1 : Unité centrale de contrôle**|
 |![UNITE_CENTRALE.JPG](images/pi_sans_case.jpg)|
-|**Figure 2 : Unité centrale de contrôle hors de son case**|
+|**Figure 2 : Unité centrale de contrôle hors de son boîtier**|
 
 Les ``Figures 1 et 2`` montrent ``l'unité centrale de contrôle du système (UC)``. Elle est composée d'un système embarqué [RaspberryPi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) et comporte un port USB pour l'alimentation ainsi que huit (8) ports de connexion ``RJ-12`` (en gris) pour les modules / capteurs à connecter.
 
@@ -54,7 +54,7 @@ Les ``Figures 5 et 6`` présentent le tapis de pression ainsi que le module d'ac
 |:----------:|
 |**Figure 7 : Câble ``RJ-12``**|
 
-La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différentes longueurs. Ceux-ci sont nécessaires pour connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmi ceux fournis, et ils peuvent être interchangés au besoin. Les câbles ``RJ-12`` comprennent 6 contacts.
+La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différentes longueurs. Ceux-ci sont nécessaires pour connecter les modules à l'unité centrale. Pendant l'installation, choississez les câbles les plus courts possibles parmi ceux fournis, ils pourront être interchangés au besoin. Les câbles ``RJ-12`` comprennent 6 contacts.
 
 ### **Batterie et câble USB**
 
@@ -62,7 +62,7 @@ La Figure 7 présente les câbles ``RJ-12``, qui sont disponibles sur différent
 |:----------:|
 |**Figure 8: Batterie USB**|
 
-La ``Figure 8`` montre la batterie USB qui sert à alimenter tout le système (avec les capteurs et le module central de contrôle). **La batterie doit être rechargée manuellement à chaque jour avec son port de recharge USB**.
+La ``Figure 8`` montre la batterie USB qui sert à alimenter tout le système (avec les capteurs et le module central de contrôle). **La batterie doit être rechargée manuellement chaque jour avec son port de recharge USB**.
 
 ## MATÉRIEL SUPPLÉMENTAIRE D'INSTALLATION REQUIS
 
@@ -95,7 +95,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 * Le connecteur USB doit être facilement accessible pour brancher la batterie.
 * Un bon endroit pour l'installation est dans la housse ``Latitude – Orthofab``, qui protègera l'unité centrale et la batterie des intempéries.
   * Dans l’éventualité où l’espace est insuffisant au bas du fauteuil ou que la housse est absente, un petit sac peut être accroché au bas du fauteuil et être utilisé comme alternative pour le rangement de l’unité centrale de contrôle et de la batterie.  
-  * Ouvrez la housse ``Latitude – Orthofab`` tel qu’illustré à la ``Figure 11``. Roulez ensuite la housse vers le bas pour découvrir le dos de la chaise.
+  * Ouvrez la housse ``Latitude – Orthofab`` tel qu’illustré sur la ``Figure 11``. Roulez ensuite la housse vers le bas pour découvrir le dos de la chaise.
   * Laissez la housse ouverte (ou le sac) pendant toute l'installation.
   * La housse permet de laisser passer les fils de chaque côté facilement.
 
@@ -117,7 +117,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
        
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
-> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'il ne soit pas accrochant et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
+> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommandé de bien placer les fils pour qu'ils ne soient pas agrippants, et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
 ### ÉTAPE 3 - INSTALLER LE MODULE CENTRALE INERTIELLE MOBILE
 
@@ -129,7 +129,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
    * Le module peut être orienté selon le choix de l'utilisateur.
 2. Connectez un câble ``RJ-12`` à l'unité centrale. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
 
-> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommendé de bien placer les fils pour qu'ils ne soient pas accrochants, et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
+> La centrale inertielle doit bouger le moins possible une fois installée. Il est recommandé de bien placer les fils pour qu'ils ne soient pas agrippants, et de solidement fixer le capteur. L'ajout de _tie-wrap_ peut aider.
 
 ### **ÉTAPE 5 - INSTALLER LE MODULE DE NOTIFICATIONS**
 
@@ -138,7 +138,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 |**Figure 15 : Installation du module de notifications**|
 
 1. Installez le module de notifications avec du velcro sur un des appuie-bras du fauteuil:
-   * Le module de notifications et son branchement ne doivent pas être accrochant.
+   * Le module de notifications et son branchement ne doivent pas être agrippants.
    * Le bouton doit se trouver vers le haut.
    * Le câble doit se diriger vers l'arrière du fauteuil.
 2. Connectez un câble ``RJ-12`` (le plus court possible) à l'unité centrale de contrôle. Utilisez n'importe quel connecteur sur les 8 qui sont disponibles.
@@ -166,7 +166,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 
 ### ÉTAPE 8 - FINITION
 
-1. Fixez les câbles qui "trainent" avec des attaches (_tie-wraps_).
+1. Fixez les câbles qui "traînent" avec des attaches (_tie-wraps_).
 2. Fermer la housse ``Latitude – Orthofab``.
 
 ## CONFIGURATION LOGICIELLE DU SYSTÈME
@@ -206,7 +206,7 @@ Une fois connecté au réseau WiFi :
 |:----------:|
 |**Figure 21 : Page de Configuration**|
 
-3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, tel que montrée à la ``Figure 21``. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
+3. Cliquez sur l'onglet ``Configuration`` dans le menu du haut. Vous obtiendrez une page, telle que montrée à la ``Figure 21``. Sur cette page, il faut configurer dans l'ordre les informations suivantes (NOTE: les informations pour chaque champ seront visibles si vous videz le texte qu'ils contiennent.):
     1. Le nom de l'usager.
     2. L'identifiant TelAsk de l'usager. **Cette information vous sera donnée par votre coordonnatrice de projet.**
     3. L'angle maximal de bascule ``en degrés``.
