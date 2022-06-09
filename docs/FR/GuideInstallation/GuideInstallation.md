@@ -192,7 +192,7 @@ Lorsque le système est démarré correctement, un point d'accès WiFi apparaît
 
 Une fois connecté au réseau WiFi :
 
-1. Connectez-vous à l'adresse [movit.plus](movit.plus) à l'aide de votre navigateur Internet.
+1. Connectez-vous à l'adresse [movit.plus](movit.plus) ou [192.168.10.1](192.168.10.1) le cas échéant à l'aide de votre navigateur Internet.
 
 |![PAGE_LOGIN.png](images/PAGE_LOGIN.png)|
 |:----------:|
