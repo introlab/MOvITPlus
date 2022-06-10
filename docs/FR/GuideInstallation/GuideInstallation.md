@@ -81,7 +81,7 @@ La ``Figure 9`` présente le schéma de connexion global du système. Les procha
 
 ### ÉTAPE 1 - INSTALLER L'UNITÉ CENTRALE DE CONTRÔLE
 
-|![INSTALLATION_BATTERIE.png](images/INSTALLATION_BATTERIE.JPG)||
+|![INSTALLATION_BATTERIE.jpg](images/INSTALLATION_BATTERIE.jpg)||
 |:----------:|:----------:|
 |**Figure 10 : Installation de l'unité centrale de contrôle**||
 
