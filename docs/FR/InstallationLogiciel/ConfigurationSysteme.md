@@ -53,9 +53,9 @@ L'entièreté des configurations ci-dessous sont basées sur une image de [Raspb
 
 > Nous recommandons d'utiliser la version _Raspberry Pi OS (32-bit) with desktop_, la version 64 bits n'étant pas disponible en ce moment.
 
-> **Utilisation headless :** le fichier `wpa_supplicant.conf` dûment remplit peut être placé dans la partition boot d'une carte SD nouvellement flashé. Le système déplacera alors ce fichier au bon endroit et l'utilisera afin de permettre une connection au wifi voulu dès le premier démarrage.
+> **Utilisation headless :** le fichier `wpa_supplicant.conf` dûment rempli peut être placé dans la partition boot d'une carte SD nouvellement flashé. Le système déplacera alors ce fichier au bon endroit et l'utilisera afin de permettre une connection au wifi voulue dès le premier démarrage.
 
-> **Utilisation headless :** SSH peut également être activé en plaçant un fichier vide et sans extension, nommé `ssh`, dans la partition de boot de l'image fraichement flashée.
+> **Utilisation headless :** SSH peut également être activé en plaçant un fichier vide et sans extension, nommé `ssh`, dans la partition de boot de l'image fraîchement flashée.
 
 
 ## 2.2. Image préconfigurée
@@ -79,7 +79,7 @@ Nous allons d'abord utiliser l'outil `raspi-config` pour les premières configur
 ```bash
 raspi-config
 ```
-3. Sélectionnez `2-Network Options -> Hostname` et donnez le nom `movit-xxyyzz` à votre système où xxyyzz représente les derniers octets de l'addresse MAC de l'appareil configuré. Ce format, également utilisé pour le nom du point d'accès plus tard, permet d'éviter les conflits de noms sur le même réseau ou la confusion entre les points d'accès si vous avez plusieurs systèmes MOvIT+ dans votre établissement. L' obtention de l'adresse MAC s'effectue par la commande suivante sur un terminal :
+3. Sélectionnez `2-Network Options -> Hostname` et donnez le nom `movit-xxyyzz` à votre système où xxyyzz représente les derniers octets de l'addresse MAC de l'appareil configuré. Ce format, également utilisé pour le nom du point d'accès plus tard, permet d'éviter les conflits de noms sur le même réseau ou la confusion entre les points d'accès si vous avez plusieurs systèmes MOvIT+ dans votre établissement. L'obtention de l'adresse MAC s'effectue par la commande suivante sur un terminal :
 ```bash
 ifconfig wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'
 ```
@@ -118,14 +118,14 @@ sudo apt-get install -y vim i2c-tools build-essential cmake mosquitto git libmos
 
 
 # 3.3 Changer le mot de passe
-Pour changer le mot de passe, la commande `passwd` permet de choisir un mot de passe après avoir entré le mot de passe précédant, soit `raspberry` pour une installation fraîche de Rasbian.  Il est recommendé que le nouveau mot de passe soit `movitdev` par soucis d'uniformité entre les appareils.
+Pour changer le mot de passe, la commande `passwd` permet de choisir un mot de passe après avoir entré le mot de passe précédant, soit `raspberry` pour une installation fraîche de Rasbian.  Il est recommandé que le nouveau mot de passe soit `movitdev` par soucis d'uniformité entre les appareils.
 
 
 # 3.4. Configuration de DNSmasq et Hostapd
 Ces deux programmes vont nous permettre de créer un point d'accès sur notre interface `wlan0`, et de créer un serveur DHCP sur celui-ci pour pouvoir gérer les clients connectés sur l'AP (_access point_).
 
 ## Installation des logiciels :
-Avant d'installer ces logiciels, il est nécessaire de faire la commande suivante pour mettre à jour toutes les composantes du système fraichement installé.
+Avant d'installer ces logiciels, il est nécessaire de faire la commande suivante pour mettre à jour toutes les composantes du système fraîchement installé.
 ```bash
 sudo apt-get update
 sudo apt-get install dnsmasq hostapd -y
@@ -134,7 +134,7 @@ sudo apt-get install dnsmasq hostapd -y
 
 
 ## Configuration de DNSmasq :
-Suite a cette commande, il faut mettre en place quelques fichiers de configuration. Le premier fichier à modifier est `/etc/dnsmasq.conf` dans lequel il faut ajouter quelques lignes à la fin, voici ces lignes:
+Suite à cette commande, il faut mettre en place quelques fichiers de configuration. Le premier fichier à modifier est `/etc/dnsmasq.conf` dans lequel il faut ajouter quelques lignes à la fin, voici ces lignes:
 ```bash
 interface=lo,wlan0
 no-dhcp-interface=lo,eth0
@@ -169,7 +169,7 @@ wpa_pairwise=TKIP CCMP
 rsn_pairwise=CCMP
 ```
 
-Il faut remplacer le ssid (nom du réseau) actuellement `Movit-xxyyzz` et remplacer _xxyyzz_ par les derniers octets de l'[addresse MAC](#obtention-de-laddresse-mac) comme précédement. Il est recommendé que le mot de passe du point d'accès, représenté ici arpès `wpa_passphrase=`, soit `movitplus` par soucis d'uniformité entre les appareils. Si changé, ce mot de passe doit avoir un minimum de 8 caractères pour respecter la norme WPA.
+Il faut remplacer le ssid (nom du réseau) actuellement `Movit-xxyyzz` et remplacer _xxyyzz_ par les derniers octets de l'[addresse MAC](#obtention-de-laddresse-mac) comme précédemment. Il est recommandé que le mot de passe du point d'accès, représenté ici après `wpa_passphrase=`, soit `movitplus` par soucis d'uniformité entre les appareils. Si modifié, ce mot de passe doit avoir un minimum de 8 caractères pour respecter la norme WPA.
 
 Ensuite, le fichier `/etc/default/hostapd` doit être modifié de façon à changer la clé `DAEMON_CONF`. Cette ligne fait comprendre à HostAPd où il doit lire son fichier de configuration au démarrage. Il faut la remplacer par :
 ```bash
@@ -187,9 +187,9 @@ nohook wpa_supplicant
 ``` 
 
 ### 3.7. Configuration du nom de domaine
-DNSmasq lit le fichier `/etc/hosts` afin d'associer certaines addresses à des noms de domaines. Cette fonction est utilisée pour rediriger le traffic vers le la bonne addresse si une tentative est faite pour se connecter aux noms de domaines spécifiés. À ce fichier, il faut **ajouter ces lignes à la fin** :
+DNSmasq lit le fichier `/etc/hosts` afin d'associer certaines addresses à des noms de domaines. Cette fonction est utilisée pour rediriger le trafic vers la bonne addresse si une tentative est faite pour se connecter aux noms de domaines spécifiés. À ce fichier, il faut **ajouter ces lignes à la fin** :
 ```bash
-#Une nom plus facile à retenir
+#Un nom plus facile à retenir
 192.168.10.1	movit	movit.plus
 ``` 
 
@@ -218,7 +218,7 @@ Ensuite, pour permettre la transcription des addresses IP pour compléter la con
 sudo iptables -t nat -A POSTROUTING -s 192.168.10.0/24 ! -d 192.168.10.0/24 -j MASQUERADE
 ```
 ## IPtables au démarrage
-Pour rendre ces règles persistentes, _iptables-persistent_ est la meilleure solution. Pour l'installer :
+Pour rendre ces règles persistantes, _iptables-persistent_ est la meilleure solution. Pour l'installer :
 ```bash
 sudo apt-get install iptables-persistent
 ```
@@ -240,7 +240,7 @@ systemctl enable networking.service
 ```
 
 ### 3.12. Redémarrage
-Une fois que toutes ces étapes sont complétées, il est nécessaire de redémarrer le Raspberry Pi. L'AP deviendra alors visible et accessible. Il permettra une connection internet en passant par le point d'accés local nommé movit-xxyyzz. Testez votre connection réseau et continuez à l'étape 4.
+Une fois que toutes ces étapes sont complétées, il est nécessaire de redémarrer le Raspberry Pi. L'AP deviendra alors visible et accessible. Il permettra une connexion internet en passant par le point d'accés local nommé movit-xxyyzz. Testez votre connexion réseau et continuez à l'étape 4.
 ___
 
 
@@ -265,9 +265,9 @@ ___
 # 5. Configuration du démarrage
 Le démarrage des différents services créés pour le projet est l'élément crucial permettant au RasbperryPi d'exécuter le code conçu dès le branchement de l'appareil.
 ## 5.1. Services avec systemd
-Puisque l'image utilisé est Raspbian Buster Lite, alors le processus de démarrage des services se fait avec _systemd_. Celui-ci nécessite des fichiers `.service` dans le dossier `/etc/systemd/system/` pour tous les services qu'il peut gérer. Ainsi, il faut créer ces fichiers et y définir les paramètres voulus pour chaques composants.
+Puisque l'image utilisée est Raspbian Buster Lite, alors le processus de démarrage des services se fait avec _systemd_. Celui-ci nécessite des fichiers `.service` dans le dossier `/etc/systemd/system/` pour tous les services qu'il peut gérer. Ainsi, il faut créer ces fichiers et y définir les paramètres voulus pour chaques composants.
 
-Après s'être diriger dans le bon dossier via `cd /etc/systemd/system/`, il faut faire `sudo nano nom-du-service.service`, où _nom-du-service.service_ est un des fichiers ci-dessous. Puis il faut copier le contenu respectif et répéter le tout pour chacun des services requis :
+Après s'être dirigé dans le bon dossier via `cd /etc/systemd/system/`, il faut faire `sudo nano nom-du-service.service`, où _nom-du-service.service_ est un des fichiers ci-dessous. Puis il faut copier le contenu respectif et répéter le tout pour chacun des services requis :
 
 - **movit_backend.service**
 ```bash
@@ -348,7 +348,7 @@ Pour pouvoir utiliser et tester les services immédiatement sans redémarrer le 
 sudo systemctl daemon-reload
 ```
 
-Il est possible de connaitre l'état, arrêter et partir les services avec les commandes suivantes :
+Il est possible de connaître l'état, lancer et arrêter les services avec les commandes suivantes :
 ```bash
 systemctl status nom-du-service.service
 sudo systemctl start nom-du-service.service
@@ -394,14 +394,14 @@ ___
 # 7. Mises à jour du système
 
 ## Mise à jour du projet manuellement
-Une des parties de la mise est jour est simplement l'utilisation de la commande `git pull` dans le dossier parent. En plus du `git pull` habituel, il peut être nécessaire de mettre à jour les sous-répertoires également :
+Une des parties de la mise est jour est simplement l'utilisation de la commande `git pull` dans le dossier parent. En plus du `git pull` habituel, il peut être également nécessaire de mettre à jour les sous-répertoires :
 ```bash
 git pull
 git submodule update --init --recursive
 ```
 - Charge les versions des sous-répertoires liées (tag de versions des sous-répertoires)
 - Met à jour les scripts et les autres fichiers contenus par le répertoire parent
-> Les services devraient être arrêté avant de procéder ainsi.
+> Les services devraient être arrêtés avant de procéder ainsi.
 ___
 
 <br>
